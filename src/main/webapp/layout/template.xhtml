@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<f:view xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" contentType="text/html">
+	<h:head>
+		<title>The Shoppe</title>
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery -->
+		<script type='text/javascript' src="js/jquery-1.11.1.min.js" />
+		<!-- Custom Theme files -->
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--webfont-->
+		<link href='css/fonts.css' rel='stylesheet' type='text/css' />
+		<!-- start menu -->
+		<link href="css/megamenu.css" rel="stylesheet" type="text/css"
+			media="all" />
+
+		<ui:insert name="head" />
+	</h:head>
+	<h:body>
+		<script type="text/javascript" src="js/megamenu.js" />
+		<script type="text/javascript" src="js/menu_jquery.js" />
+		<script type="text/javascript">
+  $(document).ready(function(){$(".megamenu").megamenu();});
+        </script>
+		<!-- header_top -->
+		<div class="top_bg">
+			<div class="container">
+				<div class="header_top">
+					<div class="top_left">
+						<h2>
+							<a href="#">50%off</a> use coupon code "big61" and get extra 50%
+							off on orders over $50
+						</h2>
+					</div>
+
+					<div class="top_right">
+						<ul>
+							<li>
+							<h:form id="viewed">
+								<h:commandLink action="#{catalogInquiry.recentlyViewed}" value="Recently Viewed" id="review" />
+							</h:form>
+							</li>|
+
+							<li><a href="contact.xhtml">Contact</a></li>|
+
+							<li class="login">
+								<div id="loginContainer">
+									<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
+										<a href="#" id="loginButton"><span>Login</span></a>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{shoppingCart.loggedIn}">
+										<a href="#" id="logoutButton"><span>Hi, <h:outputText
+													value="#{shoppingCart.customer.firstName}" /></span></a>
+									</h:panelGroup>
+
+									<div id="loginBox">
+										<h:form id="loginForm">
+											<fieldset id="body">
+												<fieldset>
+													<label for="email">Email Address</label>
+													<h:inputText id="email" value="#{identity.username}" />
+												</fieldset>
+
+												<fieldset>
+													<label for="password">Password</label>
+													<h:inputSecret id="password" value="#{identity.password}" />
+												</fieldset>
+												<h:commandButton id="login" value="Sign In"
+													action="#{identity.login}" />
+												<label> <input type="checkbox" id="checkbox" /><i>Remember
+														me</i></label>
+											</fieldset>
+										</h:form>
+										<span><a href="#">Forgot your password?</a></span>
+									</div>
+								</div>
+							</li>
+							<h:panelGroup rendered="#{shoppingCart.loggedIn}">
+							|
+							<li>
+								<h:form id="logout">
+									<h:commandLink action="#{shoppingCart.logout}" value="Logout" />
+								</h:form>
+							</li>
+							</h:panelGroup>
+						</ul>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- header -->
+		<div class="header_bg">
+			<div class="container">
+				<div class="header">
+					<div class="logo">
+						<h:graphicImage url="/images/shoppe-logo.png" />
+					</div>
+					<!-- start header_right -->
+					<div class="header_right">
+						<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
+						<div class="create_btn">
+							<a class="arrow" href="registration.xhtml">create account <img
+								src="images/right_arrow.png" alt="" /></a>
+						</div>
+						</h:panelGroup>
+
+						<ul class="icon1 sub-icon1 profile_img">
+							<li><a class="active-icon c2" href="#"></a>
+								<ul class="sub-icon1 list">
+									<h:panelGroup rendered="#{shoppingCart.items.size() == 0}">
+
+										<li>
+											<h3>shopping cart empty</h3> <a href=""></a>
+										</li>
+
+										<li>
+											<p>Do some shopping!</p>
+										</li>
+
+									</h:panelGroup>
+									<h:form id="minicart">
+										<h:dataTable value="#{shoppingCart.items}" var="item"
+											rendered="#{shoppingCart.items.size() > 0}">
+											<h:column>
+												<li>
+													<p>
+														<h:commandLink action="#{catalogInquiry.pickItem(item)}">
+															<h:outputText value="#{item.title}" />
+														</h:commandLink>
+													</p>
+												</li>
+											</h:column>
+										</h:dataTable>
+										<li>
+											<div class="btn_form">
+
+												<h:commandLink action="buy" value="Shopping Bag" style="margin-left: 25px;"/>
+
+											</div>
+										</li>
+									</h:form>
+								</ul></li>
+						</ul>
+
+						<ul class="icon1 sub-icon1 profile_img">
+							<li><a class="active-icon c1" href="#"></a>
+
+								<ul class="sub-icon1 list">
+									<h:panelGroup rendered="#{shoppingCart.wishlist.size() == 0}">
+
+										<li>
+											<h3>wishlist is empty</h3> <a href=""></a>
+										</li>
+
+										<li>
+											<p>Add some items to your wishlist!</p>
+										</li>
+
+									</h:panelGroup>
+									<h:form id="wishlist">
+										<h:dataTable value="#{shoppingCart.wishlist}" var="item"
+											rendered="#{shoppingCart.wishlist.size() > 0}">
+											<h:column>
+												<li>
+													<p>
+														<h:commandLink action="#{catalogInquiry.pickItem(item)}">
+															<h:outputText value="#{item.title}" />
+														</h:commandLink>
+													</p>
+												</li>
+											</h:column>
+										</h:dataTable>
+									</h:form>
+								</ul></li>
+						</ul>
+
+						<div class="search">
+							<h:form id="search">
+								<h:inputText id="searchCriteria"
+									value="#{catalogInquiry.searchCriteria}" />
+								<h:commandButton id="searchButton" value=""
+									action="#{catalogInquiry.search()}" />
+							</h:form>
+						</div>
+						<script>
+						$('#search\\:searchCriteria').attr("placeholder","search...")
+						</script>
+
+						<div class="clearfix"></div>
+					</div>
+					<ul class="megamenu skyblue">
+						<li><a class="color1" href="index.xhtml">Home</a></li>
+
+						<li class="grid"><a class="color2" href="#">new arrivals</a>
+
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>shop</h4>
+
+											<ul>
+												<h:form id="shopLinks">
+													<li><h:commandLink id="child-new"
+															action="#{catalogInquiry.byCategory('children',true)}"
+															value="children" /></li>
+													<li><h:commandLink id="crafts-new"
+															action="#{catalogInquiry.byCategory('crafts',true)}"
+															value="crafts" /></li>
+													<li><h:commandLink id="comics-new"
+															action="#{catalogInquiry.byCategory('comics',true)}"
+															value="comics" /></li>
+													<li><h:commandLink id="all-new"
+															action="#{catalogInquiry.newArrivals}" value="all" /></li>
+												</h:form>
+											</ul>
+										</div>
+									</div>
+
+									<div class="col1">
+										<div class="h_nav">
+											<h4>account</h4>
+
+											<ul>
+												<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
+												<li><a href="registration.xhtml">login</a></li>
+												</h:panelGroup>
+												<li><a href="registration.xhtml">create an account</a></li>
+												<li><a href="buy.xhtml">my book bag</a></li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div></li>
+
+						<li class="grid"><a class="color3" href="#">by category</a>
+
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>shop</h4>
+
+											<ul>
+												<h:form id="catLinks">
+													<li><h:commandLink id="child"
+															action="#{catalogInquiry.byCategory('children',false)}"
+															value="children" /></li>
+													<li><h:commandLink id="crafts"
+															action="#{catalogInquiry.byCategory('crafts',false)}"
+															value="crafts" /></li>
+													<li><h:commandLink id="comics"
+															action="#{catalogInquiry.byCategory('comics',false)}"
+															value="comics" /></li>
+													<li><h:commandLink id="all"
+															action="#{catalogInquiry.allItems}" value="all" /></li>
+												</h:form>
+											</ul>
+										</div>
+									</div>
+
+									<div class="col1">
+										<div class="h_nav">
+											<h4>account</h4>
+
+											<ul>
+												<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
+												<li><a href="registration.xhtml">login</a></li>
+												</h:panelGroup>
+												<li><a href="registration.xhtml">create an account</a></li>
+												<li><a href="buy.xhtml">my book bag</a></li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div></li>
+
+
+						<li><a class="color4" href="contact.xhtml">Contact</a>
+
+							<div class="megapanel">
+								<div class="row">
+									<div class="col3">
+										<div class="h_nav">
+											<h4>contact us</h4>
+										</div>
+
+										<form action="#" class="contact">
+											<label for="name">Name</label> <input id="name" type="text" />
+											<label for="email">E-mail</label> <input id="email"
+												type="text" /> <label for="message">Message</label>
+											<textarea cols="1" rows="8" id="message"/>
+											<input type="submit" value="Send" />
+										</form>
+									</div>
+
+									<div class="col3"></div>
+								</div>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<ui:insert name="content" />
+
+
+		<!-- footer_top -->
+		<div class="footer_top">
+			<div class="container">
+				
+				<!-- start span_of_2 -->
+
+				<div class="span_of_2">
+					<div class="span1_of_2">
+						<h5>
+							need help? <a href="contact.xhtml">contact us <span>&gt;</span></a>
+						</h5>
+
+						<p>(or) Call: +1 999.555.1212</p>
+					</div>
+
+					<div class="span1_of_2">
+						<h5>follow us</h5>
+
+						<div class="social-icons">
+							<ul>
+								<li><a href="http://www.facebook.com/redhatinc" target="_blank"></a></li>
+
+								<li><a href="https://twitter.com/hashtag/RedHat" target="_blank"></a></li>
+
+								<li><a href="http://vimeo.com" target="_blank"></a></li>
+
+								<li><a href="http://dribbble.com" target="_blank"></a></li>
+
+								<li><a href="http://flickr.com" target="_blank"></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+		<!-- footer -->
+		<div class="footer">
+			<div class="container">
+				<div class="tagline">
+					<h:graphicImage url="/images/logo.png" />
+					<span>Powered by Red Hat</span>
+				</div>
+			</div>
+		</div>
+
+	</h:body>
+</f:view>
+</html>

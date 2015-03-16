@@ -1,0 +1,177 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<!-- start slider -->
+		<link rel="stylesheet" href="css/fwslider.css" media="all"
+			type="text/css" />
+		<script type="text/javascript" src="js/jquery-ui.min.js" />
+		<script type="text/javascript" src="js/fwslider.js" />
+		<!--end slider -->Ï
+	</ui:define>
+	<ui:define name="content">
+		<div class="container">
+			<div class="main">
+				<div class="row content_top">
+					<div class="col-md-9 content_left">
+						<!-- start slider -->
+
+						<div id="fwslider">
+							<div class="slider_container">
+								<div class="slide">
+									<!-- Slide image -->
+									<img src="images/books.jpg" class="img-responsive" alt="" />
+									<!-- /Slide image -->
+								</div>
+
+								<div class="slide">
+									<img src="images/library.jpg" class="img-responsive" alt="" />
+								</div>
+
+								<div class="slide">
+									<img src="images/boyread.jpg" class="img-responsive" alt="" />
+								</div>
+
+								<div class="slide">
+									<img src="images/library2.jpg" class="img-responsive" alt="" />
+								</div>
+
+								<!--/slide -->
+							</div>
+
+							<div class="timers"></div>
+
+							<div class="slidePrev"></div>
+
+							<div class="slideNext"></div>
+						</div>
+						<!-- end  slider -->
+					</div>
+
+					<div class="col-md-3 sidebar">
+						<div class="grid_list">
+							<a href="details.xhtml"></a>
+
+							<div class="grid_img">
+								<img src="images/grid-child.jpg" class="img-responsive" alt="" />
+							</div>
+
+							<div class="grid_text left">
+								<h3>
+									<a href="#">extra 10<sub>%</sub> off
+									</a>
+								</h3>
+
+								<p>on children's books</p>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="grid_list">
+							<a href="details.xhtml"></a>
+
+							<div class="grid_text-middle">
+								<h3>
+									<a href="#">crafts</a>
+								</h3>
+
+								<p>old craft books</p>
+							</div>
+
+							<div class="grid_img last">
+								<img src="images/scissors.png" class="img-responsive" alt="" />
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="grid_list">
+							<a href="details.xhtml"></a>
+
+							<div class="grid_img">
+								<img src="images/war.gif" class="img-responsive" alt="" />
+							</div>
+
+							<div class="grid_text left">
+								<h3>
+									<a href="#">history of war</a>
+								</h3>
+
+								<p>shop now</p>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+				<!-- start content -->
+
+				<div class="content">
+
+					<!-- grids_of_3 -->
+					<h:form id="category">
+					<div class="row grids">
+						<div class="col-md-3 grid1">
+							<h:commandLink action="#{catalogInquiry.byCategory('comics',false)}">
+							<img src="images/books/CameraComics.jpg"
+								class="img-responsive" alt="" /></h:commandLink>
+
+							<div class="look">
+								<h4>comic books</h4>
+
+								<p>learn more</p>
+							</div>
+						</div>
+
+						<div class="col-md-3 grid1">
+							<h:commandLink action="#{catalogInquiry.byCategory('crafts',false)}">
+							<img src="images/books/FancyStitchery.jpg"
+								class="img-responsive" alt="" /></h:commandLink>
+
+							<div class="look">
+								<h4>crafts</h4>
+
+								<p>learn more</p>
+							</div>
+						</div>
+
+						<div class="col-md-3 grid1">
+							<h:commandLink action="#{catalogInquiry.byCategory('children',false)}">
+							<img src="images/books/JemimaPuddleDuck.jpg"
+								class="img-responsive" alt="" /></h:commandLink>
+
+							<div class="look">
+								<h4>children's books</h4>
+
+								<p>learn more</p>
+							</div>
+						</div>
+
+						<div class="col-md-3 grid1">
+							<h:commandLink action="#{catalogInquiry.allItems}">
+							<img src="images/books/MaryFrancesHousekeeper.jpg"
+								class="img-responsive" alt="" /></h:commandLink>
+
+							<div class="look">
+								<h4>All Books</h4>
+
+								<p>learn more</p>
+							</div>
+						</div>
+					</div>
+					</h:form>
+					<!-- end grids_of_3 -->
+				</div>
+				<!-- end content -->
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,80 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+	<ui:define name="head">
+		<script type="application/x-javascript">
+addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+       </script>
+
+
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="women_main">
+				<!-- start content -->
+
+				<div class="col-md-9 w_content">
+					<div class="women">
+
+						<h4>
+							Recently Viewed Books
+						</h4>
+
+						<div class="clearfix"></div>
+					</div>
+					<!-- grids_of_4 -->
+
+
+					<h:form id="catalog">
+						<h:panelGrid columns="1"  rendered="#{shoppingCart.viewed.size() > 0}">
+							<a4j:outputPanel id="panel" layout="block">
+								<a4j:repeat value="#{shoppingCart.viewed}" var="item" rows="3"
+									id="repeat">
+
+									<rich:panel
+										style="float:left; width:230px; height: 400px; padding:5px;">
+										<f:facet name="header">
+											<h:panelGroup style="height: 35px;">
+												<h:outputText value="#{item.title}"
+													style="font-weight:bold; height=30px;" />
+											</h:panelGroup>
+										</f:facet>
+										<h:commandLink action="#{catalogInquiry.pickItem(item)}"
+											value="">
+											<h:graphicImage value="#{item.imagePath}"
+												class="img-responsive" alt="cover" />
+										</h:commandLink>
+										<h:panelGrid columns="2" style="margin-top: 5px;">
+											<h:outputText value="Author:&nbsp;" style="font-weight:bold" />
+											<h:outputText value="#{item.author}" />
+											<h:outputText value="Price: " style="font-weight:bold" />
+											<h:outputText value="$ #{item.price}" />
+										</h:panelGrid>
+									</rich:panel>
+
+								</a4j:repeat>
+							</a4j:outputPanel>
+							<a4j:outputPanel layout="block">
+								<rich:dataScroller for="repeat" render="panel" />
+							</a4j:outputPanel>
+						</h:panelGrid>
+						<h:panelGroup rendered="#{shoppingCart.viewed.size() == 0}">
+							<p>You have not viewed any books recently.</p>
+						</h:panelGroup>
+					</h:form>
+
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- end content -->
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,126 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</ui:define>
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam name="loc" value="#{identity.location}" />
+		</f:metadata>
+		<!-- content -->
+		<div class="container">
+			<div class="main">
+				<!-- start registration -->
+				<div class="registration">
+					<div class="registration_left">
+						<h2>
+							new user? <span> create a shoppe account </span>
+						</h2>
+
+						<div class="clearfix"></div>
+
+
+						<div class="registration_form">
+							<!-- Form -->
+							<h:form id="registration_form">
+								<div>
+									<label for="firstName">First Name &#160;&#160; <h:message
+											for="firstName" style="color:red" /></label>
+									<h:inputText id="firstName" value="#{identity.firstName}"
+										required="true" requiredMessage="Required" tabindex="1" />
+
+
+								</div>
+								<div>
+									<label for="lastName">Last Name&#160;&#160; <h:message
+											for="lastName" style="color:red" /></label>
+									<h:inputText id="lastName" value="#{identity.lastName}"
+										required="true" requiredMessage="Required" tabindex="2" />
+
+								</div>
+								<div>
+									<label for="email">Email Address&#160;&#160; <h:message
+											for="email" style="color:red" /></label>
+									<h:inputText id="email" value="#{identity.email}"
+										required="true" requiredMessage="Required" tabindex="3" />
+
+								</div>
+								<div>
+									<label for="username">Username&#160;&#160; <h:message
+											for="username" style="color:red" /></label>
+									<h:inputText id="username" value="#{identity.username}"
+										required="true" requiredMessage="Required" tabindex="4" />
+
+								</div>
+								<div>
+									<label for="password">Password&#160;&#160; <h:message
+											for="password" style="color:red" /></label>
+									<h:inputSecret id="password" value="#{identity.password}"
+										required="true" requiredMessage="Required" tabindex="5" />
+
+								</div>
+								<div>
+									<label for="retype">Confirm Password&#160;&#160;<h:message
+											for="retype" style="color:red" /></label>
+									<h:inputSecret id="retype" value="#{identity.retype}"
+										required="true" requiredMessage="Required" tabindex="6" />
+
+								</div>
+								<div class="sky-form">
+									<label class="checkbox"> <h:selectBooleanCheckbox
+											value="#{identity.agreement}" id="agreement" /> <i></i>i
+										agree to shoppe.com &#160;<a class="terms" href="#"> terms
+											of service</a> &#160;&#160; <h:message for="agreement"
+											style="color:red" />
+									</label>
+								</div>
+								<div>
+									<h:commandButton id="register-submit" value="create an account"
+										action="#{identity.createAccount}" />
+								</div>
+
+							</h:form>
+						</div>
+					</div>
+
+
+
+					<div class="registration_left">
+						<h2>existing user</h2>
+						<div class="registration_form">
+							<h:messages globalOnly="true" style="color: red;" />
+							<!-- Form -->
+							<h:form id="login_form">
+								<div>
+									<label for="username">Username</label>
+									<h:inputText id="username" value="#{identity.username}" />
+
+								</div>
+								<div>
+									<label for="password">Password </label>
+									<h:inputSecret id="password" value="#{identity.password}" />
+
+								</div>
+								<div>
+									<h:commandButton value="Sign In" action="#{identity.login}" />
+								</div>
+								<div class="forget">
+									<a href="#">forgot your password</a>
+								</div>
+							</h:form>
+							<!-- /Form -->
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- end registration -->
+		</div>
+
+	</ui:define>
+</ui:composition>

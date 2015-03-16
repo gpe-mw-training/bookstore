@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<link rel="stylesheet" href="css/etalage.css" />
+		<script src="js/jquery.etalage.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($){
+
+				$('#etalage').etalage({
+					thumb_image_width: 300,
+					thumb_image_height: 400,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id){
+						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+					}
+				});
+
+			});
+		</script>
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="women_main">
+				<!-- start content -->
+				<div class="row single">
+					<div class="col-md-9">
+						<div class="single_left">
+							<div class="grid images_3_of_2">
+								<ul id="etalage">
+									<li><h:graphicImage
+											value="#{catalogInquiry.item.imagePath}"
+											styleClass="etalage_thumb_image img-responsive" /> <h:graphicImage
+											value="#{catalogInquiry.item.imagePath}"
+											styleClass="etalage_source_image img-responsive" /></li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="desc1 span_3_of_2">
+								<h3>
+									<h:outputText value="#{catalogInquiry.item.title}" />
+								</h3>
+								<p>
+									$
+									<h:outputText value="#{catalogInquiry.item.price}" />
+								</p>
+								<p>
+									By
+									<h:outputText value="#{catalogInquiry.item.author}" />
+								</p>
+								<div class="btn_form">
+									<h:form id="buy">
+										<h:commandLink
+											action="#{shoppingCart.addItem(catalogInquiry.item.id)}"
+											value="buy" />
+									</h:form>
+								</div>
+								<a href="#"><span>login to save in wishlist </span></a>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="single-bottom1">
+							<h6>Details</h6>
+							<p class="prod-desc">
+								<h:outputText value="#{catalogInquiry.item.description}" />
+							</p>
+						</div>
+					
+					</div>
+				</div>
+				<!-- end content -->
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

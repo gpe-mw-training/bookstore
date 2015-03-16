@@ -1,0 +1,76 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="main">
+				<div class="order">
+					<h:form id="order">
+						<div class="order_panel">
+							<div class="order-form">
+								<h2>Payment Info</h2>
+
+								<div>
+									<span><label>Payment Type</label></span><span><h:selectOneMenu
+											value="#{shoppingCart.payment.paymentType}" id="type">
+											<f:selectItems value="#{shoppingCart.paymentTypes}" />
+										</h:selectOneMenu></span>
+
+								</div>
+								<div id="pay_panel">
+									<div>
+										<span><label>Credit Card Number&#160;&#160;<h:message
+													for="ccnum" style="color: red;" /></label></span> <span><h:inputText
+												id="ccnum" value="#{shoppingCart.payment.number}" /></span>
+									</div>
+
+									<div>
+										<span><label>Expiration Date&#160;&#160;<h:message
+													for="expmo" style="color: red;" /></label></span> <span> <h:panelGrid
+												columns="3" style="width: 30%">
+												<h:inputText id="expmo"
+													value="#{shoppingCart.payment.expireMonth}" />
+												<span>&#160;/&#160;</span>
+												<h:inputText id="expyr"
+													value="#{shoppingCart.payment.expireYear}" />
+											</h:panelGrid>
+										</span>
+									</div>
+									<div>
+										<span><label>Cardholder Name&#160;&#160;<h:message
+													for="name" style="color: red;" /></label></span> <span><h:inputText
+												id="name" value="#{shoppingCart.payment.holderName}" /></span>
+									</div>
+								</div>
+								<div>
+									<span><h:commandButton action="#{shoppingCart.review}"
+											value="Review" /></span>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="clearfix"></div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+$("#order\\:type").click(function() {
+	if ($(this).val() == "PayMeLater") {
+		$("#pay_panel").hide();
+	} else {
+		$("#pay_panel").show();
+	}
+});
+</script>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,46 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="main">
+				<div class="contact">
+
+					<div class="contact-form">
+						<h2>Contact Us</h2>
+						<form method="post" action="contact-post.xhtml">
+							<div>
+								<span><label>Name</label></span> <span><input
+									name="userName" type="text" class="textbox" /></span>
+							</div>
+							<div>
+								<span><label>E-mail</label></span> <span><input
+									name="userEmail" type="text" class="textbox" /></span>
+							</div>
+							<div>
+								<span><label>Mobile</label></span> <span><input
+									name="userPhone" type="text" class="textbox" /></span>
+							</div>
+							<div>
+								<span><label>Subject</label></span> <span><textarea
+										name="userMsg" cols="1" rows="4"> </textarea></span>
+							</div>
+							<div>
+								<span><input type="submit" class="" value="Send" /></span>
+							</div>
+						</form>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

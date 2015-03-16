@@ -1,0 +1,165 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="main">
+				<div class="order">
+					<h:form id="order">
+						<div class="order_panel">
+							<div class="order-form">
+								<h2>Billing Info</h2>
+
+								<div>
+									<span><label>First Name</label></span> <span><h:inputText
+											id="firstName" value="#{shoppingCart.customer.firstName}"
+											readonly="true" /></span>
+								</div>
+								<div>
+									<span><label>Last Name</label></span> <span><h:inputText
+											id="lastName" value="#{shoppingCart.customer.lastName}"
+											readonly="true" /></span>
+								</div>
+								<div>
+									<span><label>E-mail</label></span> <span><h:inputText
+											id="email" value="#{shoppingCart.customer.email}"
+											readonly="true" /></span>
+								</div>
+								<div>
+									<span><label>Address&#160;&#160;<h:message
+												for="address1" style="color: red;" /></label></span> <span><h:inputText
+											id="address1"
+											value="#{shoppingCart.customer.billingAddress.streetAddress1}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><h:inputText id="address2"
+											value="#{shoppingCart.customer.billingAddress.streetAddress2}" /></span>
+								</div>
+								<div>
+									<span><h:inputText id="address3"
+											value="#{shoppingCart.customer.billingAddress.streetAddress3}" /></span>
+								</div>
+								<div>
+									<span><label>City&#160;&#160;<h:message
+												for="city" style="color: red;" /></label></span> <span><h:inputText
+											id="city"
+											value="#{shoppingCart.customer.billingAddress.city}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><label>State&#160;&#160;<h:message
+												for="state" style="color: red;" /></label></span> <span><h:inputText
+											id="state"
+											value="#{shoppingCart.customer.billingAddress.state}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><label>Postal Code&#160;&#160;<h:message
+												for="zip" style="color: red;" /></label></span> <span><h:inputText
+											id="zip"
+											value="#{shoppingCart.customer.billingAddress.postalCode}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><label>Country&#160;&#160;<h:message
+												for="country" style="color: red;" /></label></span> <span><h:inputText
+											id="country"
+											value="#{shoppingCart.customer.billingAddress.country}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><h:commandButton action="#{shoppingCart.collectPayment}" value="Next" /></span>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="order_panel">
+							<div class="order-form">
+								<h2>Shipping Info</h2>
+								<div>
+									<span><label> <h:selectBooleanCheckbox
+												value="#{shoppingCart.shipsame}" id="shipsame" />&#160;&#160;Ship
+											to same address
+									</label></span>
+								</div>
+								<div id="ship_panel">
+									<div>
+										<span><label>Address&#160;&#160;<h:message
+													for="saddress1" style="color: red;" /></label></span> <span><h:inputText
+												id="saddress1"
+												value="#{shoppingCart.customer.shippingAddress.streetAddress1}"
+												required="true" requiredMessage="Required" /></span>
+									</div>
+									<div>
+										<span><h:inputText id="saddress2"
+												value="#{shoppingCart.customer.shippingAddress.streetAddress2}" /></span>
+									</div>
+									<div>
+										<span><h:inputText id="saddress3"
+												value="#{shoppingCart.customer.shippingAddress.streetAddress3}" /></span>
+									</div>
+									<div>
+										<span><label>City&#160;&#160;<h:message
+													for="scity" style="color: red;" /></label></span> <span><h:inputText
+												id="scity"
+												value="#{shoppingCart.customer.shippingAddress.city}"
+												required="true" requiredMessage="Required" /></span>
+									</div>
+									<div>
+										<span><label>State&#160;&#160;<h:message
+													for="sstate" style="color: red;" /></label></span> <span><h:inputText
+												id="sstate"
+												value="#{shoppingCart.customer.shippingAddress.state}"
+												required="true" requiredMessage="Required" /></span>
+									</div>
+									<div>
+										<span><label>Postal Code&#160;&#160;<h:message
+													for="szip" style="color: red;" /></label></span> <span><h:inputText
+												id="szip"
+												value="#{shoppingCart.customer.shippingAddress.postalCode}"
+												required="true" requiredMessage="Required" /></span>
+									</div>
+									<div>
+										<span><label>Country&#160;&#160;<h:message
+													for="scountry" style="color: red;" /></label></span> <span><h:inputText
+												id="scountry"
+												value="#{shoppingCart.customer.shippingAddress.country}"
+												required="true" requiredMessage="Required" /></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+$("#order\\:shipsame").click(function() {
+	if ($(this).prop('checked')) {
+		$("#order\\:saddress1").val($("#order\\:address1").val());
+		$("#order\\:saddress2").val($("#order\\:address2").val());
+		$("#order\\:saddress3").val($("#order\\:address3").val());
+		$("#order\\:scity").val($("#order\\:city").val());
+		$("#order\\:sstate").val($("#order\\:state").val());
+		$("#order\\:szip").val($("#order\\:zip").val());
+		$("#order\\:scountry").val($("#order\\:country").val());
+		$("#ship_panel").hide();
+	} else {
+		$("#ship_panel").show();
+	}
+
+});
+</script>
+	</ui:define>
+</ui:composition>

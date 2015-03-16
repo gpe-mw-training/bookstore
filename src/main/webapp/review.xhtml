@@ -1,0 +1,148 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="main">
+				<div class="order">
+
+					<div class="review_panel">
+						<div class="order-form">
+							<h2>Billing Info</h2>
+
+							<div>
+								<span><label>First Name</label></span> <span><h:outputText
+										id="firstName" value="#{shoppingCart.customer.firstName}" /></span>
+							</div>
+							<div>
+								<span><label>Last Name</label></span> <span><h:outputText
+										id="lastName" value="#{shoppingCart.customer.lastName}" /></span>
+							</div>
+							<div>
+								<span><label>E-mail</label></span> <span><h:outputText
+										id="email" value="#{shoppingCart.customer.email}" /></span>
+							</div>
+							<div>
+								<span><label>Address</label></span> <span><h:outputText
+										id="address1"
+										value="#{shoppingCart.customer.billingAddress.streetAddress1}" /></span>
+							</div>
+							<div>
+								<span><h:outputText id="address2"
+										value="#{shoppingCart.customer.billingAddress.streetAddress2}" /></span>
+							</div>
+							<div>
+								<span><h:outputText id="address3"
+										value="#{shoppingCart.customer.billingAddress.streetAddress3}" /></span>
+							</div>
+							<div>
+								<span><label>City</label></span> <span><h:outputText
+										id="city" value="#{shoppingCart.customer.billingAddress.city}" /></span>
+							</div>
+							<div>
+								<span><label>State</label></span> <span><h:outputText
+										id="state"
+										value="#{shoppingCart.customer.billingAddress.state}" /></span>
+							</div>
+							<div>
+								<span><label>Postal Code</label></span> <span><h:outputText
+										id="zip"
+										value="#{shoppingCart.customer.billingAddress.postalCode}" /></span>
+							</div>
+							<div>
+								<span><label>Country</label></span> <span><h:outputText
+										id="country"
+										value="#{shoppingCart.customer.billingAddress.country}" /></span>
+							</div>
+							<div>
+								<h:form id="order">
+									<span><h:commandButton
+											action="#{shoppingCart.createOrder}" value="Send" /></span>
+								</h:form>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="review_panel">
+						<div class="order-form">
+							<h2>Shipping Info</h2>
+
+
+							<div>
+								<span><label>Address</label></span> <span><h:outputText
+										id="saddress1"
+										value="#{shoppingCart.customer.shippingAddress.streetAddress1}" />
+								</span>
+							</div>
+							<div>
+								<span><h:outputText id="saddress2"
+										value="#{shoppingCart.customer.shippingAddress.streetAddress2}" /></span>
+							</div>
+							<div>
+								<span><h:outputText id="saddress3"
+										value="#{shoppingCart.customer.shippingAddress.streetAddress3}" /></span>
+							</div>
+							<div>
+								<span><label>City</label></span> <span><h:outputText
+										id="scity"
+										value="#{shoppingCart.customer.shippingAddress.city}" /></span>
+							</div>
+							<div>
+								<span><label>State</label></span> <span><h:outputText
+										id="sstate"
+										value="#{shoppingCart.customer.shippingAddress.state}" /></span>
+							</div>
+							<div>
+								<span><label>Postal Code</label></span> <span><h:outputText
+										id="szip"
+										value="#{shoppingCart.customer.shippingAddress.postalCode}" /></span>
+							</div>
+							<div>
+								<span><label>Country</label></span> <span><h:outputText
+										id="scountry"
+										value="#{shoppingCart.customer.shippingAddress.country}" /></span>
+							</div>
+
+						</div>
+					</div>
+					<div class="review_panel">
+						<div class="order-form">
+							<h2>Payment Info</h2>
+
+							<div>
+								<span><label>Payment Type</label></span> <span><h:outputText
+										id="type" value="#{shoppingCart.payment.paymentType}" /> </span>
+							</div>
+							<h:panelGroup rendered="#{shoppingCart.payment.paymentType != 'PayMeLater'}">
+							<div>
+								<span><label>Credit Card Number</label></span> <span><h:outputText
+										id="ccnum" value="#{shoppingCart.payment.number}" /> </span>
+							</div>
+							<div>
+								<span><label>Expiration Date</label></span> <span><h:outputText
+										id="expmo" value="#{shoppingCart.payment.expireMonth}" />/ <h:outputText
+										id="expyr" value="#{shoppingCart.payment.expireYear}" /></span>
+							</div>
+							<div>
+								<span><label>Cardholder Name</label></span> <span><h:outputText
+										id="name" value="#{shoppingCart.payment.holderName}" /> </span>
+							</div>
+							 </h:panelGroup>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
