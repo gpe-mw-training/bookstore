@@ -31,6 +31,7 @@ public class OrderService {
 			oi.setExtPrice(_item.getPrice());
 			oi.setQuantity(1);
 			oi.setItem(_item);
+			order.getItems().add(oi);
 		}
 		mgr.persist(order);
 		order.getCustomer().getOrders().add(order);

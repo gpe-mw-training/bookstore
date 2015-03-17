@@ -39,7 +39,7 @@ public class Order implements Serializable {
 	private Set<OrderItem> items = new HashSet<OrderItem>();
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "payment_id")
 	private Payment payment;
 
 	public Customer getCustomer() {
