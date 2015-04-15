@@ -22,7 +22,7 @@ public class CatalogServiceTest extends BaseWebTestTemplate {
 	public void testNewArrivals() {
 		List<CatalogItem> items = service.lookupItems(true);
 		Assert.assertNotNull(items);
-		Assert.assertEquals(2, items.size());
+		Assert.assertEquals(12, items.size());
 
 	}
 
@@ -30,7 +30,7 @@ public class CatalogServiceTest extends BaseWebTestTemplate {
 	public void testAllItems() {
 		List<CatalogItem> items = service.lookupItems(false);
 		Assert.assertNotNull(items);
-		Assert.assertEquals(5, items.size());
+		Assert.assertEquals(34, items.size());
 
 	}
 
@@ -39,7 +39,7 @@ public class CatalogServiceTest extends BaseWebTestTemplate {
 		List<CatalogItem> items = service.lookupItemsByCategory("children",
 				false);
 		Assert.assertNotNull(items);
-		Assert.assertEquals(3, items.size());
+		Assert.assertEquals(16, items.size());
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class CatalogServiceTest extends BaseWebTestTemplate {
 		List<CatalogItem> items = service.lookupItemsByCategory("children",
 				true);
 		Assert.assertNotNull(items);
-		Assert.assertEquals(1, items.size());
+		Assert.assertEquals(6, items.size());
 		Assert.assertEquals("The Tale of Jemima Puddle Duck", items.get(0).getTitle());
 	}
 
@@ -62,10 +62,12 @@ public class CatalogServiceTest extends BaseWebTestTemplate {
 	public void testGetCategories() {
 		List<String> categories = service.getCategories();
 		Assert.assertNotNull(categories);
-		Assert.assertEquals(3, categories.size());
+		Assert.assertEquals(4, categories.size());
 		Assert.assertTrue(categories.contains("military"));
 		Assert.assertTrue(categories.contains("children"));
 		Assert.assertTrue(categories.contains("comics"));
+		Assert.assertTrue(categories.contains("crafts"));
+
 	}
 
 	@Test
@@ -80,7 +82,7 @@ public class CatalogServiceTest extends BaseWebTestTemplate {
 	public void testSearchCategory() {
 		List<CatalogItem> items = service.searchForItems("military");
 		Assert.assertNotNull(items);
-		Assert.assertEquals(1, items.size());
+		Assert.assertEquals(2, items.size());
 		Assert.assertEquals("The Boy Scouts at the Panama-Pacific Exposition",
 				items.get(0).getTitle());
 	}
