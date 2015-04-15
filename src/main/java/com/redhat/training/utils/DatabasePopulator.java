@@ -74,5 +74,11 @@ public class DatabasePopulator {
 	private void loadCustomers() {
 		Customer customer = new Customer("John","Doe", "jdoe", "redhat", "jdoe@doe.com");
 		mgr.persist(customer);
+		customer = new Customer("Guest","User", "guest", "user", "guest@doe.com");
+		mgr.persist(customer);
+		customer = new Customer("Admin","User", "admin", "redhat", "admin@bookshop.com");
+		mgr.persist(customer);
+
+		
 	}
 }
