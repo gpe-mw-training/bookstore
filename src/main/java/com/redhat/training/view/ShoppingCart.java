@@ -28,8 +28,8 @@ public class ShoppingCart implements Serializable {
 	private CatalogService service;
 	@Inject
 	private OrderService orderService;
-	@Inject
-	private Conversation conversation;
+//	@Inject
+//	private Conversation conversation;
 
 	private static final long serialVersionUID = 1L;
 
@@ -48,8 +48,8 @@ public class ShoppingCart implements Serializable {
 
 	public String addItem(Integer itemid) {
 
-		if (!conversation.isTransient())
-			conversation.end();
+//		if (!conversation.isTransient())
+//			conversation.end();
 
 		CatalogItem item = service.getItem(itemid);
 
