@@ -3,9 +3,9 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	<display-name>JBTravel</display-name>
+	<display-name>Bookstore</display-name>
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>1</session-timeout>
 	</session-config>
 	<error-page>
 		<error-code>404</error-code>
@@ -15,6 +15,12 @@
 		<error-code>500</error-code>
 		<location>/faces/error.xhtml</location>
 	</error-page>
+<error-page>  
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>  
+    <location>/faces/sessionExpired.xhtml</location>  
+</error-page> 
+	
+
 	<context-param>
 		<param-name>javax.faces.SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
