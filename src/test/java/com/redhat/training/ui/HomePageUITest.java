@@ -51,4 +51,13 @@ public class HomePageUITest extends BaseUITestTemplate {
 		
 	}
 	
+	@Test
+	public void isTheLoginLabelUsingUsername(@InitialPage HomePage homePage) {
+		Assert.assertTrue(homePage.isUsernameLabelCorrect());
+	}
+	
+	@Test
+	public void loginPage(){
+		Assert.assertTrue(homePage.login("admin", "redhat"));
+	}
 }

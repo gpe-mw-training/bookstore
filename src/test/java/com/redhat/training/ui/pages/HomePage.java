@@ -29,6 +29,7 @@
 package com.redhat.training.ui.pages;
 
 import org.jboss.arquillian.graphene.page.Location;
+import org.jboss.arquillian.graphene.page.Page;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,6 +42,9 @@ public class HomePage {
 	
 	@FindBy(id = "bookshopLogoForm:logoImage")
 	private WebElement bookshopLogo;	
+	
+	@Page
+	private LoginPage loginPage;
 	
 	public boolean isHomePageLinkAvailable() {
 		try {
@@ -56,6 +60,14 @@ public class HomePage {
 		} catch (NoSuchElementException e) {
 			return false;
 		}
+	}
+	
+	public boolean isUsernameLabelCorrect(){
+		return loginPage.isUsernameLabel();
+	}
+	
+	public boolean login(String username, String password){
+		return loginPage.login(username, password);
 	}
 
 }

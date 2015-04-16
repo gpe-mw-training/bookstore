@@ -29,32 +29,45 @@
 package com.redhat.training.ui.pages;
 
 import org.jboss.arquillian.graphene.Graphene;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage {
 
-	@FindBy(id = "loginForm:username")
-	private WebElement username;
-	@FindBy(id = "loginForm:password")
-	private WebElement password;
-	@FindBy(id = "loginForm:submit")
-	private WebElement submit;
+	@FindBy(id = "body")
+	private WebElement fieldsetWithLoginAndPassword;
+	@FindBy(id="loginBox")
+	private WebElement loginBox;
+	
+	@FindBy(id="loginForm:username")
+	private WebElement usernameField;
+	
+	@FindBy(id="loginForm:password")
+	private WebElement passwordField;
+	
+	@FindBy(id = "loginForm:login")
+	private WebElement loginButton;
+
+	@FindBy(id = "logoutButton")
+	private WebElement logoutButton;
+	
 	@FindBy(id = "loginForm:login_header")
 	private WebElement tableHeader;
 	
-	public boolean isOnPage() {
-		try {
-			return tableHeader.getText().equals("Login");
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
 	
-	public void login(String username, String password) {
-		this.username.sendKeys(username);
-		this.password.sendKeys(password);
-		Graphene.guardHttp(submit).click();
+	public boolean isUsernameLabel(){
+		return fieldsetWithLoginAndPassword.findElement(By.id("usernameLabel")).getText().equals("Username");
+	}
+
+	
+	public boolean login(String username, String password) {
+		if(!loginBox.isDisplayed()){
+			loginBox.click();
+		}
+		usernameField.sendKeys(username);
+		passwordField.sendKeys(password);
+		Graphene.guardHttp(loginButton).click();
+		return logoutButton.isDisplayed();
 	}
 }
