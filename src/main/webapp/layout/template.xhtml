@@ -100,7 +100,11 @@
 			<div class="container">
 				<div class="header">
 					<div class="logo">
-						<h:graphicImage url="/images/shoppe-logo.png" />
+					<h:form id="bookshopLogoForm">
+						<h:outputLink id="logoImageLink" value="index.xhtml">
+							<h:graphicImage id="logoImage" url="/images/shoppe-logo.png" />
+						</h:outputLink>
+					</h:form>
 					</div>
 					<!-- start header_right -->
 					<div class="header_right">
@@ -196,7 +200,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<ul class="megamenu skyblue">
-						<li><a class="color1" href="index.xhtml">Home</a></li>
+						<li><a class="color1" href="faces/index.xhtml">Home</a></li>
 
 						<li class="grid"><a class="color2" href="#">new arrivals</a>
 
