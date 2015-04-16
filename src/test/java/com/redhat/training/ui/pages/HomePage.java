@@ -28,44 +28,34 @@
 
 package com.redhat.training.ui.pages;
 
-import junit.framework.Assert;
-
-import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.page.Location;
-import org.jboss.arquillian.graphene.page.Page;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@Location("faces/jbtHome.xhtml")
+@Location("faces/index.xhtml")
 public class HomePage {
 
-	@FindBy(id = "logout:menuLoginId")
-	private WebElement menuLoginId;
-	@FindBy
-	private WebElement status;
-	@FindBy
-	private WebElement content;
-
-	@Page
-	private LoginPage loginPage;
-
-	public boolean isOnPage() {
+	@FindBy(id = "bookshopLogoForm:logoImageLink")
+	private WebElement bookshopLogoLink;
+	
+	@FindBy(id = "bookshopLogoForm:logoImage")
+	private WebElement bookshopLogo;	
+	
+	public boolean isHomePageLinkAvailable() {
 		try {
-			return content.findElement(By.xpath("h1")).getText().equals("Welcome to JBTravel");
+			return bookshopLogoLink.getAttribute("href").contains("index.xhtml");
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+	
+	public boolean isHomePageLinkWithImage(){
+		try {
+			return bookshopLogo.getAttribute("src").contains("shoppe-logo.png");
 		} catch (NoSuchElementException e) {
 			return false;
 		}
 	}
 
-	public void login(String username, String password) {
-		Assert.assertTrue(isOnPage());
-		Graphene.guardHttp(menuLoginId).click();
-		Assert.assertTrue(loginPage.isOnPage());
-		loginPage.login(username, password);
-
-		Assert.assertEquals("User is logged in", "Welcome: " + username, status
-				.getText().trim().substring(0, 9 + username.length()));
-	}
 }

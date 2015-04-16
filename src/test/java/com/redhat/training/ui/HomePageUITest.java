@@ -26,41 +26,29 @@
  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.redhat.training.ui.pages;
+package com.redhat.training.ui;
 
-import org.jboss.arquillian.graphene.Graphene;
+import org.jboss.arquillian.graphene.page.InitialPage;
+import org.jboss.arquillian.graphene.page.Page;
+import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class FlightSearchResultsPage {
+import com.redhat.training.BaseUITestTemplate;
+import com.redhat.training.ui.pages.HomePage;
 
-	@FindBy(id = "searchFlight_header")
-	private WebElement tableHeader;
-
-	@FindBy(className = "rf-dt")
-	private WebElement resultsTable;
-
-	public boolean isOnPage() {
-		try {
-			return tableHeader.getText().equals("Flight Search Results");
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-
+@RunWith(Arquillian.class)
+public class HomePageUITest extends BaseUITestTemplate {
+	
+	@Page
+	private HomePage homePage;
+	
+	
+	@Test
+	public void isTheLogoClickable(@InitialPage HomePage homePage) {
+		Assert.assertTrue(homePage.isHomePageLinkAvailable()&&(homePage.isHomePageLinkWithImage()));
+		
 	}
-
-	public void selectFlight(int flight) {
-		try {
-			WebElement selection = resultsTable.findElement(By
-					.xpath("//tbody/tr[" + flight + "]/td/form/a"));
-			Graphene.guardHttp(selection).click();
-		} catch (NoSuchElementException e) {
-			Assert.fail("No flight results found, please check search date.");
-			System.out.println(e.getMessage());
-		}
-
-	}
+	
 }
