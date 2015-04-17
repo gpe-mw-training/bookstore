@@ -28,6 +28,7 @@
 
 package com.redhat.training.ui.pages;
 
+import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.page.Location;
 import org.jboss.arquillian.graphene.page.Page;
 import org.openqa.selenium.NoSuchElementException;
@@ -46,6 +47,9 @@ public class HomePage {
 	@Page
 	private LoginPage loginPage;
 	
+	@Page
+	private MenuPage menuPage;
+	
 	public boolean isHomePageLinkAvailable() {
 		try {
 			return bookshopLogoLink.getAttribute("href").contains("index.xhtml");
@@ -63,11 +67,15 @@ public class HomePage {
 	}
 	
 	public boolean isUsernameLabelCorrect(){
-		return loginPage.isUsernameLabel();
+		return loginPage.isUsernameLabelAvailable();
 	}
 	
 	public boolean login(String username, String password){
 		return loginPage.login(username, password);
+	}
+	
+	public boolean hoverOverChildCategoryPage(){
+		return menuPage.selectChildrenCategory();
 	}
 
 }

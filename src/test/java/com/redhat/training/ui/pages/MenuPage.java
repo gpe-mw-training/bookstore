@@ -28,46 +28,20 @@
 
 package com.redhat.training.ui.pages;
 
-import org.jboss.arquillian.graphene.Graphene;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage {
+public class MenuPage {
 
-	@FindBy(id = "body")
-	private WebElement fieldsetWithLoginAndPassword;
-	@FindBy(id="loginBox")
-	private WebElement loginBox;
-	
-	@FindBy(id="loginForm:username")
-	private WebElement usernameField;
-	
-	@FindBy(id="loginForm:password")
-	private WebElement passwordField;
-	
-	@FindBy(id = "loginForm:login")
-	private WebElement loginButton;
+	@FindBy(id = "catLinks:child")
+	private WebElement childrenCategories;
 
-	@FindBy(id = "logoutButton")
-	private WebElement logoutButton;
+	@FindBy(id = "catLinks")
+	private WebElement childCategoryMenu;
 	
-	@FindBy(id = "loginForm:login_header")
-	private WebElement tableHeader;
-	
-	
-	public boolean isUsernameLabelAvailable(){
-		return fieldsetWithLoginAndPassword.findElement(By.id("usernameLabel")).getText().equals("Username");
-	}
-
-	
-	public boolean login(String username, String password) {
-		if(!loginBox.isDisplayed()){
-			loginBox.click();
-		}
-		usernameField.sendKeys(username);
-		passwordField.sendKeys(password);
-		Graphene.guardHttp(loginButton).click();
-		return logoutButton.isDisplayed();
+	public boolean selectChildrenCategory() {
+		childCategoryMenu.click();
+		childrenCategories.click();
+		return true;
 	}
 }

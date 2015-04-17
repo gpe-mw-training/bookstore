@@ -39,7 +39,7 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 								<a4j:repeat value="#{catalogInquiry.items}" var="item" rows="3"
 									id="repeat">
 
-									<rich:panel
+									<rich:panel id="item"
 										style="float:left; width:230px; height: 400px; padding:5px;">
 										<f:facet name="header">
 											<h:panelGroup style="height: 35px;">
@@ -47,9 +47,9 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 													style="font-weight:bold; height=30px;" />
 											</h:panelGroup>
 										</f:facet>
-										<h:commandLink action="#{catalogInquiry.pickItem(item)}"
+										<h:commandLink id="bookLink" action="#{catalogInquiry.pickItem(item)}"
 											value="">
-											<h:graphicImage value="#{item.imagePath}"
+											<h:graphicImage id="image" value="#{item.imagePath}"
 												class="img-responsive" alt="cover" />
 										</h:commandLink>
 										<h:panelGrid columns="2" style="margin-top: 5px;">
