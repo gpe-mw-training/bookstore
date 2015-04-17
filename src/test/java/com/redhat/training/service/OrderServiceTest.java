@@ -1,8 +1,6 @@
 package com.redhat.training.service;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
 import org.jboss.arquillian.junit.Arquillian;
@@ -24,9 +22,6 @@ public class OrderServiceTest extends BaseWebTestTemplate {
 	@Inject 
 	private CustomerService customerService;
 
-	@PersistenceContext
-	private EntityManager entityManager;
-	
 	@Test
 	public void testBuyItemsFromShoppingCart() {
 		Customer customer = customerService.findByCredentials("jdoe", "redhat123");
