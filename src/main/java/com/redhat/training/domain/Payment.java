@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Payment implements Serializable {
@@ -17,9 +18,13 @@ public class Payment implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@NotNull
 	private String number;
+	@NotNull
 	private String expireMonth;
+	@NotNull
 	private String expireYear;
+	@NotNull
 	private String holderName;
 	@Enumerated(EnumType.ORDINAL)
 	private PaymentType paymentType;

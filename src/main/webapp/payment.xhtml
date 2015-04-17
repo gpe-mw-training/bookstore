@@ -29,25 +29,26 @@
 									<div>
 										<span><label>Credit Card Number&#160;&#160;<h:message
 													for="ccnum" style="color: red;" /></label></span> <span><h:inputText
-												id="ccnum" value="#{shoppingCart.payment.number}" /></span>
+												id="ccnum" value="#{shoppingCart.payment.number}" required="true" requiredMessage="Credit Card number is required"/></span>
 									</div>
 
 									<div>
 										<span><label>Expiration Date&#160;&#160;<h:message
-													for="expmo" style="color: red;" /></label></span> <span> <h:panelGrid
+													for="expmo" style="color: red;" /> / <h:message
+													for="expyr" style="color: red;" /></label></span> <span> <h:panelGrid
 												columns="3" style="width: 30%">
 												<h:inputText id="expmo"
-													value="#{shoppingCart.payment.expireMonth}" />
+													value="#{shoppingCart.payment.expireMonth}" required="true" requiredMessage="Expiration month is required"/>
 												<span>&#160;/&#160;</span>
 												<h:inputText id="expyr"
-													value="#{shoppingCart.payment.expireYear}" />
+													value="#{shoppingCart.payment.expireYear}" required="true" requiredMessage="Expiration year is required"/>
 											</h:panelGrid>
 										</span>
 									</div>
 									<div>
 										<span><label>Cardholder Name&#160;&#160;<h:message
 													for="name" style="color: red;" /></label></span> <span><h:inputText
-												id="name" value="#{shoppingCart.payment.holderName}" /></span>
+												id="name" value="#{shoppingCart.payment.holderName}" required="true" requiredMessage="Cardholder name is required" /></span>
 									</div>
 								</div>
 								<div>
