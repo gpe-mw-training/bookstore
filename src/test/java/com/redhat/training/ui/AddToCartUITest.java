@@ -40,29 +40,53 @@ import com.redhat.training.ui.pages.BuyPage;
 import com.redhat.training.ui.pages.CategoryPage;
 import com.redhat.training.ui.pages.DetailsPage;
 import com.redhat.training.ui.pages.HomePage;
+import com.redhat.training.ui.pages.OrderPage;
+import com.redhat.training.ui.pages.PaymentPage;
+import com.redhat.training.ui.pages.RegistrationPage;
+import com.redhat.training.ui.pages.ReviewPage;
 
 @RunWith(Arquillian.class)
 public class AddToCartUITest extends BaseUITestTemplate {
-	
-	
+
 	@Page
 	private CategoryPage categoryPage;
-	
+
 	@Page
 	private DetailsPage detailsPage;
+
+	@Page
+	private BuyPage buyPage;
+
+	@Page
+	private RegistrationPage registrationPage;
 	
+	@Page
+	private PaymentPage paymentPage;
 	
+	@Page
+	private ReviewPage reviewPage;
+	
+	@Page
+	private OrderPage orderPage;
+
 	@Test
 	@InSequence(1)
-	public void testPurchase(@InitialPage HomePage homePage){
+	public void testPurchase(@InitialPage HomePage homePage) {
 		homePage.hoverOverChildCategoryPage();
 		categoryPage.selectFirstBook();
 		detailsPage.buyBook();
+
 	}
-	
-	
+
+	@Test
+	@InSequence(2)
 	public void testPayment(@InitialPage BuyPage buyPage){
+		buyPage.placeOrder();
+		registrationPage.signIn("admin", "redhat");
+		buyPage.clickPlaceOrder();
+		orderPage.updateBillingAddress("100 Davie St","Raleigh","NC","20121","USA");
+		paymentPage.fillCardInformation("123123123123", "12", "2015", "John Doe");
+		reviewPage.placeOrder();
 		
 	}
-	
 }

@@ -10,9 +10,17 @@ public class BuyPage {
 	@FindBy(id="placeOrderLink")
 	private WebElement loginPlaceOrder;
 	
+	@FindBy(id="order:placeOrderButton")
+	private WebElement placeOrderButton;
 	
 	public void placeOrder(){
 		loginPlaceOrder.click();
+	}
+
+
+	public void clickPlaceOrder() {
+		placeOrderButton.click();
+		
 	}
 	
 }
