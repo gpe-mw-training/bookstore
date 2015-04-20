@@ -28,7 +28,6 @@
 
 package com.redhat.training.ui.pages;
 
-import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.page.Location;
 import org.jboss.arquillian.graphene.page.Page;
 import org.openqa.selenium.NoSuchElementException;

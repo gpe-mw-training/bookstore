@@ -15,11 +15,11 @@
 		<error-code>500</error-code>
 		<location>/faces/error.xhtml</location>
 	</error-page>
-<error-page>  
-    <exception-type>javax.faces.application.ViewExpiredException</exception-type>  
-    <location>/faces/sessionExpired.xhtml</location>  
-</error-page> 
-	
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/faces/sessionExpired.xhtml</location>
+	</error-page>
+
 
 	<context-param>
 		<param-name>javax.faces.SKIP_COMMENTS</param-name>
@@ -36,4 +36,8 @@
 	<welcome-file-list>
 		<welcome-file>/faces/index.xhtml</welcome-file>
 	</welcome-file-list>
+	<mime-mapping>
+		<extension>png</extension>
+		<mime-type>image/png</mime-type>
+	</mime-mapping>
 </web-app>

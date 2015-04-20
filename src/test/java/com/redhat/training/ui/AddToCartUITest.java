@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.redhat.training.BaseUITestTemplate;
+import com.redhat.training.ui.pages.BuyPage;
 import com.redhat.training.ui.pages.CategoryPage;
 import com.redhat.training.ui.pages.DetailsPage;
 import com.redhat.training.ui.pages.HomePage;
@@ -57,7 +58,11 @@ public class AddToCartUITest extends BaseUITestTemplate {
 		homePage.hoverOverChildCategoryPage();
 		categoryPage.selectFirstBook();
 		detailsPage.buyBook();
-		
+	}
+	
+	
+	public void testPayment(@InitialPage BuyPage buyPage){
 		
 	}
+	
 }
