@@ -7,6 +7,17 @@
 
 	<ui:define name="head">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<script type="text/javascript">
+			$(function() {
+				$('#dialog-message').dialog({ 
+					autoOpen: false 
+				});
+				$('#serviceTerms').click(function(e){ 
+					e.preventDefault();
+					$('#dialog-message').dialog('open'); 
+				});
+			});
+    </script>
 	</ui:define>
 	<ui:define name="content">
 		<f:metadata>
@@ -74,10 +85,11 @@
 								<div class="sky-form">
 									<label class="checkbox"> <h:selectBooleanCheckbox
 											value="#{identity.agreement}" id="agreement" /> <i></i>i
-										agree to shoppe.com &#160;<a class="terms" href="#"> terms
-											of service</a> &#160;&#160; <h:message for="agreement"
-											style="color:red" />
-									</label>
+										agree to shoppe.com &#160;
+									</label> <a id="serviceTerms" class="terms"> terms of service</a>
+									&#160;&#160;
+									<h:message for="agreement" style="color:red" />
+
 								</div>
 								<div>
 									<h:commandButton id="register-submit" value="create an account"
@@ -87,8 +99,6 @@
 							</h:form>
 						</div>
 					</div>
-
-
 
 					<div class="registration_left">
 						<h2>existing user</h2>
@@ -107,7 +117,8 @@
 
 								</div>
 								<div>
-									<h:commandButton id="signin" value="Sign In" action="#{identity.login}" />
+									<h:commandButton id="signin" value="Sign In"
+										action="#{identity.login}" />
 								</div>
 								<div class="forget">
 									<a href="#">forgot your password</a>
@@ -121,6 +132,8 @@
 			</div>
 			<!-- end registration -->
 		</div>
-
 	</ui:define>
+
 </ui:composition>
+
+
