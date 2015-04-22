@@ -5,18 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html" contentType="text/html">
 	<h:head>
 		<title>The Shoppe</title>
-		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<h:outputStylesheet library="css" name="bootstrap.css"/>
+		<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
+		<h:outputStylesheet library="css" name="fonts.css"/>
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputStylesheet library="css" name="megamenu.css"/>
 		<!-- jQuery -->
-		<script type='text/javascript' src="js/jquery-1.11.1.min.js" />
+		<h:outputScript library="js" name="jquery-1.11.1.min.js" />
+		<!-- jQuery UI -->
+		<h:outputScript library="js" name="jquery-ui.min.js" />
 		<!-- Custom Theme files -->
-		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<!-- Custom Theme files -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--webfont-->
-		<link href='css/fonts.css' rel='stylesheet' type='text/css' />
-		<!-- start menu -->
-		<link href="css/megamenu.css" rel="stylesheet" type="text/css"
-			media="all" />
 
 		<ui:insert name="head" />
 	</h:head>

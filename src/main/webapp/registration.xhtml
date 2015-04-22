@@ -8,15 +8,25 @@
 	<ui:define name="head">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<script type="text/javascript">
-			$(function() {
-				$('#dialog-message').dialog({ 
-					autoOpen: false 
-				});
-				$('#serviceTerms').click(function(e){ 
-					e.preventDefault();
-					$('#dialog-message').dialog('open'); 
-				});
-			});
+		function initDialog() {
+			 $("#termService").dialog({
+			     modal: true,
+			     buttons:[
+					{
+    				text: "I Agree",
+    				click: function() {
+      					$( this ).dialog( "close" );
+    				}
+  				},
+  				{
+  			      text: "I don't agree",
+  			      click: function() {
+  			        $( this ).dialog( "close" );
+  			      }
+  			    }
+				] 
+			 });
+			}
     </script>
 	</ui:define>
 	<ui:define name="content">
@@ -24,6 +34,33 @@
 			<f:viewParam name="loc" value="#{identity.location}" />
 		</f:metadata>
 		<!-- content -->
+		<h:panelGroup id="termService" style="display:none">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel varius risus. Nulla eget egestas purus.
+							Fusce vel sem bibendum, vestibulum sem et, dictum dolor. Morbi est mi, finibus ultricies urna quis, fermentum
+							sagittis dolor. Donec leo dolor, rutrum ut ultrices at, varius eu eros. Mauris sed pulvinar nibh. Donec facilisis 
+							lacus aliquet diam bibendum rhoncus. Cras fermentum felis mauris, at molestie ante auctor et. Nunc ac lorem eu 
+							justo semper laoreet. Quisque risus ante, laoreet sed tristique nec, posuere sed metus. In magna arcu, cursus
+							quis nisl sed, venenatis eleifend urna. Phasellus vulputate ut nisi vel porta. Cras vel tellus feugiat urna 
+							tempor efficitur. Duis eget dapibus elit, efficitur malesuada velit. Nam id lacus sapien.
+							Pellentesque in ipsum nisi. Pellentesque mattis pulvinar lectus, ac faucibus dui condimentum eget. Vivamus
+							diam sapien, posuere ac libero non, varius consequat nibh. Aenean vestibulum id erat eu bibendum. Praesent 
+							tristique efficitur ipsum ultrices suscipit. Sed orci odio, mollis luctus consequat id, lobortis id dui. 
+							Suspendisse lacinia ligula id accumsan dapibus. Vivamus ornare est quis mi ornare, a convallis erat hendrerit. 
+							Fusce accumsan odio lectus, in volutpat orci consectetur id. Class aptent taciti sociosqu ad litora torquent 
+							per conubia nostra, per inceptos himenaeos. Aenean vel nibh arcu. Curabitur sit amet rutrum urna, non iaculis
+							libero. Etiam dapibus nibh eu enim volutpat maximus. Maecenas suscipit tellus quis neque iaculis, quis lacinia
+							lorem blandit. Donec id dictum nisi. Vestibulum a elementum lacus, rhoncus dictum nunc.
+							Aenean eu volutpat ante, quis tristique lorem. Mauris ut orci at nibh ornare semper. Mauris in est elit. Curabitur
+							et libero ut nisl varius hendrerit ac id arcu. Vivamus aliquam hendrerit mollis. Maecenas orci ex, scelerisque ac 
+							diam rhoncus, sagittis fermentum velit. Aenean eu sagittis leo. Nunc iaculis accumsan facilisis.
+							Vivamus a massa posuere, rutrum nulla sed, egestas quam. In dapibus ex elit, eu pretium tortor scelerisque a. 
+							Donec vel aliquam metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu tortor vehicula, 
+							bibendum arcu eu, ornare mauris. Proin efficitur elit purus, nec blandit mi placerat vitae. Nullam faucibus 
+							eleifend enim ac vulputate. Maecenas fringilla ligula orci, a accumsan nibh bibendum dictum. Nam ex tortor, 
+							cursus at tortor eget, posuere vulputate felis. Morbi et laoreet enim. Nam malesuada erat a efficitur faucibus. 
+							Nullam pharetra lacus id pharetra iaculis. Cras ultricies molestie varius. Praesent ullamcorper lectus id est 
+							venenatis, sed tempus elit tincidunt. Sed mattis nunc non rutrum tempus. Integer dapibus venenatis malesuada.
+						</h:panelGroup>
 		<div class="container">
 			<div class="main">
 				<!-- start registration -->
@@ -32,6 +69,7 @@
 						<h2>
 							new user? <span> create a shoppe account </span>
 						</h2>
+						
 
 						<div class="clearfix"></div>
 
@@ -86,7 +124,7 @@
 									<label class="checkbox"> <h:selectBooleanCheckbox
 											value="#{identity.agreement}" id="agreement" /> <i></i>i
 										agree to shoppe.com &#160;
-									</label> <a id="serviceTerms" class="terms"> terms of service</a>
+									</label> <a id="terms" onclick="initDialog(); return false;" class="terms"> terms of service</a>
 									&#160;&#160;
 									<h:message for="agreement" style="color:red" />
 
