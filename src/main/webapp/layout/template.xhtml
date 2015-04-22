@@ -13,7 +13,9 @@
 		<!-- jQuery -->
 		<h:outputScript library="js" name="jquery-1.11.1.min.js" />
 		<!-- jQuery UI -->
-		<h:outputScript library="js" name="jquery-ui.min.js" />
+		<h:outputScript library="js" name="megamenu.js" />
+		<h:outputScript library="js" name="menu_jquery.js" />
+		
 		<!-- Custom Theme files -->
 		<!-- Custom Theme files -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,8 +23,6 @@
 		<ui:insert name="head" />
 	</h:head>
 	<h:body>
-		<script type="text/javascript" src="js/megamenu.js" />
-		<script type="text/javascript" src="js/menu_jquery.js" />
 		<script type="text/javascript">
   $(document).ready(function(){$(".megamenu").megamenu();});
         </script>
