@@ -43,5 +43,9 @@ public class DetailsPage {
 		
 	}
 
+	public void addToWishList() {
+		
+	}
+
 		
 }

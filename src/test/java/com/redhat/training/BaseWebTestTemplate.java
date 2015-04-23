@@ -52,7 +52,6 @@ public abstract class BaseWebTestTemplate {
 				.addAsResource("runtime.properties")
 				.addAsResource("META-INF/persistence.xml")
 				.addAsResource("META-INF/maven/pom.properties")
-				.addAsResource("META-INF/kmodule.xml")
 				.addAsManifestResource(
 						new StringAsset(
 								"Dependencies: com.google.guava,org.slf4j\n"),

@@ -63,7 +63,6 @@ public abstract class BaseUITestTemplate {
 				.addPackages(true, "com.redhat.training")
 				.addAsResource("META-INF/persistence.xml")
 				.addAsResource("META-INF/maven/pom.properties")
-				.addAsResource("META-INF/kmodule.xml")
 				.addAsResource("runtime.properties")
 				.merge(ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)

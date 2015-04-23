@@ -71,6 +71,28 @@ public class ShoppingCart implements Serializable {
 
 	}
 
+	public String addToWishList(Integer itemid) {
+		CatalogItem item = service.getItem(itemid);
+
+		for (CatalogItem ci : items) {
+			if (ci.getId() == item.getId()) {
+				FacesContext
+						.getCurrentInstance()
+						.addMessage(
+								null,
+								new FacesMessage(
+										"Item has already been added to the shopping bag."));
+				return "buy?faces-redirect=true";
+			}
+		}
+
+		wishlist.add(item);
+
+		return "buy?faces-redirect=true";
+
+	}
+
+	
 	public String moveItemWishlist(CatalogItem item) {
 
 		items.remove(item);

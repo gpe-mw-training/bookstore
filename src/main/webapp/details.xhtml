@@ -65,7 +65,7 @@
 								</div>
 								<h:form id="wishListForm">
 									<h:commandLink rendered="#{not shoppingCart.loggedIn}" value="login to save in wishlist" action="registration.xhtml" />
-									<h:commandLink rendered="#{shoppingCart.loggedIn}" value="save in wishlist" action="index.xhtml"/>
+									<h:commandLink rendered="#{shoppingCart.loggedIn}" value="save in wishlist" action="#{shoppingCart.addToWishList(catalogInquiry.item.id)}"/>
 								</h:form>
 							</div>
 							<div class="clearfix"></div>

@@ -72,21 +72,12 @@ public class AddToCartUITest extends BaseUITestTemplate {
 	@Test
 	@InSequence(1)
 	public void testPurchase(@InitialPage HomePage homePage) {
+		homePage.login("admin", "redhat");
 		homePage.hoverOverChildCategoryPage();
 		categoryPage.selectFirstBook();
-		detailsPage.buyBook();
+		detailsPage.addToWishList();
 
 	}
 
-	@Test
-	@InSequence(2)
-	public void testPayment(@InitialPage BuyPage buyPage){
-		buyPage.placeOrder();
-		registrationPage.signIn("admin", "redhat");
-		buyPage.clickPlaceOrder();
-		orderPage.updateBillingAddress("100 Davie St","Raleigh","NC","20121","USA");
-		paymentPage.fillCardInformation("123123123123", "12", "2015", "John Doe");
-		reviewPage.placeOrder();
-		
-	}
+	
 }
