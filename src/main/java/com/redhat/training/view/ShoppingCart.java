@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -17,6 +17,8 @@ import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Customer;
 import com.redhat.training.domain.Payment;
 import com.redhat.training.domain.PaymentType;
+import com.redhat.training.domain.WishList;
+import com.redhat.training.domain.WishListItem;
 import com.redhat.training.service.CatalogService;
 import com.redhat.training.service.OrderService;
 
@@ -82,13 +84,13 @@ public class ShoppingCart implements Serializable {
 								null,
 								new FacesMessage(
 										"Item has already been added to the shopping bag."));
-				return "buy?faces-redirect=true";
+				return "index?faces-redirect=true";
 			}
 		}
 
 		wishlist.add(item);
 
-		return "buy?faces-redirect=true";
+		return "index?faces-redirect=true";
 
 	}
 

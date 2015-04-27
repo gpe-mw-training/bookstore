@@ -38,13 +38,15 @@ public class DetailsPage {
 	@FindBy(id="buy:detailsBuyButton")
 	private WebElement buyButton;
 	
+	@FindBy(id="wishListForm:saveInWishListLink")
+	private WebElement addToWishListLink;
+	
 	public void buyBook() {
 		buyButton.click();
-		
 	}
 
 	public void addToWishList() {
-		
+		addToWishListLink.click();
 	}
 
 		
