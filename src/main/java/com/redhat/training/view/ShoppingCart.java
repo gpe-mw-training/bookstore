@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -17,10 +16,9 @@ import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Customer;
 import com.redhat.training.domain.Payment;
 import com.redhat.training.domain.PaymentType;
-import com.redhat.training.domain.WishList;
-import com.redhat.training.domain.WishListItem;
 import com.redhat.training.service.CatalogService;
 import com.redhat.training.service.OrderService;
+import com.redhat.training.service.RememberMeService;
 
 @Named
 @SessionScoped
@@ -30,6 +28,8 @@ public class ShoppingCart implements Serializable {
 	private CatalogService service;
 	@Inject
 	private OrderService orderService;
+	@Inject 
+	private RememberMeService rememberMeService;
 //	@Inject
 //	private Conversation conversation;
 
@@ -177,9 +177,9 @@ public class ShoppingCart implements Serializable {
 	}
 	
 	public String logout() {
+		rememberMeService.logout(customer);
 		customer = null;
 		loggedIn = false;
-		
 		return "index?faces-redirect=true";
 	}
 	
