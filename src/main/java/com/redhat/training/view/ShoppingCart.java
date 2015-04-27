@@ -177,9 +177,11 @@ public class ShoppingCart implements Serializable {
 	}
 	
 	public String logout() {
-		rememberMeService.logout(customer);
-		customer = null;
-		loggedIn = false;
+		if(customer!=null){
+			rememberMeService.logout(customer);
+			customer = null;
+			loggedIn = false;	
+		}
 		return "index?faces-redirect=true";
 	}
 	

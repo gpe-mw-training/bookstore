@@ -60,7 +60,10 @@ public class RememberMeService {
 
 	public void logout(Customer customer) {
 		UserToken token = findToken(customer);
-		entityManager.remove(token);
+		if(token!=null){
+			entityManager.remove(token);	
+		}
+		
 	}
 
 }
