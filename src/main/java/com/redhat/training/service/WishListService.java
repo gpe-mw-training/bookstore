@@ -46,6 +46,11 @@ public class WishListService {
 		mgr.persist(wishItem);
 		wishList.addItem(wishItem);
 	}
+
+	public void removeWishList(Customer customer) {
+		WishList wishList = findByCustomer(customer);
+		mgr.remove(wishList);
+	}
 	
 	
 }
