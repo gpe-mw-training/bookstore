@@ -28,46 +28,33 @@
 
 package com.redhat.training.ui.pages;
 
-import org.jboss.arquillian.graphene.Graphene;
-import org.openqa.selenium.By;
+import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage {
+@Location("faces/payment.xhtml")
+public class PaymentPage {
 
-	@FindBy(id = "body")
-	private WebElement fieldsetWithLoginAndPassword;
-	@FindBy(id="loginBox")
-	private WebElement loginBox;
-	
-	@FindBy(id="loginForm:username")
-	private WebElement usernameField;
-	
-	@FindBy(id="loginForm:password")
-	private WebElement passwordField;
-	
-	@FindBy(id = "loginForm:login")
-	private WebElement loginButton;
+	@FindBy(id = "order:ccnum")
+	private WebElement creditCardNumberField;
 
-	@FindBy(id = "logoutButton")
-	private WebElement logoutButton;
+	@FindBy(id = "order:expmo")
+	private WebElement expirationMonthField;
+
+	@FindBy(id = "order:expyr")
+	private WebElement expirationYearField;
+	@FindBy(id = "order:name")
+	private WebElement cardholderNameField;
 	
-	@FindBy(id = "loginForm:login_header")
-	private WebElement tableHeader;
+	@FindBy(id="order:reviewButton")
+	private WebElement reviewButton;
 	
-	
-	public boolean isUsernameLabelAvailable(){
-		return fieldsetWithLoginAndPassword.findElement(By.id("usernameLabel")).getText().equals("Username");
+	public void fillCardInformation(String creditCardNumber, String expirationMonth, String expirationYear, String cardholderName) {
+			creditCardNumberField.sendKeys(creditCardNumber);
+			expirationMonthField.sendKeys(expirationMonth);
+			expirationYearField.sendKeys(expirationYear);
+			cardholderNameField.sendKeys(cardholderName);
+			reviewButton.click();
 	}
 
-	
-	public boolean login(String username, String password) {
-		if(!loginBox.isDisplayed()){
-			loginBox.click();
-		}
-		usernameField.sendKeys(username);
-		passwordField.sendKeys(password);
-		Graphene.guardHttp(loginButton).click();
-		return logoutButton.isDisplayed();
-	}
 }

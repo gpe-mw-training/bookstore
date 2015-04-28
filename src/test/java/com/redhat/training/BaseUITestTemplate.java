@@ -60,23 +60,17 @@ public abstract class BaseUITestTemplate {
 		WebArchive archive = ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				// get high level package and all below it
-				.addPackages(true, "com.jbtravel")
-				.addAsResource("jbtravel/jbtravel.dsl")
-				.addAsResource("jbtravel/jbtravel.drl")
-				.addAsResource("jbtravel/jbtravel.dslr")
-				.addAsResource("seats/seats.drl")
+				.addPackages(true, "com.redhat.training")
 				.addAsResource("META-INF/persistence.xml")
 				.addAsResource("META-INF/maven/pom.properties")
-				.addAsResource("META-INF/kmodule.xml")
+				.addAsResource("runtime.properties")
 				.merge(ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)
 						.as(GenericArchive.class), "/",
 						Filters.include(".*\\.xhtml$"))
-				.addAsWebInfResource("com/jbtravel/model/flightplan.protobin",
-						"classes/com/jbtravel/model/flightplan.protobin")
 				.addAsManifestResource(
 						new StringAsset(
-								"Dependencies: com.google.guava,org.slf4j,org.kie meta-inf,org.apache.cxf,org.drools,org.jboss.resteasy.resteasy-jaxrs,org.jboss.resteasy.resteasy-jaxb-provider,org.apache.httpcomponents,org.jbpm,org.jboss.remoting-jmx meta-inf\n"),
+								"Dependencies: com.google.guava,org.slf4j,org.apache.cxf,org.apache.httpcomponents,org.jboss.remoting-jmx meta-inf\n"),
 								"MANIFEST.MF")
 				.addAsWebInfResource(
 						new File(WEBAPP_SRC + "/WEB-INF", "beans.xml"))

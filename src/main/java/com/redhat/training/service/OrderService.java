@@ -2,7 +2,12 @@ package com.redhat.training.service;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Order;
@@ -36,4 +41,20 @@ public class OrderService {
 		mgr.persist(order);
 		order.getCustomer().getOrders().add(order);
 	}
+	
+	public Order getOrderById(Integer id){
+		CriteriaBuilder builder = mgr.getCriteriaBuilder();
+		CriteriaQuery<Order> criteria = builder.createQuery(Order.class);
+		Root<Order> root = criteria.from(Order.class);
+		TypedQuery<Order> query = mgr.createQuery(criteria.select(
+				root).where(builder.equal(root.get("id"), true)));
+		Order order = null;
+		try{
+			return query.getSingleResult();
+		}catch(NonUniqueResultException e){
+			return order;
+		}
+
+	}
+	
 }

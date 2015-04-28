@@ -5,24 +5,25 @@
 	xmlns:h="http://java.sun.com/jsf/html" contentType="text/html">
 	<h:head>
 		<title>The Shoppe</title>
-		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<h:outputStylesheet library="css" name="bootstrap.css"/>
+		<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
+		<h:outputStylesheet library="css" name="fonts.css"/>
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputStylesheet library="css" name="megamenu.css"/>
 		<!-- jQuery -->
-		<script type='text/javascript' src="js/jquery-1.11.1.min.js" />
+		<h:outputScript library="js" name="jquery-1.11.1.min.js" />
+		<!-- jQuery UI -->
+		<h:outputScript library="js" name="jquery-ui.min.js" />
+		<h:outputScript library="js" name="megamenu.js" />
+		<h:outputScript library="js" name="menu_jquery.js" />
+		
 		<!-- Custom Theme files -->
-		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<!-- Custom Theme files -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--webfont-->
-		<link href='css/fonts.css' rel='stylesheet' type='text/css' />
-		<!-- start menu -->
-		<link href="css/megamenu.css" rel="stylesheet" type="text/css"
-			media="all" />
 
 		<ui:insert name="head" />
 	</h:head>
 	<h:body>
-		<script type="text/javascript" src="js/megamenu.js" />
-		<script type="text/javascript" src="js/menu_jquery.js" />
 		<script type="text/javascript">
   $(document).ready(function(){$(".megamenu").megamenu();});
         </script>
@@ -61,8 +62,8 @@
 										<h:form id="loginForm">
 											<fieldset id="body">
 												<fieldset>
-													<label for="email">Email Address</label>
-													<h:inputText id="email" value="#{identity.username}" />
+													<label id="usernameLabel" for="username">Username</label>
+													<h:inputText id="username" value="#{identity.username}" />
 												</fieldset>
 
 												<fieldset>
@@ -71,7 +72,7 @@
 												</fieldset>
 												<h:commandButton id="login" value="Sign In"
 													action="#{identity.login}" />
-												<label> <input type="checkbox" id="checkbox" /><i>Remember
+												<label><h:selectBooleanCheckbox value="#{identity.rememberMe}" /><i>Remember
 														me</i></label>
 											</fieldset>
 										</h:form>
@@ -100,7 +101,11 @@
 			<div class="container">
 				<div class="header">
 					<div class="logo">
-						<h:graphicImage url="/images/shoppe-logo.png" />
+					<h:form id="bookshopLogoForm">
+						<h:outputLink id="logoImageLink" value="index.xhtml">
+							<h:graphicImage id="logoImage" url="/images/shoppe-logo.png" />
+						</h:outputLink>
+					</h:form>
 					</div>
 					<!-- start header_right -->
 					<div class="header_right">
@@ -196,7 +201,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<ul class="megamenu skyblue">
-						<li><a class="color1" href="index.xhtml">Home</a></li>
+						<li><a class="color1" href="faces/index.xhtml">Home</a></li>
 
 						<li class="grid"><a class="color2" href="#">new arrivals</a>
 

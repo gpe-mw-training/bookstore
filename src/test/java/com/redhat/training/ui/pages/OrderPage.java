@@ -28,46 +28,57 @@
 
 package com.redhat.training.ui.pages;
 
-import org.jboss.arquillian.graphene.Graphene;
-import org.openqa.selenium.By;
+import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage {
+@Location("faces/order.xhtml")
+public class OrderPage {
 
-	@FindBy(id = "body")
-	private WebElement fieldsetWithLoginAndPassword;
-	@FindBy(id="loginBox")
-	private WebElement loginBox;
-	
-	@FindBy(id="loginForm:username")
-	private WebElement usernameField;
-	
-	@FindBy(id="loginForm:password")
-	private WebElement passwordField;
-	
-	@FindBy(id = "loginForm:login")
-	private WebElement loginButton;
+	@FindBy(id = "order:address1")
+	private WebElement addressField;
 
-	@FindBy(id = "logoutButton")
-	private WebElement logoutButton;
+	@FindBy(id = "order:city")
+	private WebElement cityField;
+
+	@FindBy(id = "order:state")
+	private WebElement stateField;
+	@FindBy(id = "order:zip")
+	private WebElement zipCodeField;
+	@FindBy(id = "order:country")
+	private WebElement countryField;
+	@FindBy(id = "order:shipsame")
+	private WebElement shipSameAddressCheckBox;
+	@FindBy(id = "order:nextButton")
+	private WebElement nextButton;
+	@FindBy(id="order:saddress1")
+	private WebElement shippingAddressField;
+
+	@FindBy(id="order:scity")
+	private WebElement shippingCityField;
+	@FindBy(id="order:sstate")
+	private WebElement shippingStateField;
 	
-	@FindBy(id = "loginForm:login_header")
-	private WebElement tableHeader;
+	@FindBy(id="order:szip")
+	private WebElement shippingZipCode;
 	
+	@FindBy(id="order:scountry")
+	private WebElement shippingCountry;
 	
-	public boolean isUsernameLabelAvailable(){
-		return fieldsetWithLoginAndPassword.findElement(By.id("usernameLabel")).getText().equals("Username");
+
+	public void updateBillingAddress(String address, String city,
+			String state, String zipCode, String country) {
+			addressField.sendKeys(address);
+			cityField.sendKeys(city);
+			stateField.sendKeys(state);
+			zipCodeField.sendKeys(zipCode);
+			countryField.sendKeys(country);
+			shippingAddressField.sendKeys(address);
+			shippingCityField.sendKeys(city);
+			shippingStateField.sendKeys(state);
+			shippingZipCode.sendKeys(zipCode);
+			shippingCountry.sendKeys(country);
+			nextButton.click();
 	}
 
-	
-	public boolean login(String username, String password) {
-		if(!loginBox.isDisplayed()){
-			loginBox.click();
-		}
-		usernameField.sendKeys(username);
-		passwordField.sendKeys(password);
-		Graphene.guardHttp(loginButton).click();
-		return logoutButton.isDisplayed();
-	}
 }

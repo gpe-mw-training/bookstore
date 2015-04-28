@@ -28,37 +28,20 @@
 
 package com.redhat.training.ui.pages;
 
-import org.jboss.arquillian.graphene.Graphene;
-import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
+import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
-public class SeatPage {
+@Location("faces/category.xhtml")
+public class CategoryPage {
 
-	@FindBy(id = "reservationForm:seat")
-	private WebElement seat;
-	@FindBy(id = "reservationForm:selectButton")
-	private WebElement submit;
-	@FindBy(id = "reservation_header")
-	private WebElement tableHeader;
-
-	public boolean isOnPage() {
-		try {
-			return tableHeader.getText().equals("Complete Your Reservation");
-		} catch (NoSuchElementException e) {
-			return false;
-		}
+	@FindBy(id="catalog:repeat:0:bookLink") //1st book
+	private WebElement bookLink;
+	
+	public void selectFirstBook() {
+		bookLink.click();
+		
 	}
 
-	public void select(int num) {
-		Select select = new Select(seat);
-		try {
-			select.selectByIndex(num);
-		} catch(NoSuchElementException e) {
-			Assert.fail("No more seats available for class on this flight.");
-		}
-		Graphene.guardHttp(submit).click();
-	}
+		
 }

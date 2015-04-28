@@ -113,12 +113,12 @@
 					<div class="shoping_left">
 						<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
 							<h4>
-								<a href="registration.xhtml?loc=buy"><img src="images/login.jpg" />login
+								<a id="placeOrderLink" href="registration.xhtml?loc=buy"><img src="images/login.jpg" />login
 								</a> <span> to place order</span>
 							</h4>
 						</h:panelGroup>
 						<h:form id="order">
-							<h:commandLink value="place order" styleClass="btn1" action="#{shoppingCart.prepareOrder()}"
+							<h:commandLink id="placeOrderButton" value="place order" styleClass="btn1" action="#{shoppingCart.prepareOrder()}"
 								rendered="#{shoppingCart.loggedIn and shoppingCart.items.size() > 0}" />
 						</h:form>
 					</div>

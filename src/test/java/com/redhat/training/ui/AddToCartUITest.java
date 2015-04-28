@@ -26,61 +26,58 @@
  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.redhat.training.ui.pages;
+package com.redhat.training.ui;
 
-import org.jboss.arquillian.graphene.Graphene;
+import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
-import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class ConfirmationPage {
+import com.redhat.training.BaseUITestTemplate;
+import com.redhat.training.ui.pages.BuyPage;
+import com.redhat.training.ui.pages.CategoryPage;
+import com.redhat.training.ui.pages.DetailsPage;
+import com.redhat.training.ui.pages.HomePage;
+import com.redhat.training.ui.pages.OrderPage;
+import com.redhat.training.ui.pages.PaymentPage;
+import com.redhat.training.ui.pages.RegistrationPage;
+import com.redhat.training.ui.pages.ReviewPage;
 
-	@FindBy(id = "confirmation_header")
-	private WebElement tableHeader;
-	@FindBy(id = "reservation")
-	private WebElement resId;
-	@FindBy(id = "price")
-	private WebElement price;
-	@FindBy(id = "fees")
-	private WebElement fees;
-	@FindBy(xpath = "//a[text()='Select Seat']")
-	private WebElement seatSelection;
-	@FindBy(id = "seat")
-	private WebElement seat;
+@RunWith(Arquillian.class)
+public class AddToCartUITest extends BaseUITestTemplate {
+
+	@Page
+	private CategoryPage categoryPage;
+
+	@Page
+	private DetailsPage detailsPage;
+
+	@Page
+	private BuyPage buyPage;
+
+	@Page
+	private RegistrationPage registrationPage;
 	
 	@Page
-	private SeatPage seatPage;
+	private PaymentPage paymentPage;
 	
-	public boolean isOnPage() {
-		try {
-			return tableHeader.getText().equals("Reservation Confirmation");
-		} catch(NoSuchElementException e) {
-			return false;
-		}
+	@Page
+	private ReviewPage reviewPage;
+	
+	@Page
+	private OrderPage orderPage;
+
+	@Test
+	@InSequence(1)
+	public void testPurchase(@InitialPage HomePage homePage) {
+		homePage.login("admin", "redhat");
+		homePage.hoverOverChildCategoryPage();
+		categoryPage.selectFirstBook();
+		detailsPage.addToWishList();
+
 	}
+
 	
-	public int getConfirmationNumber() {
-	
-		return new Integer(resId.getText());
-	}
-	
-	public String getPrice() {
-		return price.getText();
-	}
-	
-	public String getFees() {
-		return fees.getText();
-	}
-	
-	public String getSeat() {
-		return seat.getText();
-	}
-	
-	public void selectSeat(int seat) {
-		Graphene.guardHttp(seatSelection).click();
-		Assert.assertTrue(seatPage.isOnPage());
-		seatPage.select(seat);
-	}
 }

@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -19,6 +18,7 @@ import com.redhat.training.domain.Payment;
 import com.redhat.training.domain.PaymentType;
 import com.redhat.training.service.CatalogService;
 import com.redhat.training.service.OrderService;
+import com.redhat.training.service.RememberMeService;
 
 @Named
 @SessionScoped
@@ -28,8 +28,10 @@ public class ShoppingCart implements Serializable {
 	private CatalogService service;
 	@Inject
 	private OrderService orderService;
-	@Inject
-	private Conversation conversation;
+	@Inject 
+	private RememberMeService rememberMeService;
+//	@Inject
+//	private Conversation conversation;
 
 	private static final long serialVersionUID = 1L;
 
@@ -48,8 +50,8 @@ public class ShoppingCart implements Serializable {
 
 	public String addItem(Integer itemid) {
 
-		if (!conversation.isTransient())
-			conversation.end();
+//		if (!conversation.isTransient())
+//			conversation.end();
 
 		CatalogItem item = service.getItem(itemid);
 
@@ -71,6 +73,28 @@ public class ShoppingCart implements Serializable {
 
 	}
 
+	public String addToWishList(Integer itemid) {
+		CatalogItem item = service.getItem(itemid);
+
+		for (CatalogItem ci : items) {
+			if (ci.getId() == item.getId()) {
+				FacesContext
+						.getCurrentInstance()
+						.addMessage(
+								null,
+								new FacesMessage(
+										"Item has already been added to the shopping bag."));
+				return "index?faces-redirect=true";
+			}
+		}
+
+		wishlist.add(item);
+
+		return "index?faces-redirect=true";
+
+	}
+
+	
 	public String moveItemWishlist(CatalogItem item) {
 
 		items.remove(item);
@@ -153,9 +177,11 @@ public class ShoppingCart implements Serializable {
 	}
 	
 	public String logout() {
-		customer = null;
-		loggedIn = false;
-		
+		if(customer!=null){
+			rememberMeService.logout(customer);
+			customer = null;
+			loggedIn = false;	
+		}
 		return "index?faces-redirect=true";
 	}
 	

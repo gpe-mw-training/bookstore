@@ -26,55 +26,59 @@
  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.redhat.training.ui.pages;
+package com.redhat.training.ui;
 
-import org.jboss.arquillian.graphene.page.Location;
+import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-@Location("faces/index.xhtml")
-public class HomePage {
+import com.redhat.training.BaseUITestTemplate;
+import com.redhat.training.ui.pages.BuyPage;
+import com.redhat.training.ui.pages.CategoryPage;
+import com.redhat.training.ui.pages.DetailsPage;
+import com.redhat.training.ui.pages.HomePage;
+import com.redhat.training.ui.pages.OrderPage;
+import com.redhat.training.ui.pages.PaymentPage;
+import com.redhat.training.ui.pages.RegistrationPage;
+import com.redhat.training.ui.pages.ReviewPage;
 
-	@FindBy(id = "bookshopLogoForm:logoImageLink")
-	private WebElement bookshopLogoLink;
-	
-	@FindBy(id = "bookshopLogoForm:logoImage")
-	private WebElement bookshopLogo;	
+@RunWith(Arquillian.class)
+public class AddToWishListUITest extends BaseUITestTemplate {
+
+	@Page
+	private HomePage homePage;
+	@Page
+	private CategoryPage categoryPage;
+
+	@Page
+	private DetailsPage detailsPage;
+
+	@Page
+	private BuyPage buyPage;
+
+	@Page
+	private RegistrationPage registrationPage;
 	
 	@Page
-	private LoginPage loginPage;
+	private PaymentPage paymentPage;
 	
 	@Page
-	private MenuPage menuPage;
+	private ReviewPage reviewPage;
 	
-	public boolean isHomePageLinkAvailable() {
-		try {
-			return bookshopLogoLink.getAttribute("href").contains("index.xhtml");
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
-	
-	public boolean isHomePageLinkWithImage(){
-		try {
-			return bookshopLogo.getAttribute("src").contains("shoppe-logo.png");
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
-	
-	public boolean isUsernameLabelCorrect(){
-		return loginPage.isUsernameLabelAvailable();
-	}
-	
-	public boolean login(String username, String password){
-		return loginPage.login(username, password);
-	}
-	
-	public boolean hoverOverChildCategoryPage(){
-		return menuPage.selectChildrenCategory();
+	@Page
+	private OrderPage orderPage;
+
+	@Test
+	@InSequence(1)
+	public void testPurchase(@InitialPage RegistrationPage registrationPage) {
+		registrationPage.signIn("admin", "redhat");
+		homePage.hoverOverChildCategoryPage();
+		categoryPage.selectFirstBook();
+		detailsPage.addToWishList();
+
 	}
 
 }
