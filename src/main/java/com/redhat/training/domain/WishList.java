@@ -1,9 +1,12 @@
 package com.redhat.training.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,14 +60,15 @@ public class WishList implements Serializable {
 		items.add(item);
 	}
 
-	public void add(CatalogItem item) {
-		if(items==null){
-			items = new HashSet<WishListItem>();
+
+	public List<CatalogItem> getAsCatalogItems() {
+		List<CatalogItem> catalogItems = new ArrayList<CatalogItem>();
+		if(items!=null){
+			for (WishListItem wishListItem : items) {
+				catalogItems.add(wishListItem.getCatalogItem());
+			}
 		}
-		WishListItem wishListItem = new WishListItem();
-		wishListItem.setCatalogItem(item);
-		items.add(wishListItem);
-		
+		return catalogItems;
 	}
 
 }

@@ -19,6 +19,7 @@ import com.redhat.training.domain.PaymentType;
 import com.redhat.training.service.CatalogService;
 import com.redhat.training.service.OrderService;
 import com.redhat.training.service.RememberMeService;
+import com.redhat.training.service.WishListService;
 
 @Named
 @SessionScoped
@@ -30,13 +31,15 @@ public class ShoppingCart implements Serializable {
 	private OrderService orderService;
 	@Inject 
 	private RememberMeService rememberMeService;
+	@Inject 
+	private WishListService wishListService;
 //	@Inject
 //	private Conversation conversation;
 
 	private static final long serialVersionUID = 1L;
 
 	private List<CatalogItem> items = new ArrayList<CatalogItem>();
-	private List<CatalogItem> wishlist = new ArrayList<CatalogItem>();
+//	private List<CatalogItem> wishlist = new ArrayList<CatalogItem>();
 	private List<CatalogItem> viewed = new ArrayList<CatalogItem>();
 
 	private Customer customer;
@@ -87,8 +90,8 @@ public class ShoppingCart implements Serializable {
 				return "index?faces-redirect=true";
 			}
 		}
-
-		wishlist.add(item);
+		wishListService.addItem(customer,item);
+//		wishlist.add(item);
 
 		return "index?faces-redirect=true";
 
@@ -98,7 +101,9 @@ public class ShoppingCart implements Serializable {
 	public String moveItemWishlist(CatalogItem item) {
 
 		items.remove(item);
-		wishlist.add(item);
+		
+		wishListService.addItem(customer, item);
+//		wishlist.add(item);
 		if (items.size() == 0)
 			discount = new BigDecimal(0);
 
@@ -148,7 +153,7 @@ public class ShoppingCart implements Serializable {
 	}
 
 	public List<CatalogItem> getWishlist() {
-		return wishlist;
+		return wishListService.findByCustomer(customer).getAsCatalogItems();
 	}
 
 	public Customer getCustomer() {
