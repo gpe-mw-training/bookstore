@@ -51,6 +51,11 @@ public class WishListService {
 		WishList wishList = findByCustomer(customer);
 		mgr.remove(wishList);
 	}
+
+	public void removeItem(Customer customer, CatalogItem item) {
+		WishList wishList = findByCustomer(customer);
+		wishList.removeItem(item);
+	}
 	
 	
 }

@@ -5,18 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html" contentType="text/html">
 	<h:head>
 		<title>The Shoppe</title>
-		<h:outputStylesheet library="css" name="bootstrap.css"/>
-		<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
-		<h:outputStylesheet library="css" name="fonts.css"/>
+		<h:outputStylesheet library="css" name="bootstrap.css" />
+		<h:outputStylesheet library="css" name="jquery-ui.min.css" />
+		<h:outputStylesheet library="css" name="fonts.css" />
 		<h:outputStylesheet library="css" name="style.css" />
-		<h:outputStylesheet library="css" name="megamenu.css"/>
+		<h:outputStylesheet library="css" name="megamenu.css" />
 		<!-- jQuery -->
 		<h:outputScript library="js" name="jquery-1.11.1.min.js" />
 		<!-- jQuery UI -->
 		<h:outputScript library="js" name="jquery-ui.min.js" />
 		<h:outputScript library="js" name="megamenu.js" />
 		<h:outputScript library="js" name="menu_jquery.js" />
-		
+
 		<!-- Custom Theme files -->
 		<!-- Custom Theme files -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,11 +40,10 @@
 
 					<div class="top_right">
 						<ul>
-							<li>
-							<h:form id="viewed">
-								<h:commandLink action="#{catalogInquiry.recentlyViewed}" value="Recently Viewed" id="review" />
-							</h:form>
-							</li>|
+							<li><h:form id="viewed">
+									<h:commandLink action="#{catalogInquiry.recentlyViewed}"
+										value="Recently Viewed" id="review" />
+								</h:form></li>|
 
 							<li><a href="contact.xhtml">Contact</a></li>|
 
@@ -72,8 +71,8 @@
 												</fieldset>
 												<h:commandButton id="login" value="Sign In"
 													action="#{identity.login}" />
-												<label><h:selectBooleanCheckbox value="#{identity.rememberMe}" /><i>Remember
-														me</i></label>
+												<label><h:selectBooleanCheckbox
+														value="#{identity.rememberMe}" /><i>Remember me</i></label>
 											</fieldset>
 										</h:form>
 										<span><a href="#">Forgot your password?</a></span>
@@ -82,11 +81,9 @@
 							</li>
 							<h:panelGroup rendered="#{shoppingCart.loggedIn}">
 							|
-							<li>
-								<h:form id="logout">
-									<h:commandLink action="#{shoppingCart.logout}" value="Logout" />
-								</h:form>
-							</li>
+							<li><h:form id="logout">
+										<h:commandLink action="#{shoppingCart.logout}" value="Logout" />
+									</h:form></li>
 							</h:panelGroup>
 						</ul>
 					</div>
@@ -101,19 +98,19 @@
 			<div class="container">
 				<div class="header">
 					<div class="logo">
-					<h:form id="bookshopLogoForm">
-						<h:outputLink id="logoImageLink" value="index.xhtml">
-							<h:graphicImage id="logoImage" url="/images/shoppe-logo.png" />
-						</h:outputLink>
-					</h:form>
+						<h:form id="bookshopLogoForm">
+							<h:outputLink id="logoImageLink" value="index.xhtml">
+								<h:graphicImage id="logoImage" url="/images/shoppe-logo.png" />
+							</h:outputLink>
+						</h:form>
 					</div>
 					<!-- start header_right -->
 					<div class="header_right">
 						<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
-						<div class="create_btn">
-							<a class="arrow" href="registration.xhtml">create account <img
-								src="images/right_arrow.png" alt="" /></a>
-						</div>
+							<div class="create_btn">
+								<a class="arrow" href="registration.xhtml">create account <img
+									src="images/right_arrow.png" alt="" /></a>
+							</div>
 						</h:panelGroup>
 
 						<ul class="icon1 sub-icon1 profile_img">
@@ -136,17 +133,26 @@
 											<h:column>
 												<li>
 													<p>
+														<h:graphicImage value="#{item.imagePath}" width="20%" />
+													</p>
+												</li>
+											</h:column>
+											<h:column>
+												<li>
+													<p>
 														<h:commandLink action="#{catalogInquiry.pickItem(item)}">
 															<h:outputText value="#{item.title}" />
 														</h:commandLink>
 													</p>
 												</li>
 											</h:column>
+
 										</h:dataTable>
 										<li>
 											<div class="btn_form">
 
-												<h:commandLink action="buy" value="Shopping Bag" style="margin-left: 25px;"/>
+												<h:commandLink action="buy" value="Shopping Bag"
+													style="margin-left: 25px;" />
 
 											</div>
 										</li>
@@ -175,8 +181,25 @@
 											<h:column>
 												<li>
 													<p>
-														<h:commandLink action="#{catalogInquiry.pickItem(item)}">
+														<h:graphicImage value="#{item.imagePath}" width="20%" />
+													</p>
+												</li>
+											</h:column>
+											<h:column>
+												<li>
+													<p>
+														<h:commandLink action="#{shoppingCart.moveFromWishlist(item)}">
 															<h:outputText value="#{item.title}" />
+														</h:commandLink>
+													</p>
+												</li>
+											</h:column>
+											<h:column>
+												<li>
+													<p>
+														<h:commandLink
+															action="#{shoppingCart.moveFromWishlist(item)}">
+															Buy
 														</h:commandLink>
 													</p>
 												</li>
@@ -235,7 +258,7 @@
 
 											<ul>
 												<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
-												<li><a href="registration.xhtml">login</a></li>
+													<li><a href="registration.xhtml">login</a></li>
 												</h:panelGroup>
 												<li><a href="registration.xhtml">create an account</a></li>
 												<li><a href="buy.xhtml">my book bag</a></li>
@@ -286,7 +309,7 @@
 
 											<ul>
 												<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
-												<li><a href="registration.xhtml">login</a></li>
+													<li><a href="registration.xhtml">login</a></li>
 												</h:panelGroup>
 												<li><a href="registration.xhtml">create an account</a></li>
 												<li><a href="buy.xhtml">my book bag</a></li>
@@ -319,7 +342,7 @@
 											<label for="name">Name</label> <input id="name" type="text" />
 											<label for="email">E-mail</label> <input id="email"
 												type="text" /> <label for="message">Message</label>
-											<textarea cols="1" rows="8" id="message"/>
+											<textarea cols="1" rows="8" id="message" />
 											<input type="submit" value="Send" />
 										</form>
 									</div>
@@ -339,7 +362,7 @@
 		<!-- footer_top -->
 		<div class="footer_top">
 			<div class="container">
-				
+
 				<!-- start span_of_2 -->
 
 				<div class="span_of_2">
@@ -356,9 +379,11 @@
 
 						<div class="social-icons">
 							<ul>
-								<li><a href="http://www.facebook.com/redhatinc" target="_blank"></a></li>
+								<li><a href="http://www.facebook.com/redhatinc"
+									target="_blank"></a></li>
 
-								<li><a href="https://twitter.com/hashtag/RedHat" target="_blank"></a></li>
+								<li><a href="https://twitter.com/hashtag/RedHat"
+									target="_blank"></a></li>
 
 								<li><a href="http://vimeo.com" target="_blank"></a></li>
 

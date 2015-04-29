@@ -70,4 +70,14 @@ public class WishList implements Serializable {
 		return catalogItems;
 	}
 
+	public void removeItem(CatalogItem item) {
+		if(items!=null){
+			WishListItem wishListItem = new WishListItem();
+			wishListItem.setCatalogItem(item);
+			if(items.contains(wishListItem)){
+				items.remove(wishListItem);
+			}
+		}
+	}
+
 }

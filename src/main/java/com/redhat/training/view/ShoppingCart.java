@@ -33,13 +33,10 @@ public class ShoppingCart implements Serializable {
 	private RememberMeService rememberMeService;
 	@Inject 
 	private WishListService wishListService;
-//	@Inject
-//	private Conversation conversation;
 
 	private static final long serialVersionUID = 1L;
 
 	private List<CatalogItem> items = new ArrayList<CatalogItem>();
-//	private List<CatalogItem> wishlist = new ArrayList<CatalogItem>();
 	private List<CatalogItem> viewed = new ArrayList<CatalogItem>();
 
 	private Customer customer;
@@ -91,8 +88,6 @@ public class ShoppingCart implements Serializable {
 			}
 		}
 		wishListService.addItem(customer,item);
-//		wishlist.add(item);
-
 		return "index?faces-redirect=true";
 
 	}
@@ -103,7 +98,16 @@ public class ShoppingCart implements Serializable {
 		items.remove(item);
 		
 		wishListService.addItem(customer, item);
-//		wishlist.add(item);
+		if (items.size() == 0)
+			discount = new BigDecimal(0);
+
+		return "buy";
+	}
+
+	public String moveFromWishlist(CatalogItem item) {
+		wishListService.removeItem(customer, item);
+		items.add(item);
+		
 		if (items.size() == 0)
 			discount = new BigDecimal(0);
 
