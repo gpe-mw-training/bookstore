@@ -3,5 +3,6 @@ target
 .classpath
 .settings
 .project
+.tern-project
 .settings/*
 !.settings/.jsdtscope
