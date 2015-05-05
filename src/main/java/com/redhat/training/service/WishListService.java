@@ -12,7 +12,6 @@ import javax.persistence.criteria.Root;
 import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Customer;
 import com.redhat.training.domain.WishList;
-import com.redhat.training.domain.WishListItem;
 
 @Stateless
 public class WishListService {
@@ -29,22 +28,20 @@ public class WishListService {
 		TypedQuery<WishList> query = mgr.createQuery(criteria.select(root)
 				.where(builder.equal(root.get("customer"), customer)));
 		try {
-			return query.getSingleResult();	
-		} catch(NoResultException e) {
-			WishList wishList = new WishList();
-			wishList.setCustomer(customer);
-			mgr.persist(wishList);
-			return wishList;
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
 		}
 
 	}
 
 	public void addItem(Customer customer, CatalogItem item) {
 		WishList wishList = findByCustomer(customer);
-		WishListItem wishItem = new WishListItem();
-		wishItem.setCatalogItem(item);
-		mgr.persist(wishItem);
-		wishList.addItem(wishItem);
+		if(wishList==null){
+			wishList = new WishList(customer);
+			mgr.persist(wishList);
+		}
+		wishList.addItem(item);
 	}
 
 	public void removeWishList(Customer customer) {
@@ -56,6 +53,5 @@ public class WishListService {
 		WishList wishList = findByCustomer(customer);
 		wishList.removeItem(item);
 	}
-	
-	
+
 }

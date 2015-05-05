@@ -19,18 +19,30 @@ public class WishListItem implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "item_id")
 	private CatalogItem catalogItem;
+
+	public WishListItem() {
+	}
+
+	public WishListItem(CatalogItem item) {
+		this.catalogItem = item;
+	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public CatalogItem getCatalogItem() {
 		return catalogItem;
 	}
+
 	public void setCatalogItem(CatalogItem catalogItem) {
 		this.catalogItem = catalogItem;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,6 +51,7 @@ public class WishListItem implements Serializable {
 				+ ((catalogItem == null) ? 0 : catalogItem.getId());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,8 +68,5 @@ public class WishListItem implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

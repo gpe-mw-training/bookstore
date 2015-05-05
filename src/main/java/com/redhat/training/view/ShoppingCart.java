@@ -16,6 +16,7 @@ import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Customer;
 import com.redhat.training.domain.Payment;
 import com.redhat.training.domain.PaymentType;
+import com.redhat.training.domain.WishList;
 import com.redhat.training.service.CatalogService;
 import com.redhat.training.service.OrderService;
 import com.redhat.training.service.RememberMeService;
@@ -162,7 +163,13 @@ public class ShoppingCart implements Serializable {
 	}
 
 	public List<CatalogItem> getWishlist() {
-		return wishListService.findByCustomer(customer).getAsCatalogItems();
+		WishList wishList = wishListService.findByCustomer(customer);
+		if(wishList!=null){
+			return wishList.getAsCatalogItems();			
+		}else{
+			return null;
+		}
+
 	}
 
 	public Customer getCustomer() {
