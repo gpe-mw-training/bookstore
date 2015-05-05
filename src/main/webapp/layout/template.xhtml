@@ -322,20 +322,6 @@
 											</ul>
 										</div>
 									</div>
-									<h:panelGroup
-										rendered="#{shoppingCart.customer.username=='admin'}">
-										<div class="col1">
-											<div class="h_nav">
-												<h4>administration</h4>
-												<ul>
-													<li><a href="registration.xhtml">login</a></li>
-													<li><a href="registration.xhtml">create an account</a></li>
-													<li><a href="buy.xhtml">my book bag</a></li>
-												</ul>
-											</div>
-										</div>
-									</h:panelGroup>
-
 
 								</div>
 
@@ -370,6 +356,34 @@
 									<div class="col3"></div>
 								</div>
 							</div></li>
+							<h:panelGroup rendered="#{shoppingCart.customer.username=='admin'}">
+							<li><a class="color4" href="admin.xhtml">administration</a>
+							
+							
+							<div class="megapanel">
+								<div class="row">
+									<div class="col3">
+										<div class="h_nav">
+											<h4>administration</h4>
+										</div>
+
+										
+										<div class="col1">
+											<div class="h_nav">
+												<h4>administration</h4>
+												<ul>
+													<li><a href="registration.xhtml">login</a></li>
+													<li><a href="registration.xhtml">create an account</a></li>
+													<li><a href="buy.xhtml">my book bag</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<div class="col3"></div>
+								</div>
+							</div></li>
+							</h:panelGroup>
 					</ul>
 				</div>
 			</div>
