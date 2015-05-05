@@ -226,7 +226,7 @@ public class DatabasePopulator {
 		mgr.persist(customer);
 		customer = new Customer("Guest","User", "guest", "user", "guest@doe.com");
 		mgr.persist(customer);
-		customer = new Customer("Admin","User", "admin", "redhat", "admin@bookshop.com");
+		customer = new Customer("Admin","User", "admin", "redhat", "admin@bookshop.com",true);
 		mgr.persist(customer);
 
 		

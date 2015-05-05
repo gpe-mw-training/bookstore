@@ -26,8 +26,9 @@ public class Customer implements Serializable {
 
 	private String username;
 	private String password;
-	
+
 	private String email;
+	private Boolean admin;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bill_addr_id")
@@ -35,14 +36,14 @@ public class Customer implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ship_addr_id")
 	private Address shippingAddress;
-	
+
 	@OneToMany(mappedBy = "customer")
 	private Set<Order> orders = new HashSet<Order>();
-	
+
 	public Customer() {
-		
+
 	}
-	
+
 	public Customer(String firstName, String lastName, String username,
 			String password, String email) {
 
@@ -51,9 +52,19 @@ public class Customer implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.admin = false;
 	}
 
+	public Customer(String firstName, String lastName, String username,
+			String password, String email, Boolean admin) {
 
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.admin = admin;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -147,6 +158,12 @@ public class Customer implements Serializable {
 		return true;
 	}
 
-	
-	
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 }
