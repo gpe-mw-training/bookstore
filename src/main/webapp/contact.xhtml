@@ -16,27 +16,26 @@
 
 					<div class="contact-form">
 						<h2>Contact Us</h2>
-						<form method="post" action="contact-post.xhtml">
+						<h:form>
 							<div>
-								<span><label>Name</label></span> <span><input
-									name="userName" type="text" class="textbox" /></span>
+								<span><h:outputLabel value="Name" for="messageName" /></span> 
+								<span><h:inputText id="messageName" styleClass="textbox" value="#{messageContact.contact.name}" /></span>
+								<span><h:message for="messageName"/></span>
 							</div>
 							<div>
-								<span><label>E-mail</label></span> <span><input
-									name="userEmail" type="text" class="textbox" /></span>
+								<span><h:outputLabel value="E-mail" for="messageEmail" /></span> 
+								<span><h:inputText id="messageEmail" styleClass="textbox" value="#{messageContact.contact.email}"  /></span>
+								<span><h:message for="messageEmail"/></span>
 							</div>
 							<div>
-								<span><label>Mobile</label></span> <span><input
-									name="userPhone" type="text" class="textbox" /></span>
+								<span><h:outputLabel value="Subject" for="messageSubject" /></span> 
+								<span><h:inputTextarea id="messageSubject" value="#{messageContact.contact.message}" cols="1" rows="4" /></span>
+								<span><h:message for="messageSubject"/></span>
 							</div>
 							<div>
-								<span><label>Subject</label></span> <span><textarea
-										name="userMsg" cols="1" rows="4"> </textarea></span>
+								<span><h:commandButton value="Send" action="#{messageContact.send}" /></span>
 							</div>
-							<div>
-								<span><input type="submit" class="" value="Send" /></span>
-							</div>
-						</form>
+						</h:form>
 					</div>
 					<div class="clearfix"></div>
 				</div>

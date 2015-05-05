@@ -34,9 +34,10 @@
 					<div class="top_left">
 						<h2>
 							<h:form>
-							<h:panelGroup rendered="#{shoppingCart.promoCode==null and shoppingCart.customer!=null}">
-								<h:commandLink value="50%off"
-									action="#{shoppingCart.applyPromoCode}" /> use coupon code "big61" and get extra 50%
+								<h:panelGroup
+									rendered="#{shoppingCart.promoCode==null and shoppingCart.customer!=null}">
+									<h:commandLink value="50%off"
+										action="#{shoppingCart.applyPromoCode}" /> use coupon code "big61" and get extra 50%
 							off on orders over $50
 							</h:panelGroup>
 							</h:form>
@@ -169,7 +170,8 @@
 							<li><a class="active-icon c1" href="#"></a>
 
 								<ul class="sub-icon1 list">
-									<h:panelGroup rendered="#{shoppingCart.wishlist.size() == 0}">
+									<h:panelGroup
+										rendered="#{shoppingCart.wishlist==null or shoppingCart.wishlist.size() == 0}">
 
 										<li>
 											<h3>wishlist is empty</h3> <a href=""></a>
@@ -344,46 +346,56 @@
 											<h4>contact us</h4>
 										</div>
 
-										<form action="#" class="contact">
-											<label for="name">Name</label> <input id="name" type="text" />
-											<label for="email">E-mail</label> <input id="email"
-												type="text" /> <label for="message">Message</label>
-											<textarea cols="1" rows="8" id="message" />
-											<input type="submit" value="Send" />
-										</form>
+										<h:form id="contact" styleClass="contact">
+												<h:outputLabel value="Name" for="name" />
+												<h:inputText id="name" styleClass="textbox"
+													value="#{messageContact.contact.name}" />
+												<h:message for="name" />
+												<h:outputLabel value="Email" for="email" />
+												<h:inputText id="email" styleClass="textbox"
+													value="#{messageContact.contact.email}" />
+												<h:message for="email" />
+												<h:outputLabel value="Message" for="message" />
+												<h:inputTextarea id="message"
+													value="#{messageContact.contact.message}" cols="1" rows="8" />
+												<h:message for="message" />
+												<h:commandButton value="Send"
+													action="#{messageContact.send}" />
+										</h:form>
 									</div>
 
 									<div class="col3"></div>
 								</div>
 							</div></li>
-							<h:panelGroup rendered="#{shoppingCart.customer.admin}">
+						<h:panelGroup rendered="#{shoppingCart.customer.admin}">
 							<li><a class="color4" href="admin.xhtml">administration</a>
-							
-							
-							<div class="megapanel">
-								<div class="row">
-									<div class="col3">
-										<div class="h_nav">
-											<h4>administration</h4>
-										</div>
 
-										
-										<div class="col1">
+
+								<div class="megapanel">
+									<div class="row">
+										<div class="col3">
 											<div class="h_nav">
 												<h4>administration</h4>
-												<ul>
-													<li><a href="registration.xhtml">login</a></li>
-													<li><a href="registration.xhtml">create an account</a></li>
-													<li><a href="buy.xhtml">my book bag</a></li>
-												</ul>
+											</div>
+
+
+											<div class="col1">
+												<div class="h_nav">
+													<h4>administration</h4>
+													<ul>
+														<li><a href="registration.xhtml">login</a></li>
+														<li><a href="registration.xhtml">create an
+																account</a></li>
+														<li><a href="buy.xhtml">my book bag</a></li>
+													</ul>
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="col3"></div>
-								</div>
-							</div></li>
-							</h:panelGroup>
+										<div class="col3"></div>
+									</div>
+								</div></li>
+						</h:panelGroup>
 					</ul>
 				</div>
 			</div>
