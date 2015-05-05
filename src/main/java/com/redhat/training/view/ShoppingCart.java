@@ -104,6 +104,11 @@ public class ShoppingCart implements Serializable {
 		return "buy";
 	}
 
+	public void applyPromoCode(){
+		promoCode="big61";
+	}
+
+	
 	public String moveFromWishlist(CatalogItem item) {
 		wishListService.removeItem(customer, item);
 		items.add(item);
@@ -125,7 +130,7 @@ public class ShoppingCart implements Serializable {
 
 	public String applyPromo() {
 
-		if ("abc123".equals(promoCode)) {
+		if ("big61".equals(promoCode)) {
 			FacesContext.getCurrentInstance().addMessage("coupon:promo",
 					new FacesMessage("", "Promotion code applied."));
 			discount = discount.add(new BigDecimal(1.00));
