@@ -34,7 +34,7 @@
 					<div class="top_left">
 						<h2>
 							<h:form>
-							<h:panelGroup rendered="#{shoppingCart.promoCode==null}">
+							<h:panelGroup rendered="#{shoppingCart.promoCode==null and shoppingCart.customer!=null}">
 								<h:commandLink value="50%off"
 									action="#{shoppingCart.applyPromoCode}" /> use coupon code "big61" and get extra 50%
 							off on orders over $50
