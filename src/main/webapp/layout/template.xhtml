@@ -3,6 +3,7 @@
 <f:view xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" contentType="text/html">
+	<f:loadBundle basename="com.redhat.training.i18n.bookstore" var="i18n"/>
 	<h:head>
 		<title>The Shoppe</title>
 		<h:outputStylesheet library="css" name="bootstrap.css" />
@@ -63,44 +64,52 @@
 										value="Recently Viewed" id="review" />
 								</h:form></li>
 
-							<li><a href="contact.xhtml">Contact</a></li>
+							<li>
+								<h:outputLink value="contact.xhtml">
+							 		<h:outputText value="#{i18n['template.greeting.contact']}" />
+							 	</h:outputLink>
+							 </li>
 
 							<li class="login">
 								<div id="loginContainer">
 									<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
-										<a href="#" id="loginButton"><span>Login</span></a>
+										<a href="#" id="loginButton"><span><h:outputText value="#{i18n['template.greeting.username']}"/></span></a>
 									</h:panelGroup>
 									<h:panelGroup rendered="#{shoppingCart.loggedIn}">
-										<a href="#" id="logoutButton"><span>Hi, <h:outputText
-													value="#{shoppingCart.customer.firstName}" /></span></a>
+										<a href="#" id="logoutButton">
+										<span>
+											<h:outputFormat value="#{i18n['template.greeting.message']}" >
+												<f:param value="#{shoppingCart.customer.firstName}" />	
+											</h:outputFormat>
+										</span></a>
 									</h:panelGroup>
 
 									<div id="loginBox">
 										<h:form id="loginForm">
 											<fieldset id="body">
 												<fieldset>
-													<label id="usernameLabel" for="username">Username</label>
+													<h:outputLabel value="#{i18n['template.greeting.username']}" id="usernameLabel" for="username" />
 													<h:inputText id="username" value="#{identity.username}" />
 												</fieldset>
 
 												<fieldset>
-													<label for="password">Password</label>
+													<h:outputLabel value="#{i18n['template.greeting.password']}" for="password" />
 													<h:inputSecret id="password" value="#{identity.password}" />
 												</fieldset>
-												<h:commandButton id="login" value="Sign In"
-													action="#{identity.login}" />
-												<label><h:selectBooleanCheckbox
-														value="#{identity.rememberMe}" /><i>Remember me</i></label>
+												<h:commandButton id="login" value="#{i18n['template.greeting.sign.in']}" action="#{identity.login}" />
+												
+													<h:selectBooleanCheckbox value="#{identity.rememberMe}" />
+														<i><h:outputLabel value="#{i18n['template.greeting.remember.me']}" /></i>
 											</fieldset>
 										</h:form>
-										<span><a href="#">Forgot your password?</a></span>
+										<span><a href="#"><h:outputText value="#{i18n['template.greeting.forgot.password']}" /></a></span>
 									</div>
 								</div>
 							</li>
 							<h:panelGroup rendered="#{shoppingCart.loggedIn}">
 							|
 							<li><h:form id="logout">
-										<h:commandLink action="#{shoppingCart.logout}" value="Logout" />
+										<h:commandLink action="#{shoppingCart.logout}" value="#{i18n['template.greeting.logout']}" />
 									</h:form></li>
 							</h:panelGroup>
 						</ul>
@@ -126,8 +135,10 @@
 					<div class="header_right">
 						<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
 							<div class="create_btn">
-								<a class="arrow" href="registration.xhtml">create account <img
-									src="images/right_arrow.png" alt="" /></a>
+								<h:outputLink styleClass="arrow" value="registration.xhtml">
+									<h:outputText value="#{i18n['template.greeting.create.account']}" /> 
+									<img src="images/right_arrow.png" alt="" />
+								</h:outputLink>
 							</div>
 						</h:panelGroup>
 
@@ -137,11 +148,11 @@
 									<h:panelGroup rendered="#{shoppingCart.items.size() == 0}">
 
 										<li>
-											<h3>shopping cart empty</h3> <a href=""></a>
+											<h3><h:outputText value="#{i18n['template.greeting.shopping.cart.empty']}" /> </h3> <a href=""></a>
 										</li>
 
 										<li>
-											<p>Do some shopping!</p>
+											<p><h:outputText value="#{i18n['template.greeting.shopping.cart.suggestion']}" /> </p>
 										</li>
 
 									</h:panelGroup>
@@ -169,7 +180,7 @@
 										<li>
 											<div class="btn_form">
 
-												<h:commandLink action="buy" value="Shopping Bag"
+												<h:commandLink action="buy" value="#{i18n['template.greeting.shopping.cart']}"
 													style="margin-left: 25px;" />
 
 											</div>
@@ -186,11 +197,11 @@
 										rendered="#{shoppingCart.wishlist==null or shoppingCart.wishlist.size() == 0}">
 
 										<li>
-											<h3>wishlist is empty</h3> <a href=""></a>
+											<h3><h:outputText value="#{i18n['template.greeting.wishlist.empty']}" /></h3> <a href=""></a>
 										</li>
 
 										<li>
-											<p>Add some items to your wishlist!</p>
+											<p><h:outputText value="#{i18n['template.greeting.wishlist.suggestion']}" /></p>
 										</li>
 
 									</h:panelGroup>
@@ -218,9 +229,7 @@
 												<li>
 													<p>
 														<h:commandLink
-															action="#{shoppingCart.moveFromWishlist(item)}">
-															Buy
-														</h:commandLink>
+															action="#{shoppingCart.moveFromWishlist(item)}" value="#{i18n['template.greeting.menu.buy']}"/>
 													</p>
 												</li>
 											</h:column>
@@ -238,33 +247,33 @@
 							</h:form>
 						</div>
 						<script>
-						$('#search\\:searchCriteria').attr("placeholder","Search...")
+						$('#search\\:searchCriteria').attr("placeholder","#{i18n['template.greeting.search']}")
 						</script>
 
 						<div class="clearfix"></div>
 					</div>
 					<ul class="megamenu skyblue">
-						<li><a class="color1" href="faces/index.xhtml">Home</a></li>
+						<li><a class="color1" href="faces/index.xhtml"><h:outputText value="#{i18n['template.greeting.menu.home']}"/></a></li>
 
-						<li class="grid"><a class="color2" href="#">new arrivals</a>
+						<li class="grid"><a class="color2" href="#"><h:outputText value="#{i18n['template.greeting.menu.new.arrivals']}"/></a>
 
 							<div class="megapanel">
 								<div class="row">
 									<div class="col1">
 										<div class="h_nav">
-											<h4>shop</h4>
+											<h4><h:outputText value="#{i18n['template.greeting.menu.shop']}" /></h4>
 
 											<ul>
 												<h:form id="shopLinks">
 													<li><h:commandLink id="child-new"
 															action="#{catalogInquiry.byCategory('children',true)}"
-															value="children" /></li>
+															value="#{i18n['template.greeting.menu.shop.children']}" /></li>
 													<li><h:commandLink id="crafts-new"
 															action="#{catalogInquiry.byCategory('crafts',true)}"
-															value="crafts" /></li>
+															value="#{i18n['template.greeting.menu.shop.crafts']}" /></li>
 													<li><h:commandLink id="comics-new"
 															action="#{catalogInquiry.byCategory('comics',true)}"
-															value="comics" /></li>
+															value="#{i18n['template.greeting.menu.shop.comics']}" /></li>
 													<li><h:commandLink id="all-new"
 															action="#{catalogInquiry.newArrivals}" value="all" /></li>
 												</h:form>
@@ -274,14 +283,20 @@
 
 									<div class="col1">
 										<div class="h_nav">
-											<h4>account</h4>
+											<h4><h:outputText value="#{i18n['template.greeting.menu.account']}" /></h4>
 
 											<ul>
 												<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
 													<li><a href="registration.xhtml">login</a></li>
 												</h:panelGroup>
-												<li><a href="registration.xhtml">create an account</a></li>
-												<li><a href="buy.xhtml">my book bag</a></li>
+												<li>
+												<h:outputLink value="registration.xhtml">
+													<h:outputText value="#{i18n['template.greeting.create.account']}" />
+												</h:outputLink>
+												</li>
+												<li><h:outputLink value="buy.xhtml">
+													<h:outputText value="#{i18n['template.greeting.shopping.cart']}" />
+												</h:outputLink></li>
 											</ul>
 										</div>
 									</div>
@@ -297,25 +312,25 @@
 								</div>
 							</div></li>
 
-						<li class="grid"><a class="color3" href="#">by category</a>
+						<li class="grid"><a class="color3" href="#"><h:outputText value="#{i18n['template.greeting.menu.category']}" /></a>
 
 							<div class="megapanel">
 								<div class="row">
 									<div class="col1">
 										<div class="h_nav">
-											<h4>shop</h4>
+											<h4><h:outputText value="#{i18n['template.greeting.menu.shop']}" /></h4>
 
 											<ul>
 												<h:form id="catLinks">
 													<li><h:commandLink id="child"
 															action="#{catalogInquiry.byCategory('children',false)}"
-															value="children" /></li>
+															value="#{i18n['template.greeting.menu.shop.children']}" /></li>
 													<li><h:commandLink id="crafts"
 															action="#{catalogInquiry.byCategory('crafts',false)}"
-															value="crafts" /></li>
+															value="#{i18n['template.greeting.menu.shop.crafts']}" /></li>
 													<li><h:commandLink id="comics"
 															action="#{catalogInquiry.byCategory('comics',false)}"
-															value="comics" /></li>
+															value="#{i18n['template.greeting.menu.shop.comics']}" /></li>
 													<li><h:commandLink id="all"
 															action="#{catalogInquiry.allItems}" value="all" /></li>
 												</h:form>
@@ -325,14 +340,20 @@
 
 									<div class="col1">
 										<div class="h_nav">
-											<h4>account</h4>
+											<h4><h:outputText value="#{i18n['template.greeting.menu.account']}" /></h4>
 
 											<ul>
 												<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
 													<li><a href="registration.xhtml">login</a></li>
 												</h:panelGroup>
-												<li><a href="registration.xhtml">create an account</a></li>
-												<li><a href="buy.xhtml">my book bag</a></li>
+												<li>
+												<h:outputLink value="registration.xhtml">
+													<h:outputText value="#{i18n['template.greeting.create.account']}" />
+												</h:outputLink>
+												</li>
+												<li><h:outputLink value="buy.xhtml">
+													<h:outputText value="#{i18n['template.greeting.shopping.cart']}" />
+												</h:outputLink></li>
 											</ul>
 										</div>
 									</div>
@@ -349,29 +370,29 @@
 							</div></li>
 
 
-						<li><a class="color4" href="contact.xhtml">Contact</a>
+						<li><a class="color4" href="contact.xhtml"><h:outputText value="#{i18n['template.greeting.contact']}" /></a>
 
 							<div class="megapanel">
 								<div class="row">
 									<div class="col3">
 										<div class="h_nav">
-											<h4>contact us</h4>
+											<h4><h:outputText value="#{i18n['template.greeting.contact.us']}"/></h4>
 										</div>
 
 										<h:form id="contact" styleClass="contact">
-											<h:outputLabel value="Name" for="name" />
+											<h:outputLabel value="#{i18n['template.greeting.contact.name']}" for="name" />
 											<h:inputText id="name" styleClass="textbox"
 												value="#{messageContact.contact.name}" />
 											<h:message for="name" />
-											<h:outputLabel value="Email" for="email" />
+											<h:outputLabel value="#{i18n['template.greeting.contact.email']}" for="email" />
 											<h:inputText id="email" styleClass="textbox"
 												value="#{messageContact.contact.email}" />
 											<h:message for="email" />
-											<h:outputLabel value="Message" for="message" />
+											<h:outputLabel value="#{i18n['template.greeting.contact.message']}" for="message" />
 											<h:inputTextarea id="message"
 												value="#{messageContact.contact.message}" cols="1" rows="8" />
 											<h:message for="message" />
-											<h:commandButton value="Send" action="#{messageContact.send}" />
+											<h:commandButton value="#{i18n['template.greeting.contact.send']}" action="#{messageContact.send}" />
 										</h:form>
 									</div>
 
@@ -379,25 +400,32 @@
 								</div>
 							</div></li>
 						<h:panelGroup rendered="#{shoppingCart.customer.admin}">
-							<li><a class="color4" href="admin.xhtml">administration</a>
+							<li>
+							<h:outputLink value="admin.xhtml" styleClass="color4">
+								<h:outputText value="#{i18n['template.greeting.menu.administration']}"/> 
+							</h:outputLink>
 
 
 								<div class="megapanel">
 									<div class="row">
 										<div class="col3">
 											<div class="h_nav">
-												<h4>administration</h4>
+												<h4><h:outputText value="#{i18n['template.greeting.menu.administration']}" /></h4>
 											</div>
 
 
 											<div class="col1">
 												<div class="h_nav">
-													<h4>administration</h4>
+													<h4><h:outputText value="#{i18n['template.greeting.menu.administration']}" /></h4>
 													<ul>
 														<li><a href="registration.xhtml">login</a></li>
-														<li><a href="registration.xhtml">create an
-																account</a></li>
-														<li><a href="buy.xhtml">my book bag</a></li>
+														<li>
+														<h:outputLink value="registration.xhtml">
+															<h:outputText value="#{i18n['template.greeting.create.account']}'"  />
+														</h:outputLink></li>
+														<li><h:outputLink value="buy.xhtml">
+													<h:outputText value="#{i18n['template.greeting.shopping.cart']}" />
+												</h:outputLink></li>
 													</ul>
 												</div>
 											</div>
@@ -425,14 +453,17 @@
 				<div class="span_of_2">
 					<div class="span1_of_2">
 						<h5>
-							need help? <a href="contact.xhtml">contact us <span>&gt;</span></a>
+							<h:outputText value="#{i18n['template.greeting.need.help']}" /> 
+							<h:outputLink value="contact.xhtml">
+								<h:outputText value="#{i18n['template.greeting.contact.us']}" />
+							</h:outputLink><span>&gt;</span>
 						</h5>
 
-						<p>(or) Call: +1 999.555.1212</p>
+						<p><h:outputText value="#{i18n['template.greeting.or.call']}" /> +1 999.555.1212</p>
 					</div>
 
 					<div class="span1_of_2">
-						<h5>follow us</h5>
+						<h5><h:outputText value="#{i18n['template.greeting.follow.us']}"/></h5>
 
 						<div class="social-icons">
 							<ul>
