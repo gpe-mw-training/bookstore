@@ -6,6 +6,10 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+	<f:loadBundle var="order" basename="com.redhat.training.i18n.order"/>
+	<f:loadBundle var="payment" basename="com.redhat.training.i18n.payment"/>
+	<f:loadBundle var="review" basename="com.redhat.training.i18n.review"/>
+	
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</ui:define>
 	<ui:define name="content">
@@ -19,21 +23,21 @@
 							<h2>Billing Info</h2>
 
 							<div>
-								<span><label>First Name</label></span> <span><h:outputText
-										id="firstName" value="#{shoppingCart.customer.firstName}" /></span>
+								<span><h:outputLabel value="#{order['order.label.first.name']}" /></span> 
+								<span><h:outputText id="firstName" value="#{shoppingCart.customer.firstName}" /></span>
 							</div>
 							<div>
-								<span><label>Last Name</label></span> <span><h:outputText
-										id="lastName" value="#{shoppingCart.customer.lastName}" /></span>
+								<span><h:outputLabel value="#{order['order.label.last.name']}" /></span> 
+								<span><h:outputText id="lastName" value="#{shoppingCart.customer.lastName}" /></span>
 							</div>
 							<div>
-								<span><label>E-mail</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{order['order.label.email']}" /></span> 
+								<span><h:outputText
 										id="email" value="#{shoppingCart.customer.email}" /></span>
 							</div>
 							<div>
-								<span><label>Address</label></span> <span><h:outputText
-										id="address1"
-										value="#{shoppingCart.customer.billingAddress.streetAddress1}" /></span>
+								<span><h:outputText value="#{order['order.label.address']}" /></span>
+								<span><h:outputText id="address1" value="#{shoppingCart.customer.billingAddress.streetAddress1}" /></span>
 							</div>
 							<div>
 								<span><h:outputText id="address2"
@@ -44,28 +48,29 @@
 										value="#{shoppingCart.customer.billingAddress.streetAddress3}" /></span>
 							</div>
 							<div>
-								<span><label>City</label></span> <span><h:outputText
+								<span><h:outputText value="#{order['order.label.address.city']}" /></span> <span><h:outputText
 										id="city" value="#{shoppingCart.customer.billingAddress.city}" /></span>
 							</div>
 							<div>
-								<span><label>State</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{order['order.label.address.state']}" /></span>
+								<span><h:outputText
 										id="state"
 										value="#{shoppingCart.customer.billingAddress.state}" /></span>
 							</div>
 							<div>
-								<span><label>Postal Code</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{order['order.label.address.postal.code']}" /></span> <span><h:outputText
 										id="zip"
 										value="#{shoppingCart.customer.billingAddress.postalCode}" /></span>
 							</div>
 							<div>
-								<span><label>Country</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{order['order.label.address.country']}" /></span> <span><h:outputText
 										id="country"
 										value="#{shoppingCart.customer.billingAddress.country}" /></span>
 							</div>
 							<div>
 								<h:form id="order">
 									<span><h:commandButton id="sendButton"
-											action="#{shoppingCart.createOrder}" value="Send" /></span>
+											action="#{shoppingCart.createOrder}" value="#{review['review.button.send']}" /></span>
 								</h:form>
 							</div>
 
@@ -74,11 +79,12 @@
 
 					<div class="review_panel">
 						<div class="order-form">
-							<h2>Shipping Info</h2>
+							<h2><h:outputText value="#{order['order.label.shipping.info']}" /></h2>
 
 
 							<div>
-								<span><label>Address</label></span> <span><h:outputText
+								<span><h:outputText value="#{order['order.label.address']}" /></span>
+								<span><h:outputText
 										id="saddress1"
 										value="#{shoppingCart.customer.shippingAddress.streetAddress1}" />
 								</span>
@@ -92,22 +98,23 @@
 										value="#{shoppingCart.customer.shippingAddress.streetAddress3}" /></span>
 							</div>
 							<div>
-								<span><label>City</label></span> <span><h:outputText
-										id="scity"
+								<span><h:outputText value="#{order['order.label.address.city']}" /></span> 
+								<span><h:outputText id="scity"
 										value="#{shoppingCart.customer.shippingAddress.city}" /></span>
 							</div>
 							<div>
-								<span><label>State</label></span> <span><h:outputText
+								<span><h:outputText value="#{order['order.label.address.state']}" /></span> <span><h:outputText
 										id="sstate"
 										value="#{shoppingCart.customer.shippingAddress.state}" /></span>
 							</div>
 							<div>
-								<span><label>Postal Code</label></span> <span><h:outputText
+								<span><h:outputText value="#{order['order.label.address.postal.code']}" /></span> <span><h:outputText
 										id="szip"
 										value="#{shoppingCart.customer.shippingAddress.postalCode}" /></span>
 							</div>
 							<div>
-								<span><label>Country</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{order['order.label.address.country']}" /></span>
+								<span><h:outputText
 										id="scountry"
 										value="#{shoppingCart.customer.shippingAddress.country}" /></span>
 							</div>
@@ -116,24 +123,24 @@
 					</div>
 					<div class="review_panel">
 						<div class="order-form">
-							<h2>Payment Info</h2>
+							<h2><h:outputText value="#{payment['payment.label.payment.info']}"/></h2>
 
 							<div>
-								<span><label>Payment Type</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{payment['payment.label.payment.info.type']}" /></span> <span><h:outputText
 										id="type" value="#{shoppingCart.payment.paymentType}" /> </span>
 							</div>
 							<h:panelGroup rendered="#{shoppingCart.payment.paymentType != 'PayMeLater'}">
 							<div>
-								<span><label>Credit Card Number</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{payment['payment.label.payment.info.cc.number']}" /></span> <span><h:outputText
 										id="ccnum" value="#{shoppingCart.payment.number}" /> </span>
 							</div>
 							<div>
-								<span><label>Expiration Date</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{payment['payment.label.payment.info.cc.expiration']}" /></span> <span><h:outputText
 										id="expmo" value="#{shoppingCart.payment.expireMonth}" />/ <h:outputText
 										id="expyr" value="#{shoppingCart.payment.expireYear}" /></span>
 							</div>
 							<div>
-								<span><label>Cardholder Name</label></span> <span><h:outputText
+								<span><h:outputLabel value="#{payment['payment.label.payment.info.cc.name']}" /></span> <span><h:outputText
 										id="name" value="#{shoppingCart.payment.holderName}" /> </span>
 							</div>
 							 </h:panelGroup>

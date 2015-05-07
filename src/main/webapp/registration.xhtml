@@ -6,6 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+		<f:loadBundle var="registration" basename="com.redhat.training.i18n.registration"/>
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<script type="text/javascript">
 		function initDialog() {
@@ -13,13 +14,13 @@
 			     modal: true,
 			     buttons:[
 					{
-    				text: "I Agree",
+    				text: "#{registration['registration.label.agree']}",
     				click: function() {
       					$( this ).dialog( "close" );
     				}
   				},
   				{
-  			      text: "I don't agree",
+  			      text: "#{registration['registration.label.no.agree']}",
   			      click: function() {
   			        $( this ).dialog( "close" );
   			      }
@@ -78,7 +79,7 @@
 							<!-- Form -->
 							<h:form id="registration_form">
 								<div>
-									<label for="firstName">First Name &#160;&#160; <h:message
+									<label for="firstName"><h:outputText value="#{registration['registration.label.first.name']}" />&#160;&#160; <h:message
 											for="firstName" style="color:red" /></label>
 									<h:inputText id="firstName" value="#{identity.firstName}"
 										required="true" requiredMessage="Required" tabindex="1" />
@@ -86,35 +87,35 @@
 
 								</div>
 								<div>
-									<label for="lastName">Last Name&#160;&#160; <h:message
+									<label for="lastName"><h:outputText value="#{registration['registration.label.last.name']}" />&#160;&#160; <h:message
 											for="lastName" style="color:red" /></label>
 									<h:inputText id="lastName" value="#{identity.lastName}"
 										required="true" requiredMessage="Required" tabindex="2" />
 
 								</div>
 								<div>
-									<label for="email">Email Address&#160;&#160; <h:message
+									<label for="email"><h:outputText value="#{registration['registration.label.email']}" />&#160;&#160; <h:message
 											for="email" style="color:red" /></label>
 									<h:inputText id="email" value="#{identity.email}"
 										required="true" requiredMessage="Required" tabindex="3" />
 
 								</div>
 								<div>
-									<label for="username">Username&#160;&#160; <h:message
+									<label for="username"><h:outputText value="#{registration['registration.label.username']}" />&#160;&#160; <h:message
 											for="username" style="color:red" /></label>
 									<h:inputText id="username" value="#{identity.username}"
 										required="true" requiredMessage="Required" tabindex="4" />
 
 								</div>
 								<div>
-									<label for="password">Password&#160;&#160; <h:message
+									<label for="password"><h:outputText value="#{registration['registration.label.password']}" />&#160;&#160; <h:message
 											for="password" style="color:red" /></label>
 									<h:inputSecret id="password" value="#{identity.password}"
 										required="true" requiredMessage="Required" tabindex="5" />
 
 								</div>
 								<div>
-									<label for="retype">Confirm Password&#160;&#160;<h:message
+									<label for="retype"><h:outputText value="#{registration['registration.label.confirm.password']}" />&#160;&#160;<h:message
 											for="retype" style="color:red" /></label>
 									<h:inputSecret id="retype" value="#{identity.retype}"
 										required="true" requiredMessage="Required" tabindex="6" />
@@ -145,21 +146,20 @@
 							<!-- Form -->
 							<h:form id="login_form">
 								<div>
-									<label for="username">Username</label>
+									<h:outputLabel value="#{registration['registration.label.username']}" for="username" />
 									<h:inputText id="username" value="#{identity.username}" />
 
 								</div>
 								<div>
-									<label for="password">Password </label>
+									<h:outputLabel value="#{registration['registration.label.password']}" for="password" />
 									<h:inputSecret id="password" value="#{identity.password}" />
-
 								</div>
 								<div>
-									<h:commandButton id="signin" value="Sign In"
+									<h:commandButton id="signin" value="#{registration['registration.label.signin']}"
 										action="#{identity.login}" />
 								</div>
 								<div class="forget">
-									<a href="#">forgot your password</a>
+									<a href="#"><h:outputText value="#{registration['registration.label.signin']}"/></a>
 								</div>
 							</h:form>
 							<!-- /Form -->

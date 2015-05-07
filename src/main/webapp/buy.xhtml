@@ -9,6 +9,7 @@
 
 	<ui:define name="head">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<f:loadBundle var="buy" basename="com.redhat.training.i18n.buy"/>
 	</ui:define>
 	<ui:define name="content">
 		<!-- content -->
@@ -17,8 +18,8 @@
 				<div class="shoping_bag">
 					<h:messages globalOnly="true" style="color: red;" />
 					<h4>
-						<img src="images/bag1.png" />my shopping bag / <span> <h:outputText
-								value="#{shoppingCart.items.size()}" /> items
+						<img src="images/bag1.png" /><h:outputText value="#{buy['buy.label.my.shopping.bag']}"/> <span> <h:outputText
+								value="#{shoppingCart.items.size()}" /> <h:outputText value="#{buy['buy.label.items']}" />
 						</span>
 					</h4>
 
@@ -39,17 +40,17 @@
 										<h:commandLink action="#{catalogInquiry.pickItem(item)}"
 											value="#{item.title}" />
 									</h4>
-									<span>qty <b>1</b> | sku : <h:outputText
+									<span><h:outputText value="#{buy['buy.label.qty']}" /> <b>1</b> | <h:outputText value="#{buy['buy.label.sku']}" /> <h:outputText
 											value="#{item.sku}" />
 									</span>
 									<ul class="s_icons">
 										<li><h:commandLink
 												action="#{shoppingCart.moveItemWishlist(item)}">
-												<img src="images/s_icon2.png" title="Move to Wishlist" />
+												<img src="images/s_icon2.png" title="#{buy['buy.label.move.wishlist']}" />
 											</h:commandLink></li>
 										<li><h:commandLink
 												action="#{shoppingCart.removeItem(item)}">
-												<img src="images/s_icon3.png" title="Remove Item" />
+												<img src="images/s_icon3.png" title="#{buy['buy.label.remove.item']}" />
 											</h:commandLink></li>
 									</ul>
 								</div>
@@ -73,7 +74,7 @@
 					<div class="shoping_left"></div>
 					<div class="shoping_right">
 						<p>
-							cart total &#160;<span>$<h:outputText
+							<h:outputText value="#{buy['buy.label.cart.total']}" /> &#160;<span>$<h:outputText
 									value="#{shoppingCart.cartTotal}" />
 							</span>
 						</p>
@@ -85,15 +86,18 @@
 					<div class="shoping_left">
 						<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
 							<h2>
-								<a href="registration.xhtml?loc=buy"><img src="images/login.jpg" />login
-								</a> <span> to apply coupons</span>
+							<h:outputLink value="registration.xhtml?loc=buy">
+								<h:graphicImage value="images/login.jpg" />
+								<h:outputText value="#{buy['buy.label.login']}" />
+							</h:outputLink>
+						<span><h:outputText value="#{buy['buy.label.apply.coupons']}" /> </span>
 							</h2>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{shoppingCart.loggedIn and shoppingCart.items.size() > 0}">
 							<h:form id="coupon">
-								<label for="promo">Enter promotion code</label>
+								<h:outputLabel for="promo" value="#{buy['buy.label.enter.promotion.code']}" />
 								<h:inputText id="promo" value="#{shoppingCart.promoCode}" />&#160;&#160;
-								<h:commandButton value="Apply"
+								<h:commandButton value="#{buy['buy.button.apply']}"
 									action="#{shoppingCart.applyPromo()}"
 									style="background-color: #00405d; color: #ffffff;" />&#160;&#160;
 								<h:message for="promo" style="color: red;" />
@@ -102,7 +106,7 @@
 					</div>
 					<div class="shoping_right">
 						<p>
-							coupon discount &#160;<span class="color">$<h:outputText
+							<h:outputText value="#{buy['buy.label.coupon.discount']}" /> &#160;<span class="color">$<h:outputText
 									value="#{shoppingCart.discount}" /></span>
 						</p>
 					</div>
@@ -113,18 +117,18 @@
 					<div class="shoping_left">
 						<h:panelGroup rendered="#{not shoppingCart.loggedIn}">
 							<h4>
-								<a id="placeOrderLink" href="registration.xhtml?loc=buy"><img src="images/login.jpg" />login
-								</a> <span> to place order</span>
+								<a id="placeOrderLink" href="registration.xhtml?loc=buy"><img src="images/login.jpg" /><h:outputText value="#{buy['buy.label.login']}" />
+								</a> <span> <h:outputText value="#{buy['buy.label.place.order']}"/></span>
 							</h4>
 						</h:panelGroup>
 						<h:form id="order">
-							<h:commandLink id="placeOrderButton" value="place order" styleClass="btn1" action="#{shoppingCart.prepareOrder()}"
+							<h:commandLink id="placeOrderButton" value="#{buy['buy.button.place.order']}" styleClass="btn1" action="#{shoppingCart.prepareOrder()}"
 								rendered="#{shoppingCart.loggedIn and shoppingCart.items.size() > 0}" />
 						</h:form>
 					</div>
 					<div class="shoping_right">
 						<p class="tot">
-							total &#160;<span class="color">$<h:outputText
+							<h:outputText value="#{buy['buy.label.total']}" /> &#160;<span class="color">$<h:outputText
 									value="#{shoppingCart.orderTotal}" /></span>
 						</p>
 					</div>

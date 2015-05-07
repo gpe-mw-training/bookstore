@@ -6,6 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+		<f:loadBundle var="confirm" basename="com.redhat.training.i18n.confirm_pt_BR"/>
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</ui:define>
 	<ui:define name="content">
@@ -13,13 +14,12 @@
 		<div class="container">
 			<div class="main">
 				<div class="order">
-					<h2 style="text-transform: none;">Thank you for your order. We have sent a confirmation email
-						to you.</h2>
+					<h2 style="text-transform: none;"><h:outputText value="#{confirm['confirm.label.thank.you']}"/></h2>
 				</div>
 				<div class="order-form">
 					<h:form id="continue">
 						<span><h:commandButton styleClass="btn1" action="index"
-								value="Continue Shopping" /></span>
+								value="#{confirm['confirm.button.continue.shopping']}" /></span>
 					</h:form>
 				</div>
 			</div>

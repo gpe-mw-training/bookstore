@@ -7,6 +7,7 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
 	<ui:define name="head">
+		<f:loadBundle var="viewed" basename="com.redhat.training.i18n.viewed"/>
 		<script type="application/x-javascript">
 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
        </script>
@@ -23,7 +24,7 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 					<div class="women">
 
 						<h4>
-							Recently Viewed Books
+							<h:outputText value="#{viewed['viewed.label.recently.views']}" />
 						</h4>
 
 						<div class="clearfix"></div>
@@ -51,9 +52,9 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 												class="img-responsive" alt="cover" />
 										</h:commandLink>
 										<h:panelGrid columns="2" style="margin-top: 5px;">
-											<h:outputText value="Author:&nbsp;" style="font-weight:bold" />
+											<h:outputText value="#{viewed['viewed.label.author']}" style="font-weight:bold" />
 											<h:outputText value="#{item.author}" />
-											<h:outputText value="Price: " style="font-weight:bold" />
+											<h:outputText value="#{viewed['viewed.label.price']} " style="font-weight:bold" />
 											<h:outputText value="$ #{item.price}" />
 										</h:panelGrid>
 									</rich:panel>
@@ -65,7 +66,7 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 							</a4j:outputPanel>
 						</h:panelGrid>
 						<h:panelGroup rendered="#{shoppingCart.viewed.size() == 0}">
-							<p>You have not viewed any books recently.</p>
+							<p><h:outputText value="#{viewed['viewed.label.no.recently.views']}" /></p>
 						</h:panelGroup>
 					</h:form>
 

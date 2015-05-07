@@ -6,6 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+	<f:loadBundle var="contact" basename="com.redhat.training.i18n.contact"/>
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</ui:define>
 	<ui:define name="content">
@@ -18,22 +19,22 @@
 						<h2>Contact Us</h2>
 						<h:form>
 							<div>
-								<span><h:outputLabel value="Name" for="messageName" /></span> 
+								<span><h:outputLabel value="#{contact['contact.label.name']}" for="messageName" /></span> 
 								<span><h:inputText id="messageName" styleClass="textbox" value="#{messageContact.contact.name}" /></span>
 								<span><h:message for="messageName"/></span>
 							</div>
 							<div>
-								<span><h:outputLabel value="E-mail" for="messageEmail" /></span> 
+								<span><h:outputLabel value="#{contact['contact.label.email']}" for="messageEmail" /></span> 
 								<span><h:inputText id="messageEmail" styleClass="textbox" value="#{messageContact.contact.email}"  /></span>
 								<span><h:message for="messageEmail"/></span>
 							</div>
 							<div>
-								<span><h:outputLabel value="Subject" for="messageSubject" /></span> 
+								<span><h:outputLabel value="#{contact['contact.label.subject']}" for="messageSubject" /></span> 
 								<span><h:inputTextarea id="messageSubject" value="#{messageContact.contact.message}" cols="1" rows="4" /></span>
 								<span><h:message for="messageSubject"/></span>
 							</div>
 							<div>
-								<span><h:commandButton value="Send" action="#{messageContact.send}" /></span>
+								<span><h:commandButton value="#{contact['contact.button.send']}" action="#{messageContact.send}" /></span>
 							</div>
 						</h:form>
 					</div>

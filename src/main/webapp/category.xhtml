@@ -7,6 +7,7 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
 	<ui:define name="head">
+	<f:loadBundle var="category" basename="com.redhat.training.i18n.category"/>
 		<script type="application/x-javascript">
 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
        </script>
@@ -24,7 +25,7 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 
 						<h4>
 							#{catalogInquiry.category}
-							<h:outputText value=" - New Arrivals"
+							<h:outputText value="#{category['category.label.new.arrivals']}"
 								rendered="#{catalogInquiry.newItems}" />
 						</h4>
 
@@ -53,9 +54,9 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 												class="img-responsive" alt="cover" />
 										</h:commandLink>
 										<h:panelGrid columns="2" style="margin-top: 5px;">
-											<h:outputText value="Author:&nbsp;" style="font-weight:bold" />
+											<h:outputText value="#{category['category.label.author']}" style="font-weight:bold" />
 											<h:outputText value="#{item.author}" />
-											<h:outputText value="Price: " style="font-weight:bold" />
+											<h:outputText value="#{category['category.label.price']}" style="font-weight:bold" />
 											<h:outputText value="$ #{item.price}" />
 										</h:panelGrid>
 									</rich:panel>
@@ -67,7 +68,7 @@ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); func
 							</a4j:outputPanel>
 						</h:panelGrid>
 						<h:panelGroup rendered="#{catalogInquiry.items.size() == 0}">
-							<p>There are no books for this category.</p>
+							<p><h:outputText value="#{category['category.label.no.books']}" /></p>
 						</h:panelGroup>
 					</h:form>
 

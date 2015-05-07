@@ -6,6 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+	<f:loadBundle var="order" basename="com.redhat.training.i18n.order"/>
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</ui:define>
 	<ui:define name="content">
@@ -16,29 +17,27 @@
 					<h:form id="order">
 						<div class="order_panel">
 							<div class="order-form">
-								<h2>Billing Info</h2>
+								<h2><h:outputText value="#{order['order.label.billing.info']}" /></h2>
 
 								<div>
-									<span><label>First Name</label></span> <span><h:inputText
-											id="firstName" value="#{shoppingCart.customer.firstName}"
+									<span><h:outputLabel value="#{order['order.label.first.name']}" for="firstName" /></span>
+									<span><h:inputText id="firstName" value="#{shoppingCart.customer.firstName}" readonly="true" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel value="#{order['order.label.last.name']}" /></span>
+									<span><h:inputText id="lastName" value="#{shoppingCart.customer.lastName}" readonly="true" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel value="#{order['order.label.email']}" /></span>
+									<span><h:inputText id="email" value="#{shoppingCart.customer.email}"
 											readonly="true" /></span>
 								</div>
 								<div>
-									<span><label>Last Name</label></span> <span><h:inputText
-											id="lastName" value="#{shoppingCart.customer.lastName}"
-											readonly="true" /></span>
-								</div>
-								<div>
-									<span><label>E-mail</label></span> <span><h:inputText
-											id="email" value="#{shoppingCart.customer.email}"
-											readonly="true" /></span>
-								</div>
-								<div>
-									<span><label>Address&#160;&#160;<h:message
+									<span><label><h:outputText value="#{order['order.label.address']}" /><h:message
 												for="address1" style="color: red;" /></label></span> <span><h:inputText
 											id="address1"
 											value="#{shoppingCart.customer.billingAddress.streetAddress1}"
-											required="true" requiredMessage="Required" /></span>
+											required="true" requiredMessage="#{order['order.message.required']}" /></span>
 								</div>
 								<div>
 									<span><h:inputText id="address2"
@@ -49,35 +48,35 @@
 											value="#{shoppingCart.customer.billingAddress.streetAddress3}" /></span>
 								</div>
 								<div>
-									<span><label>City&#160;&#160;<h:message
+									<span><label><h:outputText value="#{order['order.label.address.city']}" />&#160;&#160;<h:message
 												for="city" style="color: red;" /></label></span> <span><h:inputText
 											id="city"
 											value="#{shoppingCart.customer.billingAddress.city}"
-											required="true" requiredMessage="Required" /></span>
+											required="true" requiredMessage="#{order['order.message.required']}" /></span>
 								</div>
 								<div>
-									<span><label>State&#160;&#160;<h:message
+									<span><label><h:outputText value="#{order['order.label.address.state']}" />&#160;&#160;<h:message
 												for="state" style="color: red;" /></label></span> <span><h:inputText
 											id="state"
 											value="#{shoppingCart.customer.billingAddress.state}"
-											required="true" requiredMessage="Required" /></span>
+											required="true" requiredMessage="#{order['order.message.required']}" /></span>
 								</div>
 								<div>
-									<span><label>Postal Code&#160;&#160;<h:message
+									<span><label><h:outputText value="#{order['order.label.address.postal.code']}" />&#160;&#160;<h:message
 												for="zip" style="color: red;" /></label></span> <span><h:inputText
 											id="zip"
 											value="#{shoppingCart.customer.billingAddress.postalCode}"
-											required="true" requiredMessage="Required" /></span>
+											required="true" requiredMessage="#{order['order.message.required']}" /></span>
 								</div>
 								<div>
-									<span><label>Country&#160;&#160;<h:message
+									<span><label><h:outputText value="#{order['order.label.address.country']}" />&#160;&#160;<h:message
 												for="country" style="color: red;" /></label></span> <span><h:inputText
 											id="country"
 											value="#{shoppingCart.customer.billingAddress.country}"
-											required="true" requiredMessage="Required" /></span>
+											required="true" requiredMessage="#{order['order.message.required']}" /></span>
 								</div>
 								<div>
-									<span><h:commandButton id="nextButton" action="#{shoppingCart.collectPayment}" value="Next" /></span>
+									<span><h:commandButton id="nextButton" action="#{shoppingCart.collectPayment}" value="#{order['order.button.next']}" /></span>
 								</div>
 
 							</div>
@@ -85,20 +84,19 @@
 
 						<div class="order_panel">
 							<div class="order-form">
-								<h2>Shipping Info</h2>
+								<h2><h:outputText value="#{order['order.label.shipping.info']}" /></h2>
 								<div>
-									<span><label> <h:selectBooleanCheckbox
-												value="#{shoppingCart.shipsame}" id="shipsame" />&#160;&#160;Ship
-											to same address
-									</label></span>
+									<span>
+										<h:selectBooleanCheckbox value="#{shoppingCart.shipsame}" id="shipsame" />&#160;&#160;<h:outputLabel for="shipsame" value="#{order['order.label.ship.same.address']}" />
+									</span>
 								</div>
 								<div id="ship_panel">
 									<div>
-										<span><label>Address&#160;&#160;<h:message
-													for="saddress1" style="color: red;" /></label></span> <span><h:inputText
+										<span><label><h:outputText value="#{order['order.label.address']}" />&#160;&#160;<h:message
+													for="saddress1" style="color: red;" /></label></span> <h:inputText
 												id="saddress1"
 												value="#{shoppingCart.customer.shippingAddress.streetAddress1}"
-												required="true" requiredMessage="Required" /></span>
+												required="true" requiredMessage="#{order['order.message.required']}" />
 									</div>
 									<div>
 										<span><h:inputText id="saddress2"
@@ -109,32 +107,33 @@
 												value="#{shoppingCart.customer.shippingAddress.streetAddress3}" /></span>
 									</div>
 									<div>
-										<span><label>City&#160;&#160;<h:message
+										<span><label><h:outputText value="#{order['order.label.address.city']}" />&#160;&#160;<h:message
+										
 													for="scity" style="color: red;" /></label></span> <span><h:inputText
 												id="scity"
 												value="#{shoppingCart.customer.shippingAddress.city}"
-												required="true" requiredMessage="Required" /></span>
+												required="true" requiredMessage="#{order['order.message.required']}" /></span>
 									</div>
 									<div>
-										<span><label>State&#160;&#160;<h:message
+										<span><label><h:outputText value="#{order['order.label.address.state']}" />&#160;&#160;<h:message
 													for="sstate" style="color: red;" /></label></span> <span><h:inputText
 												id="sstate"
 												value="#{shoppingCart.customer.shippingAddress.state}"
-												required="true" requiredMessage="Required" /></span>
+												required="true" requiredMessage="#{order['order.message.required']}" /></span>
 									</div>
 									<div>
-										<span><label>Postal Code&#160;&#160;<h:message
+										<span><label><h:outputText value="#{order['order.label.address.postal.code']}"/>&#160;&#160;<h:message
 													for="szip" style="color: red;" /></label></span> <span><h:inputText
 												id="szip"
 												value="#{shoppingCart.customer.shippingAddress.postalCode}"
-												required="true" requiredMessage="Required" /></span>
+												required="true" requiredMessage="#{order['order.message.required']}" /></span>
 									</div>
 									<div>
-										<span><label>Country&#160;&#160;<h:message
+										<span><label><h:outputText value="#{order['order.label.address.country']}" />&#160;&#160;<h:message
 													for="scountry" style="color: red;" /></label></span> <span><h:inputText
 												id="scountry"
 												value="#{shoppingCart.customer.shippingAddress.country}"
-												required="true" requiredMessage="Required" /></span>
+												required="true" requiredMessage="#{order['order.message.required']}" /></span>
 									</div>
 								</div>
 							</div>

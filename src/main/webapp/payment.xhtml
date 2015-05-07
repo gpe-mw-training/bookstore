@@ -6,6 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+	<f:loadBundle var="payment" basename="com.redhat.training.i18n.payment"/>
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</ui:define>
 	<ui:define name="content">
@@ -16,44 +17,46 @@
 					<h:form id="order">
 						<div class="order_panel">
 							<div class="order-form">
-								<h2>Payment Info</h2>
+								<h2><h:outputText value="#{payment['payment.label.payment.info']}"/></h2>
 
 								<div>
-									<span><label>Payment Type</label></span><span><h:selectOneMenu
-											value="#{shoppingCart.payment.paymentType}" id="type">
+									<span><h:outputLabel for="type" value="#{payment['payment.label.payment.info.type']}" /></span>
+									<span><h:selectOneMenu value="#{shoppingCart.payment.paymentType}" id="type">
 											<f:selectItems value="#{shoppingCart.paymentTypes}" />
 										</h:selectOneMenu></span>
 
 								</div>
 								<div id="pay_panel">
 									<div>
-										<span><label>Credit Card Number&#160;&#160;<h:message
-													for="ccnum" style="color: red;" /></label></span> <span><h:inputText
-												id="ccnum" value="#{shoppingCart.payment.number}" required="true" requiredMessage="Credit Card number is required"/></span>
+										<span>
+											<h:outputLabel for="ccnum" value="#{payment['payment.label.payment.info.cc.number']}" />&#160;&#160;
+											<h:message for="ccnum" style="color: red;" />
+										</span>
+										<span>
+											<h:inputText id="ccnum" value="#{shoppingCart.payment.number}" required="true" requiredMessage="#{payment['payment.message.cc.required']}"/>
+										</span>
 									</div>
 
 									<div>
-										<span><label>Expiration Date&#160;&#160;<h:message
+										<span><h:outputLabel for="expmo" value="#{payment['payment.label.payment.info.cc.expiration']}" />&#160;&#160;<h:message
 													for="expmo" style="color: red;" /> / <h:message
-													for="expyr" style="color: red;" /></label></span> <span> <h:panelGrid
-												columns="3" style="width: 30%">
-												<h:inputText id="expmo"
-													value="#{shoppingCart.payment.expireMonth}" required="true" requiredMessage="Expiration month is required"/>
+													for="expyr" style="color: red;" /></span> 
+													<span> <h:panelGrid columns="3" style="width: 30%">
+												<h:inputText id="expmo" value="#{shoppingCart.payment.expireMonth}" required="true" requiredMessage="#{payment['payment.message.expmo.required']}"/>
 												<span>&#160;/&#160;</span>
-												<h:inputText id="expyr"
-													value="#{shoppingCart.payment.expireYear}" required="true" requiredMessage="Expiration year is required"/>
+												<h:inputText id="expyr" value="#{shoppingCart.payment.expireYear}" required="true" requiredMessage="#{payment['payment.message.expyr.required']}"/>
 											</h:panelGrid>
 										</span>
 									</div>
 									<div>
-										<span><label>Cardholder Name&#160;&#160;<h:message
-													for="name" style="color: red;" /></label></span> <span><h:inputText
-												id="name" value="#{shoppingCart.payment.holderName}" required="true" requiredMessage="Cardholder name is required" /></span>
+										<span><h:outputLabel value="#{payment['payment.label.payment.info.cc.name']}" />&#160;&#160;<h:message
+													for="name" style="color: red;" /></span> <span><h:inputText
+												id="name" value="#{shoppingCart.payment.holderName}" required="true" requiredMessage="#{payment['payment.message.name.required']}" /></span>
 									</div>
 								</div>
 								<div>
 									<span><h:commandButton id="reviewButton" action="#{shoppingCart.review}"
-											value="Review" /></span>
+											value="#{payment['payment.button.payment.review']}" /></span>
 								</div>
 
 							</div>

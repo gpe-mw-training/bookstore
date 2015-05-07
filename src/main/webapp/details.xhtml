@@ -31,6 +31,7 @@
 
 			});
 		</script>
+		<f:loadBundle var="details" basename="com.redhat.training.i18n.details"/>
 	</ui:define>
 	<ui:define name="content">
 		<!-- content -->
@@ -59,25 +60,25 @@
 									<h:outputText value="#{catalogInquiry.item.price}" />
 								</p>
 								<p>
-									By
+									<h:outputText value="#{details['details.label.by']}"/>
 									<h:outputText value="#{catalogInquiry.item.author}" />
 								</p>
 								<div class="btn_form">
 									<h:form id="buy">
 										<h:commandLink
 											action="#{shoppingCart.addItem(catalogInquiry.item.id)}" id="detailsBuyButton"
-											value="buy" />
+											value="#{details['details.label.buy']}" />
 									</h:form>
 								</div>
 								<h:form id="wishListForm">
-									<h:commandLink id="loginToSaveInWishListLink" rendered="#{not shoppingCart.loggedIn}" value="login to save in wishlist" action="registration.xhtml" />
-									<h:commandLink id="saveInWishListLink" rendered="#{shoppingCart.loggedIn}" value="save in wishlist" action="#{shoppingCart.addToWishList(catalogInquiry.item.id)}"/>
+									<h:commandLink id="loginToSaveInWishListLink" rendered="#{not shoppingCart.loggedIn}" value="#{details['details.label.login.save.wishlist']}" action="registration.xhtml" />
+									<h:commandLink id="saveInWishListLink" rendered="#{shoppingCart.loggedIn}" value="#{details['details.label.save.wishlist']}" action="#{shoppingCart.addToWishList(catalogInquiry.item.id)}"/>
 								</h:form>
 							</div>
 							<div class="clearfix"></div>
 						</div>
 						<div class="single-bottom1">
-							<h6>Details</h6>
+							<h6><h:outputText value="#{details['details.label.details']}" /></h6>
 							<p class="prod-desc">
 								<h:outputText value="#{catalogInquiry.item.description}" />
 							</p>
