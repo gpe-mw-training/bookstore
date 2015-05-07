@@ -6,10 +6,12 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
+		<f:loadBundle var="index" basename="com.redhat.training.i18n.index"/>
 		<!-- start slider -->
 		<h:outputStylesheet library="css" name="fwslider.css"/>
 		<h:outputScript library="js" name="fwslider.js" />
 		<h:outputScript library="js" name="jquery-ui.min.js" />
+		
 		
 		<!--end slider -->Ï
 	</ui:define>
@@ -66,7 +68,7 @@
 									</a>
 								</h3>
 
-								<p>on children's books</p>
+								<p><h:outputText value="#{index['index.label.children.book']}"/></p>
 							</div>
 
 							<div class="clearfix"></div>
@@ -77,10 +79,10 @@
 
 							<div class="grid_text-middle">
 								<h3>
-									<a href="#">crafts</a>
+									<a href="#"><h:outputText value="#{index['index.label.crafts']}"/></a>
 								</h3>
 
-								<p>old craft books</p>
+								<p><h:outputText value="#{index['index.label.craft.books']}"/></p>
 							</div>
 
 							<div class="grid_img last">
@@ -99,10 +101,10 @@
 
 							<div class="grid_text left">
 								<h3>
-									<a href="#">history of war</a>
+									<a href="#"><h:outputText value="#{index['index.label.history.war']}"/></a>
 								</h3>
 
-								<p>shop now</p>
+								<p><h:outputText value="#{index['index.label.shop.now']}"/></p>
 							</div>
 
 							<div class="clearfix"></div>
@@ -124,7 +126,7 @@
 								class="img-responsive" alt="" /></h:commandLink>
 
 							<div class="look">
-								<h4>comic books</h4>
+								<h4><h:outputText value="#{index['index.label.comic.books']}"/></h4>
 
 								<p>learn more</p>
 							</div>
@@ -136,9 +138,9 @@
 								class="img-responsive" alt="" /></h:commandLink>
 
 							<div class="look">
-								<h4>crafts</h4>
+								<h4><h:outputText value="#{index['index.label.crafts']}"/></h4>
 
-								<p>learn more</p>
+								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
 							</div>
 						</div>
 
@@ -148,9 +150,9 @@
 								class="img-responsive" alt="" /></h:commandLink>
 
 							<div class="look">
-								<h4>children's books</h4>
+								<h4><h:outputText value="#{index['index.label.childrens.book']}"/></h4>
 
-								<p>learn more</p>
+								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
 							</div>
 						</div>
 
@@ -160,9 +162,9 @@
 								class="img-responsive" alt="" /></h:commandLink>
 
 							<div class="look">
-								<h4>All Books</h4>
+								<h4><h:outputText value="#{index['index.label.all.books']}"/></h4>
 
-								<p>learn more</p>
+								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
 							</div>
 						</div>
 					</div>
