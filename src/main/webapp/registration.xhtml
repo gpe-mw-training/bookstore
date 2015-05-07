@@ -68,7 +68,7 @@
 				<div class="registration">
 					<div class="registration_left">
 						<h2>
-							new user? <span> create a shoppe account </span>
+							<h:outputText value="#{registration['registration.label.new.user']}" /> <span> <h:outputText value="#{registration['registration.label.new.user.create.account']}" /> </span>
 						</h2>
 						
 
@@ -82,7 +82,7 @@
 									<label for="firstName"><h:outputText value="#{registration['registration.label.first.name']}" />&#160;&#160; <h:message
 											for="firstName" style="color:red" /></label>
 									<h:inputText id="firstName" value="#{identity.firstName}"
-										required="true" requiredMessage="Required" tabindex="1" />
+										required="true" requiredMessage="#{registration['registration.message.required']}" tabindex="1" />
 
 
 								</div>
@@ -90,35 +90,35 @@
 									<label for="lastName"><h:outputText value="#{registration['registration.label.last.name']}" />&#160;&#160; <h:message
 											for="lastName" style="color:red" /></label>
 									<h:inputText id="lastName" value="#{identity.lastName}"
-										required="true" requiredMessage="Required" tabindex="2" />
+										required="true" requiredMessage="#{registration['registration.message.required']}" tabindex="2" />
 
 								</div>
 								<div>
 									<label for="email"><h:outputText value="#{registration['registration.label.email']}" />&#160;&#160; <h:message
 											for="email" style="color:red" /></label>
 									<h:inputText id="email" value="#{identity.email}"
-										required="true" requiredMessage="Required" tabindex="3" />
+										required="true" requiredMessage="#{registration['registration.message.required']}" tabindex="3" />
 
 								</div>
 								<div>
 									<label for="username"><h:outputText value="#{registration['registration.label.username']}" />&#160;&#160; <h:message
 											for="username" style="color:red" /></label>
 									<h:inputText id="username" value="#{identity.username}"
-										required="true" requiredMessage="Required" tabindex="4" />
+										required="true" requiredMessage="#{registration['registration.message.required']}" tabindex="4" />
 
 								</div>
 								<div>
 									<label for="password"><h:outputText value="#{registration['registration.label.password']}" />&#160;&#160; <h:message
 											for="password" style="color:red" /></label>
 									<h:inputSecret id="password" value="#{identity.password}"
-										required="true" requiredMessage="Required" tabindex="5" />
+										required="true" requiredMessage="#{registration['registration.message.required']}" tabindex="5" />
 
 								</div>
 								<div>
 									<label for="retype"><h:outputText value="#{registration['registration.label.confirm.password']}" />&#160;&#160;<h:message
 											for="retype" style="color:red" /></label>
 									<h:inputSecret id="retype" value="#{identity.retype}"
-										required="true" requiredMessage="Required" tabindex="6" />
+										required="true" requiredMessage="#{registration['registration.message.required']}" tabindex="6" />
 
 								</div>
 								<div class="sky-form">
@@ -131,7 +131,7 @@
 
 								</div>
 								<div>
-									<h:commandButton id="register-submit" value="create an account"
+									<h:commandButton id="register-submit" value="#[#{registration['registration.label.create.account']}]"
 										action="#{identity.createAccount}" />
 								</div>
 
@@ -140,7 +140,7 @@
 					</div>
 
 					<div class="registration_left">
-						<h2>existing user</h2>
+						<h2><h:outputText value="#{registration['registration.label.existing.user']}"/></h2>
 						<div class="registration_form">
 							<h:messages globalOnly="true" style="color: red;" />
 							<!-- Form -->
