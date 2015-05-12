@@ -98,4 +98,8 @@ public class CatalogService {
 		}
 
 	}
+
+	public void addItem(CatalogItem catalogItem) {
+		mgr.persist(catalogItem);
+	}
 }

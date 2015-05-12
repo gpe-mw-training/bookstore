@@ -28,6 +28,7 @@ public class Order implements Serializable {
 	private Integer id;
 	private Date orderDate = new Date();
 	private BigDecimal discount;
+	private Boolean delivered=false;
 	
 	@ManyToOne
 	@JoinColumn(name = "cust_id")
@@ -88,6 +89,14 @@ public class Order implements Serializable {
 
 	public void setDiscount(BigDecimal discount) {
 		this.discount = discount;
+	}
+
+	public Boolean getDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(Boolean delivered) {
+		this.delivered = delivered;
 	}
 
 }

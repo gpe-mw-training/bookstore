@@ -1,0 +1,78 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
+
+	<ui:define name="head">
+	<f:loadBundle var="additem" basename="com.redhat.training.i18n.item"/>
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</ui:define>
+	<ui:define name="content">
+		<!-- content -->
+		<div class="container">
+			<div class="main">
+				<div class="order">
+					<h:form id="order">
+						<div class="order_panel">
+							<div class="order-form">
+								<h2><h:outputText value="Book" /></h2>
+
+								<div>
+									<span><h:outputLabel value="SKU" for="sku" /><h:message
+												for="sku" style="color: red;" /></span>
+									<span><h:inputText id="sku" value="#{catalogManage.catalogItem.sku}" disabled="#{catalogManage.editable}" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel value="Title" /><h:message
+												for="title" style="color: red;" /></span>
+									<span><h:inputText id="title" value="#{catalogManage.catalogItem.title}" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel value="Price" /><h:message
+												for="price" style="color: red;" /></span>
+									<span><h:inputText id="price" value="#{catalogManage.catalogItem.price}" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel for="description" value="Description" /></span> 
+									<span><h:inputTextarea id="description" value="#{catalogManage.catalogItem.description}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel for="author" value="Author" /></span> 
+									<span><h:inputText id="author"
+											value="#{catalogManage.catalogItem.author}" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel value="Image path:" />&#160;&#160;<h:message
+												for="imagePath" style="color: red;" /></span> <span><h:inputText
+											id="imagePath"
+											value="#{catalogManage.catalogItem.imagePath}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel value="Category" /><h:message for="category" style="color: red;" /></span> 
+									<span><h:inputText id="category"
+											value="#{catalogManage.catalogItem.category}"
+											required="true" requiredMessage="Required" /></span>
+								</div>
+								<div>
+									<span><h:outputLabel for="newItem" value="New Item?" />&#160;&#160;<h:message
+												for="newItem" style="color: red;" /></span> 
+									<span><h:selectBooleanCheckbox value="#{catalogManage.catalogItem.newItem}" id="newItem" required="true" requiredMessage="#{order['order.message.required']}" /></span>
+								</div>
+								<div>
+									<span><h:commandButton id="nextButton" action="#{catalogManage.addItem}" value="#{catalogManage.editable?'Add':'Update'}" /></span>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

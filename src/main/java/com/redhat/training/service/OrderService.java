@@ -1,5 +1,7 @@
 package com.redhat.training.service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
@@ -55,6 +57,16 @@ public class OrderService {
 			return order;
 		}
 
+	}
+	
+	public List<Order> getAllOpenOrders(){
+		CriteriaBuilder builder = mgr.getCriteriaBuilder();
+		CriteriaQuery<Order> criteria = builder.createQuery(Order.class);
+		Root<Order> root = criteria.from(Order.class);
+		root.fetch("items");
+		TypedQuery<Order> query = mgr.createQuery(criteria.select(
+				root).where(builder.equal(root.get("delivered"), false)));
+		return query.getResultList();
 	}
 	
 }

@@ -41,6 +41,7 @@
 		<script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script>
 		
 		<!-- header_top -->
+		<h:messages />
 		<div class="top_bg">
 			<div class="container">
 				<div class="header_top">
@@ -418,14 +419,14 @@
 												<div class="h_nav">
 													<h4><h:outputText value="#{i18n['template.greeting.menu.administration']}" /></h4>
 													<ul>
-														<li><a href="registration.xhtml">login</a></li>
+														<li><h:outputLink value="item.xhtml">
+															<h:outputText value="#{i18n['template.greeting.add.item']}" />
+														</h:outputLink>
+														</li>
 														<li>
-														<h:outputLink value="registration.xhtml">
-															<h:outputText value="#{i18n['template.greeting.create.account']}'"  />
+														<h:outputLink value="ordermgmt.xhtml">
+															<h:outputText value="#{i18n['template.greeting.order.mgmt']}'"  />
 														</h:outputLink></li>
-														<li><h:outputLink value="buy.xhtml">
-													<h:outputText value="#{i18n['template.greeting.shopping.cart']}" />
-												</h:outputLink></li>
 													</ul>
 												</div>
 											</div>
