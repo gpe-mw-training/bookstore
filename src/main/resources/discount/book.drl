@@ -13,36 +13,3 @@ rule "Child Discount"
         modify(user) { setLoyaltylevel("Gold") }
 end
 
-rule "Big 61 Discount"
-
-    when
-        user : User(miles >= 25000, miles < 50000, loyaltylevel != "Silver")
-    then
-        modify(user) { setLoyaltylevel("Silver") }
-end
-
-rule "Bronze Status"
-
-    when
-        user : User(miles >= 10000, miles < 25000, loyaltylevel != "Bronze")     
-    then
-        modify(user) { setLoyaltylevel("Bronze") }
-end
-
-rule "Non-Frequent Flyer"
-	when
-		user : User(loyaltylevel == null)
-	then
-		modify(user) { setLoyaltylevel("None") }
-end
-
-rule "Assign Mileage" 
-	when
-		reservation : Reservation(status == ReservationStatusType.PENDING, user : user, flight : flight)
-	then
-		insert(user);
-		modify(user) { setMiles(user.getMiles() + flight.getRoute().getDistance()); }
-		modify(reservation) { setStatus(ReservationStatusType.CONFIRMED); }
-
-end
-
