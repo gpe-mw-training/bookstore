@@ -28,8 +28,10 @@
 package com.redhat.training.rules;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -38,6 +40,8 @@ import javax.ejb.Startup;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+
+import com.redhat.training.domain.CatalogItem;
 
 
 @Singleton
@@ -70,29 +74,25 @@ public class RulesEngine  implements Serializable {
 		return updatedFacts;
 	}
 	
-//	public List<Seat> fire(List<CatalogItem> catalogItems, Reservation reservation, User customer) {
-//		
-//		KieSession ksession = container.newKieSession("SeatSession");
-//		if (ksession == null)
-//			throw new IllegalStateException("KIE SeatSession was not built");
-//		
-//		for(Object seat : availableSeats) {
-//			ksession.insert(seat);
-//		}
-//		ksession.insert(reservation);
-//		ksession.insert(customer);
-//	
-//		ksession.fireAllRules();
-//		
-//		List<Seat> seats = new ArrayList<Seat>();
-//		for (Object o : ksession.getObjects())
-//			if (o instanceof Seat)
-//			  seats.add((Seat) o);
-//		
-//		ksession.dispose();
-//		
-//		return seats;
-//	}
+	public BigDecimal fire(List<CatalogItem> catalogItems) {
+		
+		KieSession ksession = container.newKieSession("DiscountSession");
+		if (ksession == null)
+			throw new IllegalStateException("KIE DiscountSession was not built");
+		
+		for(Object item : catalogItems) {
+			ksession.insert(item);
+		}
+	
+		ksession.fireAllRules();
+		
+		BigDecimal finalDiscountValue = BigDecimal.ZERO;
+		for (Object o : ksession.getObjects())
+			if (o instanceof BigDecimal)
+			  finalDiscountValue = finalDiscountValue.add((BigDecimal) o);
+		ksession.dispose();
+		return finalDiscountValue;
+	}
 	
 	@PostConstruct
 	public void build(){
