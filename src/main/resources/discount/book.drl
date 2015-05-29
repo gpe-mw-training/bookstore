@@ -2,14 +2,15 @@ package com.jbtravel
 
 //list any import classes here.
 import com.redhat.training.domain.*
+import java.math.BigDecimal
 
 //declare any global variables here
 
-rule "Child Discount"
+//rule "Child Discount"
 
-    when
-        book : CatalogItem(category == 'children')
-    then
-        modify(user) { setLoyaltylevel("Gold") }
-end
+//    when
+//        book : CatalogItem(category == 'children')
+//    then
+//        modify(book) { setPrice(new BigDecimal(10.0) }
+//end
 
