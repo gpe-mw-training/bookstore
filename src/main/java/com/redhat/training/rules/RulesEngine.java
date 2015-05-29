@@ -70,7 +70,7 @@ public class RulesEngine  implements Serializable {
 		return updatedFacts;
 	}
 	
-//	public List<Seat> fire(List<Seat> availableSeats, Reservation reservation, User customer) {
+//	public List<Seat> fire(List<CatalogItem> catalogItems, Reservation reservation, User customer) {
 //		
 //		KieSession ksession = container.newKieSession("SeatSession");
 //		if (ksession == null)

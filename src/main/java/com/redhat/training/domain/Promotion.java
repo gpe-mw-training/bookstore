@@ -19,6 +19,15 @@ public class Promotion implements Serializable {
 	private Integer percent;
 	private Boolean valid = true;
 
+	Promotion(){
+	}
+	
+	public Promotion(String code, Integer percent, Boolean valid) {
+		this.code = code;
+		this.percent = percent;
+		this.valid = valid;
+	}
+
 	public String getCode() {
 		return code;
 	}

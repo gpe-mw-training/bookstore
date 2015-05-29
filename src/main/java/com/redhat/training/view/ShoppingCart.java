@@ -16,6 +16,7 @@ import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Customer;
 import com.redhat.training.domain.Payment;
 import com.redhat.training.domain.PaymentType;
+import com.redhat.training.domain.Promotion;
 import com.redhat.training.domain.WishList;
 import com.redhat.training.service.CatalogService;
 import com.redhat.training.service.OrderService;
@@ -39,7 +40,8 @@ public class ShoppingCart implements Serializable {
 
 	private List<CatalogItem> items = new ArrayList<CatalogItem>();
 	private List<CatalogItem> viewed = new ArrayList<CatalogItem>();
-
+	private List<Promotion> promotions = new ArrayList<Promotion>();
+	
 	private Customer customer;
 	private boolean loggedIn = false;
 	private String promoCode;

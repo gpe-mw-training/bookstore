@@ -15,6 +15,7 @@ import org.hibernate.search.jpa.Search;
 
 import com.redhat.training.domain.CatalogItem;
 import com.redhat.training.domain.Customer;
+import com.redhat.training.domain.Promotion;
 
 @Singleton
 @Startup
@@ -39,7 +40,14 @@ public class DatabasePopulator {
 			}
 			loadCatalog();
 			loadCustomers();
+			loadPromotions();
 		}
+	}
+
+	private void loadPromotions() {
+		Promotion promotion = new Promotion("KID10",10,true);
+		mgr.persist(promotion);
+		
 	}
 
 	private void loadCatalog() {
