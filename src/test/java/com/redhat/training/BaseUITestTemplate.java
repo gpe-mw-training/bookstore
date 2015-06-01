@@ -64,6 +64,8 @@ public abstract class BaseUITestTemplate {
 				.addAsResource("META-INF/persistence.xml")
 				.addAsResource("META-INF/maven/pom.properties")
 				.addAsResource("runtime.properties")
+				.addAsResource("META-INF/kmodule.xml")
+				.addAsResource("discount/book.drl")
 				.merge(ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)
 						.as(GenericArchive.class), "/",

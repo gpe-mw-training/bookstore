@@ -52,6 +52,8 @@ public abstract class BaseWebTestTemplate {
 				.addAsResource("runtime.properties")
 				.addAsResource("META-INF/persistence.xml")
 				.addAsResource("META-INF/maven/pom.properties")
+				.addAsResource("META-INF/kmodule.xml")
+				.addAsResource("discount/book.drl")
 				.addAsManifestResource(
 						new StringAsset(
 								"Dependencies: com.google.guava,org.slf4j\n"),
@@ -62,8 +64,10 @@ public abstract class BaseWebTestTemplate {
 
 		// Add runtime dependencies
 		File[] libs = Maven.resolver().loadPomFromFile("pom.xml")
-				.importRuntimeDependencies().resolve().withTransitivity().asFile();
-		archive.addAsLibraries(libs).as(JavaArchive.class); 
+				.importRuntimeDependencies().resolve().withTransitivity()
+				.asFile();
+		archive.addAsLibraries(libs).as(JavaArchive.class);
+		archive.addAsLibraries(libs).as(JavaArchive.class);
 
 		// For debugging purposes, display contents of generated archive
 		System.out.println(archive.toString(true));

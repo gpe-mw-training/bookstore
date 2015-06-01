@@ -1,4 +1,4 @@
-package com.jbtravel
+package discount
 
 //list any import classes here.
 import com.redhat.training.domain.*
