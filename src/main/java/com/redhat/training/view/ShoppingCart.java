@@ -3,7 +3,9 @@ package com.redhat.training.view;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -20,6 +22,7 @@ import com.redhat.training.domain.Promotion;
 import com.redhat.training.domain.WishList;
 import com.redhat.training.rules.RulesEngine;
 import com.redhat.training.service.CatalogService;
+import com.redhat.training.service.DiscountService;
 import com.redhat.training.service.OrderService;
 import com.redhat.training.service.RememberMeService;
 import com.redhat.training.service.WishListService;
@@ -37,22 +40,24 @@ public class ShoppingCart implements Serializable {
 	@Inject
 	private WishListService wishListService;
 	@Inject
+	private DiscountService discountService;
+	@Inject
 	private RulesEngine engine;
 	
 	private static final long serialVersionUID = 1L;
 
 	private List<CatalogItem> items = new ArrayList<CatalogItem>();
 	private List<CatalogItem> viewed = new ArrayList<CatalogItem>();
-	private List<Promotion> promotions = new ArrayList<Promotion>();
+	private Set<Promotion> promotions = new HashSet<Promotion>();
 
 	private Customer customer;
 	private boolean loggedIn = false;
-	private String promoCode;
 	private boolean shipsame;
 	private Payment payment;
-	private String appliedPromoCode;
+	private String promoCode;
+	
 
-	private BigDecimal discount = new BigDecimal("0");
+	private BigDecimal discount = BigDecimal.ZERO;
 
 	public String addItem(Integer itemid) {
 
@@ -74,6 +79,7 @@ public class ShoppingCart implements Serializable {
 		}
 
 		items.add(item);
+		engine.fire(items, promotions);
 
 		return "buy?faces-redirect=true";
 
@@ -104,21 +110,18 @@ public class ShoppingCart implements Serializable {
 
 		wishListService.addItem(customer, item);
 		if (items.size() == 0)
-			discount = new BigDecimal(0);
+			discount = BigDecimal.ZERO;
 
 		return "buy";
 	}
 
-	public void applyPromoCode() {
-		promoCode = "big61";
-	}
 
 	public String moveFromWishlist(CatalogItem item) {
 		wishListService.removeItem(customer, item);
 		items.add(item);
 
 		if (items.size() == 0)
-			discount = new BigDecimal(0);
+			discount = BigDecimal.ZERO;
 
 		return "buy";
 	}
@@ -127,23 +130,23 @@ public class ShoppingCart implements Serializable {
 
 		items.remove(item);
 		if (items.size() == 0)
-			discount = new BigDecimal(0);
+			discount = BigDecimal.ZERO;
 
 		return "buy";
 	}
 
 	public String applyPromo() {
-		if ("big61".equals(promoCode)) {
-			FacesContext.getCurrentInstance().addMessage("coupon:promo",
-					new FacesMessage("", "Promotion code applied."));
-			discount = discount.add(new BigDecimal(1.00));
-			appliedPromoCode = promoCode;
-			promoCode = "";
-		} else {
-			FacesContext.getCurrentInstance().addMessage("coupon:promo",
-					new FacesMessage("", "Promotion code invalid."));
-		}
+		String result = applyPromo(promoCode);
+		promoCode="";
+		return result;
 
+	}
+	
+	public String applyPromo(String code) {
+		Promotion promotionCode = discountService.getPromotionCode(code);
+		promotions.add(promotionCode);
+		promoCode="";
+		discount= engine.fire(items, promotions,this);
 		return "buy";
 	}
 
@@ -152,7 +155,7 @@ public class ShoppingCart implements Serializable {
 	}
 
 	public BigDecimal getCartTotal() {
-		BigDecimal total = new BigDecimal("0");
+		BigDecimal total = BigDecimal.ZERO;
 		for (CatalogItem item : items) {
 			total = total.add(item.getPrice());
 		}
@@ -187,13 +190,6 @@ public class ShoppingCart implements Serializable {
 		return loggedIn;
 	}
 
-	public String getPromoCode() {
-		return promoCode;
-	}
-
-	public void setPromoCode(String promoCode) {
-		this.promoCode = promoCode;
-	}
 
 	public BigDecimal getDiscount() {
 		return discount;
@@ -233,10 +229,9 @@ public class ShoppingCart implements Serializable {
 
 		orderService.placeOrder(this);
 		items.clear();
-		appliedPromoCode = "";
 		payment = null;
 		shipsame = false;
-		discount = new BigDecimal(0);
+		discount =BigDecimal.ZERO;
 
 		return "confirm?faces-redirect=true";
 	}
@@ -261,9 +256,6 @@ public class ShoppingCart implements Serializable {
 		return PaymentType.values();
 	}
 
-	public String getAppliedPromoCode() {
-		return appliedPromoCode;
-	}
 
 	public List<CatalogItem> getViewed() {
 		return viewed;
@@ -273,4 +265,17 @@ public class ShoppingCart implements Serializable {
 		this.viewed = viewed;
 	}
 
+	public Set<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public String getPromoCode() {
+		return promoCode;
+	}
+
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
+	}
+
+	
 }

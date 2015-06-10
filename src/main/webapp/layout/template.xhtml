@@ -48,11 +48,9 @@
 					<div class="top_left">
 						<h2>
 							<h:form>
-								<h:panelGroup
-									rendered="#{shoppingCart.promoCode==null and shoppingCart.customer!=null}">
+								<h:panelGroup>
 									<h:commandLink value="50%off"
-										action="#{shoppingCart.applyPromoCode}" /> use coupon code "big61" and get extra 50%
-							off on orders over $50
+										action="#{shoppingCart.applyPromo('big61')}" /> <h:outputText value="#{i18n['template.greeting.get.50.off']}" />
 							</h:panelGroup>
 							</h:form>
 						</h2>

@@ -45,7 +45,9 @@ public class DatabasePopulator {
 	}
 
 	private void loadPromotions() {
-		Promotion promotion = new Promotion("KID10",10,true);
+		Promotion promotion = new Promotion("kid10",10,true);
+		mgr.persist(promotion);
+		promotion = new Promotion("big61", 50, true);
 		mgr.persist(promotion);
 		
 	}

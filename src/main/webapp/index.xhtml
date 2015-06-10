@@ -6,13 +6,13 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="layout/template.xhtml">
 
 	<ui:define name="head">
-		<f:loadBundle var="index" basename="com.redhat.training.i18n.index"/>
+		<f:loadBundle var="index" basename="com.redhat.training.i18n.index" />
 		<!-- start slider -->
-		<h:outputStylesheet library="css" name="fwslider.css"/>
+		<h:outputStylesheet library="css" name="fwslider.css" />
 		<h:outputScript library="js" name="fwslider.js" />
 		<h:outputScript library="js" name="jquery-ui.min.js" />
-		
-		
+
+
 		<!--end slider -->Ï
 	</ui:define>
 	<ui:define name="content">
@@ -64,11 +64,14 @@
 
 							<div class="grid_text left">
 								<h3>
-									<a href="#">extra 10<sub>%</sub> off
-									</a>
+									<h:form>
+										<h:commandLink action="#{shoppingCart.applyPromo('kid10')}"> extra 10 <sub>%</sub> off</h:commandLink>
+									</h:form>
 								</h3>
 
-								<p><h:outputText value="#{index['index.label.children.book']}"/></p>
+								<p>
+									<h:outputText value="#{index['index.label.children.book']}" />
+								</p>
 							</div>
 
 							<div class="clearfix"></div>
@@ -79,10 +82,13 @@
 
 							<div class="grid_text-middle">
 								<h3>
-									<a href="#"><h:outputText value="#{index['index.label.crafts']}"/></a>
+									<a href="#"><h:outputText
+											value="#{index['index.label.crafts']}" /></a>
 								</h3>
 
-								<p><h:outputText value="#{index['index.label.craft.books']}"/></p>
+								<p>
+									<h:outputText value="#{index['index.label.craft.books']}" />
+								</p>
 							</div>
 
 							<div class="grid_img last">
@@ -101,10 +107,13 @@
 
 							<div class="grid_text left">
 								<h3>
-									<a href="#"><h:outputText value="#{index['index.label.history.war']}"/></a>
+									<a href="#"><h:outputText
+											value="#{index['index.label.history.war']}" /></a>
 								</h3>
 
-								<p><h:outputText value="#{index['index.label.shop.now']}"/></p>
+								<p>
+									<h:outputText value="#{index['index.label.shop.now']}" />
+								</p>
 							</div>
 
 							<div class="clearfix"></div>
@@ -119,55 +128,78 @@
 
 					<!-- grids_of_3 -->
 					<h:form id="category">
-					<div class="row grids">
-						<div class="col-md-3 grid1">
-							<h:commandLink action="#{catalogInquiry.byCategory('comics',false)}">
-							<img src="images/books/CameraComics.jpg"
-								class="img-responsive" alt="" /></h:commandLink>
+						<div class="row grids">
+							<div class="col-md-3 grid1">
+								<h:commandLink
+									action="#{catalogInquiry.byCategory('comics',false)}">
+									<img src="images/books/CameraComics.jpg" class="img-responsive"
+										alt="" />
+								</h:commandLink>
 
-							<div class="look">
-								<h4><h:outputText value="#{index['index.label.comic.books']}"/></h4>
+								<div class="look">
+									<h4>
+										<h:outputText value="#{index['index.label.comic.books']}" />
+									</h4>
 
-								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
+									<p>
+										<h:outputText value="#{index['index.label.learn.more']}" />
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-3 grid1">
+								<h:commandLink
+									action="#{catalogInquiry.byCategory('crafts',false)}">
+									<img src="images/books/FancyStitchery.jpg"
+										class="img-responsive" alt="" />
+								</h:commandLink>
+
+								<div class="look">
+									<h4>
+										<h:outputText value="#{index['index.label.crafts']}" />
+									</h4>
+
+									<p>
+										<h:outputText value="#{index['index.label.learn.more']}" />
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-3 grid1">
+								<h:commandLink
+									action="#{catalogInquiry.byCategory('children',false)}">
+									<img src="images/books/JemimaPuddleDuck.jpg"
+										class="img-responsive" alt="" />
+								</h:commandLink>
+
+								<div class="look">
+									<h4>
+										<h:outputText value="#{index['index.label.childrens.book']}" />
+									</h4>
+
+									<p>
+										<h:outputText value="#{index['index.label.learn.more']}" />
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-3 grid1">
+								<h:commandLink action="#{catalogInquiry.allItems}">
+									<img src="images/books/MaryFrancesHousekeeper.jpg"
+										class="img-responsive" alt="" />
+								</h:commandLink>
+
+								<div class="look">
+									<h4>
+										<h:outputText value="#{index['index.label.all.books']}" />
+									</h4>
+
+									<p>
+										<h:outputText value="#{index['index.label.learn.more']}" />
+									</p>
+								</div>
 							</div>
 						</div>
-
-						<div class="col-md-3 grid1">
-							<h:commandLink action="#{catalogInquiry.byCategory('crafts',false)}">
-							<img src="images/books/FancyStitchery.jpg"
-								class="img-responsive" alt="" /></h:commandLink>
-
-							<div class="look">
-								<h4><h:outputText value="#{index['index.label.crafts']}"/></h4>
-
-								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
-							</div>
-						</div>
-
-						<div class="col-md-3 grid1">
-							<h:commandLink action="#{catalogInquiry.byCategory('children',false)}">
-							<img src="images/books/JemimaPuddleDuck.jpg"
-								class="img-responsive" alt="" /></h:commandLink>
-
-							<div class="look">
-								<h4><h:outputText value="#{index['index.label.childrens.book']}"/></h4>
-
-								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
-							</div>
-						</div>
-
-						<div class="col-md-3 grid1">
-							<h:commandLink action="#{catalogInquiry.allItems}">
-							<img src="images/books/MaryFrancesHousekeeper.jpg"
-								class="img-responsive" alt="" /></h:commandLink>
-
-							<div class="look">
-								<h4><h:outputText value="#{index['index.label.all.books']}"/></h4>
-
-								<p><h:outputText value="#{index['index.label.learn.more']}"/></p>
-							</div>
-						</div>
-					</div>
 					</h:form>
 					<!-- end grids_of_3 -->
 				</div>

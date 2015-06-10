@@ -2,15 +2,40 @@ package discount
 
 //list any import classes here.
 import com.redhat.training.domain.*
+import com.redhat.training.view.*
 import java.math.BigDecimal
 
 //declare any global variables here
 
-//rule "Child Discount"
+rule "Child Discount"
 
-//    when
-//        book : CatalogItem(category == 'children')
-//    then
-//        modify(book) { setPrice(new BigDecimal(10.0) }
-//end
+    when
+        book : CatalogItem(category == "children", $price : price )
+        promotion : Promotion(valid==true, code == "kid10", $percent : percent)
+    then
+    	BigDecimal percentual = remainder($percent);
+    	System.out.println("Running Child Discount");
+    	System.out.println("Percent"+$percent);
+        insert(percentual.multiply($price));
+end
+
+rule "Big Discount"
+
+    when
+        shoppingCart : ShoppingCart($cartTotal : cartTotal > 50)
+        Promotion(valid==true, code=="big61" , $percent : percent)
+    then
+    	BigDecimal percentual = remainder($percent);
+    	insert($cartTotal.multiply(percentual));
+
+end
+
+
+function BigDecimal remainder(Integer discount) {
+    	BigDecimal oneHundred = new BigDecimal("100");
+    	BigDecimal remainder = oneHundred.subtract(new BigDecimal(discount));
+    	BigDecimal percentual = remainder.divide(oneHundred);
+		return percentual;
+}
+
 

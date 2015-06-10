@@ -61,7 +61,9 @@
 							<div class="shoping_right">
 								<p>
 									<!-- Discount -->
-									&#160;<span>$#{item.price}</span>
+									&#160;<span>$<h:outputFormat value="#{item.price}" >
+											<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+									</h:outputFormat></span>
 								</p>
 							</div>
 
@@ -74,8 +76,9 @@
 					<div class="shoping_left"></div>
 					<div class="shoping_right">
 						<p>
-							<h:outputText value="#{buy['buy.label.cart.total']}" /> &#160;<span>$<h:outputText
-									value="#{shoppingCart.cartTotal}" />
+							<h:outputText value="#{buy['buy.label.cart.total']}" /> &#160;<span>$<h:outputFormat value="#{shoppingCart.cartTotal}" >
+											<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+									</h:outputFormat>
 							</span>
 						</p>
 
@@ -106,8 +109,11 @@
 					</div>
 					<div class="shoping_right">
 						<p>
-							<h:outputText value="#{buy['buy.label.coupon.discount']}" /> &#160;<span class="color">$<h:outputText
-									value="#{shoppingCart.discount}" /></span>
+							<h:outputText value="#{buy['buy.label.coupon.discount']}" /> &#160;<span class="color">$
+							<h:outputFormat value="#{shoppingCart.discount}" >
+								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+							</h:outputFormat>
+									</span>
 						</p>
 					</div>
 					<div class="clearfix"></div>
@@ -128,8 +134,11 @@
 					</div>
 					<div class="shoping_right">
 						<p class="tot">
-							<h:outputText value="#{buy['buy.label.total']}" /> &#160;<span class="color">$<h:outputText
-									value="#{shoppingCart.orderTotal}" /></span>
+							<h:outputText value="#{buy['buy.label.total']}" /> &#160;<span class="color">$
+							<h:outputFormat value="#{shoppingCart.orderTotal}">
+								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+							</h:outputFormat>
+							</span>
 						</p>
 					</div>
 					<div class="clearfix"></div>

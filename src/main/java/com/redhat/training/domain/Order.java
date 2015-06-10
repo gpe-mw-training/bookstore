@@ -33,7 +33,10 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cust_id")
 	private Customer customer;
-	private String promoCode;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="promo_id")
+	private Set<Promotion> promoCode;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
@@ -51,11 +54,11 @@ public class Order implements Serializable {
 		this.customer = customer;
 	}
 
-	public String getPromoCode() {
+	public Set<Promotion> getPromoCode() {
 		return promoCode;
 	}
 
-	public void setPromoCode(String promoCode) {
+	public void setPromoCode(Set<Promotion> promoCode) {
 		this.promoCode = promoCode;
 	}
 

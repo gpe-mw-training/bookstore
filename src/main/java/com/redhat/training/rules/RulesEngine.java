@@ -32,6 +32,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -42,6 +43,8 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 import com.redhat.training.domain.CatalogItem;
+import com.redhat.training.domain.Promotion;
+import com.redhat.training.view.ShoppingCart;
 
 
 @Singleton
@@ -74,7 +77,7 @@ public class RulesEngine  implements Serializable {
 		return updatedFacts;
 	}
 	
-	public BigDecimal fire(List<CatalogItem> catalogItems) {
+	public BigDecimal fire(List<CatalogItem> catalogItems,Set<Promotion> promotions, ShoppingCart cart) {
 		
 		KieSession ksession = container.newKieSession("DiscountSession");
 		if (ksession == null)
@@ -83,6 +86,11 @@ public class RulesEngine  implements Serializable {
 		for(Object item : catalogItems) {
 			ksession.insert(item);
 		}
+		
+		for (Promotion promotion : promotions) {
+			ksession.insert(promotion);
+		}
+		ksession.insert(cart);
 	
 		ksession.fireAllRules();
 		

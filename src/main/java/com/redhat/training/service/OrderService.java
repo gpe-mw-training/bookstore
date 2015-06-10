@@ -29,7 +29,7 @@ public class OrderService {
 		order.setCustomer(mgr.merge(cart.getCustomer()));
 		
 		order.setPayment(cart.getPayment());
-		order.setPromoCode(cart.getAppliedPromoCode());
+		order.setPromoCode(cart.getPromotions());
 		order.setDiscount(cart.getDiscount());
 		
 		for(CatalogItem item : cart.getItems()) {
