@@ -3,6 +3,7 @@ package com.redhat.training.view;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,8 +21,15 @@ public class OrderManage implements Serializable {
 	private OrderService service;
 
 	private Order orderSelected;
+	
+	@Inject
+	private Conversation conversation;
 
 	public List<Order> getAllOpenItems() {
+		if(!conversation.isTransient()){
+			conversation.end();
+		}
+		conversation.begin();
 		return service.getAllOpenOrders();
 	}
 
@@ -30,6 +38,13 @@ public class OrderManage implements Serializable {
 		return "orderdetail";
 	}
 
+	public String sendOrder(){
+		service.deliverOrder(orderSelected);
+		setOrderSelected(null);
+		conversation.end();
+		return "ordermgmt";
+	}
+	
 	public Order getOrderSelected() {
 		return orderSelected;
 	}

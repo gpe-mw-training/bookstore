@@ -38,6 +38,10 @@
 									<h:graphicImage value="#{item.item.imagePath}" />
 								</div>
 
+								<div class="shoping1_of_2">
+									<h:outputText value="#{item.item.title}" />
+								</div>
+
 
 								<div class="clearfix"></div>
 							</div>
@@ -56,6 +60,13 @@
 				</div>
 
 				<div class="clearfix"></div>
+				<div class="shoping_left">
+					<h:form id="order">
+						<h:commandLink id="deliverButton"
+							value="#{orderDetail['orderDetail.button.sent']}" styleClass="btn1"
+							action="#{orderManage.sendOrder()}" />
+					</h:form>
+				</div>
 			</div>
 
 		</div>

@@ -102,4 +102,8 @@ public class Order implements Serializable {
 		this.delivered = delivered;
 	}
 
+	public void deliver() {
+		setDelivered(true);
+	}
+
 }

@@ -44,6 +44,11 @@ public class OrderService {
 		order.getCustomer().getOrders().add(order);
 	}
 	
+	public void deliverOrder(Order order){
+		order.deliver();
+		mgr.merge(order);
+	}
+	
 	public Order getOrderById(Integer id){
 		CriteriaBuilder builder = mgr.getCriteriaBuilder();
 		CriteriaQuery<Order> criteria = builder.createQuery(Order.class);
