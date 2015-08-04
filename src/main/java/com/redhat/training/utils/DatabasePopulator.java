@@ -29,6 +29,7 @@ public class DatabasePopulator {
 
 	@PostConstruct
 	public void setup() {
+		System.out.println("setup()");
 		if (props.getPreLoadData()) {
 			FullTextEntityManager ftem = Search.getFullTextEntityManager(mgr);
 			MassIndexer indexer = ftem.createIndexer(CatalogItem.class);
