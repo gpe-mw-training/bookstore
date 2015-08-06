@@ -1,0 +1,2 @@
+DISABLE_ASSET_COMPILATION=true
+MAVEN_ARGS="clean test"
