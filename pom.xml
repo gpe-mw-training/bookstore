@@ -9,6 +9,11 @@
     <name>The Shoppe Book Store</name>
     <description>The Java EE book store application</description>
     <packaging>war</packaging>
+
+    <!-- Example execution:
+            mvn clean package -DskipTests -DOSE_NEXUS_HOST=nexus.devops.ose.jbrideratwater.com
+    -->
+
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
@@ -457,5 +462,18 @@
             </build>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>Nexus Repository</id>
+            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>Nexus Repository</id>
+            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
