@@ -13,6 +13,18 @@
     <!-- Example execution:
             mvn clean package -DskipTests -DOSE_NEXUS_HOST=nexus.devops.ose.jbrideratwater.com
     -->
+    <repositories>
+        <repository>
+            <id>Nexus Repository</id>
+            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>Nexus Repository</id>
+            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -36,8 +48,8 @@
         <version.exec.plugin>1.2.1</version.exec.plugin>
 
         <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
 
         <!-- test dependencies versions -->
         <junit.version>4.8.2</junit.version>
@@ -463,17 +475,5 @@
         </profile>
     </profiles>
 
-    <repositories>
-        <repository>
-            <id>Nexus Repository</id>
-            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>Nexus Repository</id>
-            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
