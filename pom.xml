@@ -10,21 +10,6 @@
     <description>The Java EE book store application</description>
     <packaging>war</packaging>
 
-    <!-- Example execution:
-            mvn clean package -DskipTests -DOSE_NEXUS_HOST=nexus.devops.ose.jbrideratwater.com
-    -->
-    <repositories>
-        <repository>
-            <id>Nexus Repository</id>
-            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>Nexus Repository</id>
-            <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -450,15 +435,47 @@
                 </dependency>
             </dependencies>
         </profile>
+
+
         <profile>
-            <!-- When built in OpenShift the 'openshift' profile will be used when 
-                invoking mvn. -->
-            <!-- Use this profile for any OpenShift specific customization your app 
-                will need. -->
-            <!-- By default that is to put the resulting archive into the 'deployments' 
-                folder. -->
-            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+            <id>jenkins</id>
+                <!-- 
+                    Example execution:   mvn clean package -DskipTests -DOSE_NEXUS_HOST=nexus.devops.ose.jbrideratwater.com -P jenkins
+                    Jenkins image uses Maven v3.1.3 .  Using OSE_NEXUS_HOST system property works fine.
+                -->
+                <repositories>
+                    <repository>
+                        <id>Nexus Repository</id>
+                        <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
+                    </repository>
+                </repositories>
+                <pluginRepositories>
+                    <pluginRepository>
+                        <id>Nexus Repository</id>
+                        <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
+                    </pluginRepository>
+                </pluginRepositories>
+        </profile>
+
+        <profile>
             <id>openshift</id>
+                <!--
+                    Setting of OSE_NEXUS_HOST system property does not work with Maven v3.0.5 .... which is version of Maven found in stock RHEL-server 7 based yum repositories
+                    Subsequently, setting of OSE_NEXUS_HOST (similar to the jenkins profile) does not work in OSEv3 S2I (which leverages maven from base RHEL7 OS.
+                    Unfortunately, will need to hard-code URL of NEXUS_HOST
+                -->
+                <repositories>
+                    <repository>
+                        <id>Nexus Repository</id>
+                        <url>http://nexus.devops.ose.jbrideratwater.com/content/groups/public/</url>
+                    </repository>
+                </repositories>
+                <pluginRepositories>
+                    <pluginRepository>
+                        <id>Nexus Repository</id>
+                        <url>http://nexus.devops.ose.jbrideratwater.com/content/groups/public/</url>
+                    </pluginRepository>
+                </pluginRepositories>
             <build>
                 <finalName>bookstore</finalName>
                 <plugins>
@@ -473,7 +490,6 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
-
-
 </project>
