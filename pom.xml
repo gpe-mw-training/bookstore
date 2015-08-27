@@ -436,40 +436,6 @@
             </dependencies>
         </profile>
 
-
-        <profile>
-            <id>jenkins</id>
-                <!-- 
-                    Example execution:   mvn clean package -DskipTests -DOSE_NEXUS_HOST=nexus.devops.ose.jbrideratwater.com -P jenkins
-                    Jenkins image uses Maven v3.1.3 .  Using OSE_NEXUS_HOST system property works fine.
-                -->
-                <repositories>
-                    <repository>
-                        <id>Nexus Repository</id>
-                        <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
-                    </repository>
-                </repositories>
-                <pluginRepositories>
-                    <pluginRepository>
-                        <id>Nexus Repository</id>
-                        <url>http://${OSE_NEXUS_HOST}/content/groups/public/</url>
-                    </pluginRepository>
-                </pluginRepositories>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>7.2.0.Final</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.arquillian.protocol</groupId>
-                    <artifactId>arquillian-protocol-servlet</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
         <profile>
             <id>openshift</id>
                 <!--
