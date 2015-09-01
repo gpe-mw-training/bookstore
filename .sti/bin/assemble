@@ -7,9 +7,10 @@
 #
 # 2) APPLICATION_ARTIFACT_URL       :   if set, this script will use curl to download the previously built application artifact.
 #                                       once downloaded, application artifact will be included in the $JBOSS_HOME/standalone/deployments directory
-#
 # 3) DOWNLOAD_USER_CREDENTIALS      :   if set, will utilize this as an argument to curl utility if/when downloading $APPLICATION_ARTIFACT_URL
 #                                       Must be in <user:password> convention
+#
+# JA Bride:  now also copying any files that might exist in this JEE project's bin directory to $JBOSS_HOME/bin
 
 echo DISABLE_ASSET_COMPILATION = $DISABLE_ASSET_COMPILATION
 echo APPLICATION_ARTIFACT_URL = $APPLICATION_ARTIFACT_URL
@@ -37,7 +38,6 @@ function copy_artifacts() {
 
 # Copy the source for compilation
 cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
-
 
 # If a pom.xml is present, this is a normal build scenario
 # so run maven.
@@ -99,10 +99,15 @@ if [ -d $LOCAL_SOURCE_DIR/modules ]; then
   cp -vr $LOCAL_SOURCE_DIR/modules/* $JBOSS_HOME/modules/
 fi
 
+if [ -d $LOCAL_SOURCE_DIR/bin ]; then
+  echo "Copying shell scripts from project bin directory..."
+  cp -vr $LOCAL_SOURCE_DIR/bin/* $JBOSS_HOME/bin/
+fi
+
 if [ ! -z "$APPLICATION_ARTIFACT_URL" ]; then
     APP_NAME=`basename $APPLICATION_ARTIFACT_URL`
     echo "deploying artifact found at $APPLICATION_ARTIFACT_URL to: $DEPLOY_DIR/$APP_NAME";
-    if [ -z "$DOWNLOAD_USER_CREDENTIALS" ]; 
+    if [ -z "$DOWNLOAD_USER_CREDENTIALS" ];
     then
         curl -L -o $DEPLOY_DIR/$APP_NAME $APPLICATION_ARTIFACT_URL
     else
