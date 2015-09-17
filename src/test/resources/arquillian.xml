@@ -16,7 +16,7 @@
         <configuration>
 
             <!-- Change the following to the ip address of your JBoss EAP server -->
-            <property name="managementAddress">172.17.42.1</property>
+            <property name="managementAddress">localhost</property>
 
             <!--property name="managementAddress">localhost</property -->
 

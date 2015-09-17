@@ -32,7 +32,7 @@ import java.io.File;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.drone.api.annotation.Drone;
+//import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
@@ -42,14 +42,14 @@ import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebDriver;
 
 public abstract class BaseUITestTemplate {
 
 	private static final String WEBAPP_SRC = "src/main/webapp";
 
-	@Drone
-	protected WebDriver browser;
+	//@Drone
+	//protected WebDriver browser;
 
 	@ArquillianResource
 	protected URL deploymentURL;
