@@ -394,13 +394,13 @@
                 <repositories>
                     <repository>
                         <id>Nexus Repository</id>
-                        <url>http://inf00-mwl.opentlc.com/content/groups/public/</url>
+                        <url>http://inf00-mwl.opentlc.com/nexus/content/groups/public/</url>
                     </repository>
                 </repositories>
                 <pluginRepositories>
                     <pluginRepository>
                         <id>Nexus Repository</id>
-                        <url>http://inf00-mwl.opentlc.com/content/groups/public/</url>
+                        <url>http://inf00-mwl.opentlc.com/nexus/content/groups/public/</url>
                     </pluginRepository>
                 </pluginRepositories>
             <build>
